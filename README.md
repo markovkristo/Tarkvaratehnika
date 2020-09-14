@@ -1,4 +1,4 @@
-# Team <write your team name here>:
+# Team Kristotaunopatrik:
 1. Patrik Pruunsild
 2. Tauno Tamm
 3. Kristo Markov
