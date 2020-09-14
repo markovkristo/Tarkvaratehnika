@@ -3,6 +3,8 @@
 2. <team member name 2>
 3. <team member name 3>
 
+Test
+
 ## Homework 1:
 <When you finish your homework, add a link pointing to the solution here (for example, a link to a page on the wiki)> 
 
