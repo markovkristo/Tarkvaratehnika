@@ -40,4 +40,8 @@ public class StockController implements Initializable {
         warehouseTableView.setItems(FXCollections.observableList(dao.findStockItems()));
         warehouseTableView.refresh();
     }
+
+    private void removeStockItems() {
+
+    }
 }

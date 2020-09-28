@@ -15,4 +15,18 @@ public class HistoryController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         // TODO: implement
     }
+
+    public void showAllHistoryButtonClicked() {
+
+    }
+
+    public void showHistoryBetweenSpecificDatesButtonClicked() {
+
+    }
+
+    public void showLastTenPurchasesButtonClicked() {
+
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package ee.ut.math.tvt.salessystem.logic;
 
+import ee.ut.math.tvt.salessystem.SalesSystemException;
 import ee.ut.math.tvt.salessystem.dao.SalesSystemDAO;
 import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
 
@@ -24,6 +25,10 @@ public class ShoppingCart {
 
         items.add(item);
         //log.debug("Added " + item.getName() + " quantity of " + item.getQuantity());
+    }
+
+    public void removeItem(SoldItem item) {
+
     }
 
     public List<SoldItem> getAll() {
@@ -51,5 +56,13 @@ public class ShoppingCart {
             dao.rollbackTransaction();
             throw e;
         }
+    }
+
+    private boolean isItemInCart(SoldItem item) {
+        return items.contains(item);
+    }
+
+    private boolean isItemInStock(SoldItem item) {
+        return item.getQuantity() <= item.getStockItem().getQuantity();
     }
 }
