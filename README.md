@@ -8,7 +8,7 @@
 https://bitbucket.org/dlisnuurp/lab2-kristotaunopatrik/wiki/Home
 
 ## Homework 2:
-<Links to the solution>
+https://bitbucket.org/dlisnuurp/lab2-kristotaunopatrik/wiki/Homework%202
 
 ## Homework 3:
 <Links to the solution>
