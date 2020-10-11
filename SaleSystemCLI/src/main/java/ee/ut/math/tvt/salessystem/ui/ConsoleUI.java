@@ -6,6 +6,7 @@ import ee.ut.math.tvt.salessystem.dao.SalesSystemDAO;
 import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
 import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
 import ee.ut.math.tvt.salessystem.logic.ShoppingCart;
+import ee.ut.math.tvt.salessystem.logic.TeamInfoSupplier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,10 +24,12 @@ public class ConsoleUI {
 
     private final SalesSystemDAO dao;
     private final ShoppingCart cart;
+    private final TeamInfoSupplier teamInfoSupplier;
 
     public ConsoleUI(SalesSystemDAO dao) {
         this.dao = dao;
         cart = new ShoppingCart(dao);
+        teamInfoSupplier = new TeamInfoSupplier();
     }
 
     public static void main(String[] args) throws Exception {
@@ -83,6 +86,16 @@ public class ConsoleUI {
         System.out.println("a IDX NR \tAdd NR of stock item with index IDX to the cart");
         System.out.println("p\t\tPurchase the shopping cart");
         System.out.println("r\t\tReset the shopping cart");
+        System.out.println("t\t\tSee team information");
+        System.out.println("-------------------------");
+    }
+
+    private void showTeamInfo() {
+        System.out.println("-------------------------");
+        System.out.println("Team info:");
+        System.out.println("Team name: " + teamInfoSupplier.getTeamName());
+        System.out.println("Team leader: " + teamInfoSupplier.getTeamLeaderName());
+        System.out.println("Team members: " + teamInfoSupplier.getTeamMembers());
         System.out.println("-------------------------");
     }
 
@@ -95,6 +108,8 @@ public class ConsoleUI {
             System.exit(0);
         else if (c[0].equals("w"))
             showStock();
+        else if (c[0].equals("t"))
+            showTeamInfo();
         else if (c[0].equals("c"))
             showCart();
         else if (c[0].equals("p"))

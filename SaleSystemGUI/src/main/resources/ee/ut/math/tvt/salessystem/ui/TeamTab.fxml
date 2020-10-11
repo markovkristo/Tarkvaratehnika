@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<TitledPane alignment="CENTER" animated="false" collapsible="false" text="Team info"
+            xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
+    <HBox prefHeight="200" spacing="15" xmlns="http://javafx.com/javafx/8.0.102">
+        <VBox prefHeight="200" spacing="15" xmlns="http://javafx.com/javafx/8.0.102">
+            <padding>
+                <Insets top="25" left="10"/>
+            </padding>
+            <Text text="Team name"/>
+            <Text text="Team leader"/>
+            <Text text="Team members"/>
+        </VBox>
+        <VBox prefHeight="200" spacing="15" xmlns="http://javafx.com/javafx/8.0.102">
+            <padding>
+                <Insets top="25" left="10"/>
+            </padding>
+            <Text fx:id="teamName"/>
+            <Text fx:id="teamContactPerson"/>
+            <Text fx:id="teamMembers"/>
+        </VBox>
+        <VBox prefHeight="200" spacing="15" xmlns="http://javafx.com/javafx/8.0.102">
+            <padding>
+                <Insets top="25" left="50"/>
+            </padding>
+            <ImageView fx:id="teamImage"
+            fitHeight="100"
+            fitWidth="100"/>
+        </VBox>
+    </HBox>
+</TitledPane>
