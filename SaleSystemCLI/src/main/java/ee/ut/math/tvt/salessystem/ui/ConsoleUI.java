@@ -92,7 +92,7 @@ public class ConsoleUI {
 
     private void showTeamInfo() {
         System.out.println("-------------------------");
-        System.out.println("Team info:");
+        System.out.println("Team information:");
         System.out.println("Team name: " + teamInfoSupplier.getTeamName());
         System.out.println("Team leader: " + teamInfoSupplier.getTeamLeaderName());
         System.out.println("Team members: " + teamInfoSupplier.getTeamMembers());
