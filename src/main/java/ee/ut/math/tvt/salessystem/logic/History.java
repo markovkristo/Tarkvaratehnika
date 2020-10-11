@@ -1,13 +1,13 @@
 package ee.ut.math.tvt.salessystem.logic;
 
-import ee.ut.math.tvt.salessystem.dto.Transaction;
+import ee.ut.math.tvt.salessystem.dataobjects.Transaction;
 
 import java.util.List;
 
 public class History {
     private String startDate;
     private String endDate;
-    private List<Transaction> transaction;
+    private List<Transaction> transactions;
 
     public History(String startDate, String endDate) {
         this.startDate = startDate;

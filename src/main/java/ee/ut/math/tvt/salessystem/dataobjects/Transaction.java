@@ -1,4 +1,4 @@
-package ee.ut.math.tvt.salessystem.dto;
+package ee.ut.math.tvt.salessystem.dataobjects;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
