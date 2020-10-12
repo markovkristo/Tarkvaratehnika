@@ -71,6 +71,7 @@ public class StockController implements Initializable {
                 item.setQuantity(item.getQuantity() - quantity);
                 log.info(quantity + " units of the product was removed from the warehouse");
             }
+            refreshStockItems();
         }
     }
 
@@ -87,6 +88,7 @@ public class StockController implements Initializable {
             StockItem item = new StockItem(id, productName, "", productPrice, quantity);
             stockItems.add(item);
             log.info("New product has been added / resupplied");
+            refreshStockItems();
         } else {
             StockItem item = dao.findStockItem(id);
             if (!item.getName().equals(productName)) {
@@ -97,6 +99,7 @@ public class StockController implements Initializable {
                 }
                 item.setQuantity(item.getQuantity() + quantity);
                 log.info("New product has been added / resupplied");
+                refreshStockItems();
             }
         }
     }
