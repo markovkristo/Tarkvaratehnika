@@ -6,39 +6,68 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.BorderPane?>
-<TitledPane alignment="CENTER" animated="false" collapsible="false" text="Warehouse status" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
-  <BorderPane>
-    <center>
-      <TableView fx:id="warehouseTableView" styleClass="blue_style" BorderPane.alignment="CENTER">
-        <columns>
-          <TableColumn text="Id">
-            <cellValueFactory>
-              <PropertyValueFactory property="id" />
-            </cellValueFactory>
-          </TableColumn>
-          <TableColumn text="Name">
-            <cellValueFactory>
-              <PropertyValueFactory property="name" />
-            </cellValueFactory>
-          </TableColumn>
-          <TableColumn text="Price">
-            <cellValueFactory>
-              <PropertyValueFactory property="price" />
-            </cellValueFactory>
-          </TableColumn>
-          <TableColumn text="Quantity">
-            <cellValueFactory>
-              <PropertyValueFactory property="quantity" />
-            </cellValueFactory>
-          </TableColumn>
-        </columns>
-        <columnResizePolicy>
-          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-        </columnResizePolicy>
-      </TableView>
-    </center>
-    <top>
-      <Button onMouseClicked="#refreshButtonClicked" text="Refresh warehouse" BorderPane.alignment="TOP_LEFT" />
-    </top>
-  </BorderPane>
-</TitledPane>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
+  <SplitPane dividerPositions="0.4" orientation="VERTICAL" prefHeight="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <HBox maxHeight="150" spacing="25">
+      <padding><Insets top="25" right="25" bottom="25" left="85"/></padding>
+      <VBox maxHeight="150" spacing="12">
+        <Label text="Bar Code:"/>
+
+        <Label text="Amount:"/>
+
+        <Label text="Name:"/>
+
+        <Label text="Price:"/>
+      </VBox>
+      <VBox maxHeight="150" spacing="3">
+        <TextField maxHeight="8"/>
+        <TextField maxHeight="8"/>
+        <TextField maxHeight="8"/>
+        <TextField maxHeight="8"/>
+      </VBox>
+    </HBox>
+    <TitledPane alignment="BASELINE_CENTER" animated="false" collapsible="false" text="Warehouse status">
+      <BorderPane>
+        <center>
+          <TableView fx:id="warehouseTableView" styleClass="blue_style" BorderPane.alignment="CENTER">
+            <columns>
+              <TableColumn text="Id">
+                <cellValueFactory>
+                  <PropertyValueFactory property="id" />
+                </cellValueFactory>
+              </TableColumn>
+              <TableColumn text="Name">
+                <cellValueFactory>
+                  <PropertyValueFactory property="name" />
+                </cellValueFactory>
+              </TableColumn>
+              <TableColumn text="Price">
+                <cellValueFactory>
+                  <PropertyValueFactory property="price" />
+                </cellValueFactory>
+              </TableColumn>
+              <TableColumn text="Quantity">
+                <cellValueFactory>
+                  <PropertyValueFactory property="quantity" />
+                </cellValueFactory>
+              </TableColumn>
+            </columns>
+            <columnResizePolicy>
+              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+          </TableView>
+        </center>
+        <top>
+          <Button onMouseClicked="#refreshButtonClicked" text="Refresh warehouse" BorderPane.alignment="TOP_LEFT" />
+        </top>
+      </BorderPane>
+    </TitledPane>
+  </SplitPane>
+</AnchorPane>
