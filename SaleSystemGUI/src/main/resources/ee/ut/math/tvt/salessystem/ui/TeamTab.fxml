@@ -23,9 +23,10 @@
             <Text fx:id="teamContactPerson"/>
             <Text fx:id="teamMembers"/>
         </VBox>
-        <VBox prefHeight="200" spacing="15" xmlns="http://javafx.com/javafx/8.0.102">
+        <Region prefHeight="150.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+        <VBox alignment="CENTER_RIGHT" prefHeight="200" spacing="15" xmlns="http://javafx.com/javafx/8.0.102">
             <padding>
-                <Insets top="25" left="50"/>
+                <Insets top="20" right="30"/>
             </padding>
             <ImageView fx:id="teamImage"
             fitHeight="100"
