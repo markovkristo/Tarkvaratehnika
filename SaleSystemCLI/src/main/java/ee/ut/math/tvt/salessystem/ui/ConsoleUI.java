@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 /**
  * A simple CLI (limited functionality).
@@ -58,7 +59,7 @@ public class ConsoleUI {
         List<StockItem> stockItems = dao.findStockItems();
         System.out.println("-------------------------");
         for (StockItem si : stockItems) {
-            System.out.println(si.getId() + " " + si.getName() + " " + si.getPrice() + "Euro (" + si.getQuantity() + " items)");
+            System.out.println(si.getId() + " " + si.getName() + " " + si.getPrice() + "Euro (" + si.getQuantity() + " items, all items sum: " + (si.getQuantity() * si.getPrice()) + ")" + "");
         }
         if (stockItems.size() == 0) {
             System.out.println("\tNothing");
@@ -157,11 +158,15 @@ public class ConsoleUI {
                 int removableAmount = Integer.parseInt(c[2]);
                 StockItem item = dao.findStockItem(idx);
                 int amount = item.getQuantity();
-
-                if (item != null) {
-                    item.setQuantity(amount-removableAmount);
-                } else {
-                    System.out.println("no stock item with id " + idx);
+                Scanner choice= new Scanner(System.in);
+                System.out.println("Are you sure that you want to remove this item form the warehouse? (Yes/No)");
+                String input = choice.nextLine().toLowerCase();
+                if (input.equals("yes")) {
+                    if (item != null) {
+                        item.setQuantity(amount - removableAmount);
+                    } else {
+                        System.out.println("no stock item with id " + idx);
+                    }
                 }
             } catch (SalesSystemException | NoSuchElementException e) {
                 log.error(e.getMessage(), e);
