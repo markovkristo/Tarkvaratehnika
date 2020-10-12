@@ -59,7 +59,7 @@ public class ConsoleUI {
         List<StockItem> stockItems = dao.findStockItems();
         System.out.println("-------------------------");
         for (StockItem si : stockItems) {
-            System.out.println(si.getId() + " " + si.getName() + " " + si.getPrice() + "Euro (" + si.getQuantity() + " items, all items sum: " + (si.getQuantity() * si.getPrice()) + ")" + "");
+            System.out.println(si.getId() + " " + si.getName() + " " + si.getPrice() + " Euro (" + si.getQuantity() + " items, all items sum: " + (si.getQuantity() * si.getPrice()) + ")" + "");
         }
         if (stockItems.size() == 0) {
             System.out.println("\tNothing");
@@ -81,15 +81,15 @@ public class ConsoleUI {
     private void printUsage() {
         System.out.println("-------------------------");
         System.out.println("Usage:");
-        System.out.println("h\t\tShow this help");
-        System.out.println("w\t\tShow warehouse contents");
+        System.out.println("h\t\t\t\t\t\tShow this help");
+        System.out.println("w\t\t\t\t\t\tShow warehouse contents");
         System.out.println("wa IDX NR Na Desc P\t\tAdd NR of items with index IDX, name Na, description Desc and price P to the warehouse");
-        System.out.println("wr IDX NR \tRemove NR of stock item with index IDX from the warehouse");
-        System.out.println("c\t\tShow cart contents");
-        System.out.println("a IDX NR \tAdd NR of stock item with index IDX to the cart");
-        System.out.println("p\t\tPurchase the shopping cart");
-        System.out.println("r\t\tReset the shopping cart");
-        System.out.println("t\t\tSee team information");
+        System.out.println("wr IDX NR \t\t\t\tRemove NR of stock item with index IDX from the warehouse");
+        System.out.println("c\t\t\t\t\t\tShow cart contents");
+        System.out.println("a IDX NR \t\t\t\tAdd NR of stock item with index IDX to the cart");
+        System.out.println("p\t\t\t\t\t\tPurchase the shopping cart");
+        System.out.println("r\t\t\t\t\t\tReset the shopping cart");
+        System.out.println("t\t\t\t\t\t\tSee team information");
         System.out.println("-------------------------");
     }
 
@@ -153,19 +153,18 @@ public class ConsoleUI {
         }
         else if (c[0].equals("wr") && c.length == 3) {
             try {
-
                 long idx = Long.parseLong(c[1]);
                 int removableAmount = Integer.parseInt(c[2]);
                 StockItem item = dao.findStockItem(idx);
                 int amount = item.getQuantity();
                 Scanner choice= new Scanner(System.in);
-                System.out.println("Are you sure that you want to remove this item form the warehouse? (Yes/No)");
+                System.out.println("Are you sure that you want to remove this item from the warehouse? (Yes/No)");
                 String input = choice.nextLine().toLowerCase();
                 if (input.equals("yes")) {
                     if (item != null) {
                         item.setQuantity(amount - removableAmount);
                     } else {
-                        System.out.println("no stock item with id " + idx);
+                        System.out.println("No stock item with id " + idx);
                     }
                 }
             } catch (SalesSystemException | NoSuchElementException e) {
@@ -176,5 +175,4 @@ public class ConsoleUI {
             System.out.println("unknown command");
         }
     }
-
 }

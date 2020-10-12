@@ -27,14 +27,14 @@
         <Label text="Price:"/>
       </VBox>
       <VBox maxHeight="150" spacing="3">
-        <TextField maxHeight="8"/>
-        <TextField maxHeight="8"/>
-        <TextField maxHeight="8"/>
-        <TextField maxHeight="8"/>
+        <TextField fx:id="barcode" maxHeight="8"/>
+        <TextField fx:id="amount" maxHeight="8"/>
+        <TextField fx:id="name" maxHeight="8"/>
+        <TextField fx:id="price" maxHeight="8"/>
       </VBox>
       <VBox maxHeight="150" spacing="3">
-        <Button maxWidth="140" style="-fx-font-size: 12px" text="Add product"/>
-        <Button maxWidth="140" style="-fx-font-size: 12px" text="Remove product"/>
+        <Button maxWidth="140" style="-fx-font-size: 12px"  onAction="#addProductButtonClicked" text="Add product"/>
+        <Button maxWidth="140" style="-fx-font-size: 12px"  onAction="#removeProductButtonClicked" text="Remove product"/>
       </VBox>
     </HBox>
     <TitledPane alignment="BASELINE_CENTER" animated="false"  collapsible="false" text="Warehouse status">
