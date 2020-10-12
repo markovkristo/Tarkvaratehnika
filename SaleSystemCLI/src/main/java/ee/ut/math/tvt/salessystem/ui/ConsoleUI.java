@@ -82,6 +82,8 @@ public class ConsoleUI {
         System.out.println("Usage:");
         System.out.println("h\t\tShow this help");
         System.out.println("w\t\tShow warehouse contents");
+        System.out.println("wa IDX NR Na Desc P\t\tAdd NR of items with index IDX, name Na, description Desc and price P to the warehouse");
+        System.out.println("wr IDX NR \tRemove NR of stock item with index IDX from the warehouse");
         System.out.println("c\t\tShow cart contents");
         System.out.println("a IDX NR \tAdd NR of stock item with index IDX to the cart");
         System.out.println("p\t\tPurchase the shopping cart");
@@ -129,7 +131,43 @@ public class ConsoleUI {
             } catch (SalesSystemException | NoSuchElementException e) {
                 log.error(e.getMessage(), e);
             }
-        } else {
+        }
+        else if (c[0].equals("wa") && c.length == 6) {
+            try {
+                long idx = Long.parseLong(c[1]);
+                int quantity = Integer.parseInt(c[2]);
+                String name = c[3];
+                String desc = c[4];
+                double price = Double.parseDouble(c[5]);
+                List<StockItem> stockItems = dao.findStockItems();
+                StockItem item = new StockItem(idx, name, desc, price, quantity );
+                if (item != null) {
+                    stockItems.add(item);
+                } else {
+                    System.out.println("no stock item with id " + idx);
+                }
+            } catch (SalesSystemException | NoSuchElementException e) {
+                log.error(e.getMessage(), e);
+            }
+        }
+        else if (c[0].equals("wr") && c.length == 3) {
+            try {
+
+                long idx = Long.parseLong(c[1]);
+                int removableAmount = Integer.parseInt(c[2]);
+                StockItem item = dao.findStockItem(idx);
+                int amount = item.getQuantity();
+
+                if (item != null) {
+                    item.setQuantity(amount-removableAmount);
+                } else {
+                    System.out.println("no stock item with id " + idx);
+                }
+            } catch (SalesSystemException | NoSuchElementException e) {
+                log.error(e.getMessage(), e);
+            }
+        }
+        else {
             System.out.println("unknown command");
         }
     }
