@@ -63,14 +63,16 @@ public class StockController implements Initializable {
         StockItem item = dao.findStockItem(id);
         if (quantity > item.getQuantity()) {
             log.info("Removable amount can't exceed item quantity.");
+            Popup.display("Error", "Removable amount can't exceed item quantity.", "Proceed");
         } else {
             if (item.getQuantity()-quantity == 0) {
                 stockItems.remove(item);
                 log.info("All of the product has been removed from the warehouse.");
+                Popup.display("Warehouse", "All of the product has been removed from the warehouse.", "Proceed");
             } else {
                 item.setQuantity(item.getQuantity() - quantity);
                 log.info(quantity + " units of the product was removed from the warehouse");
-                Popup.display();
+                Popup.display("Warehouse", "Units of the product was removed from the warehouse", "Proceed");
             }
             refreshStockItems();
         }
@@ -90,10 +92,12 @@ public class StockController implements Initializable {
             stockItems.add(item);
             log.info("New product has been added / resupplied");
             refreshStockItems();
+            Popup.display("Warehouse", "New product has been added / resupplied!", "Proceed");
         } else {
             StockItem item = dao.findStockItem(id);
             if (!item.getName().equals(productName)) {
                 log.info("There's a different item with the same index inside the warehouse");
+                Popup.display("Error", "There's a different item with the same index inside the warehouse", "Proceed");
             } else {
                 if (item.getPrice() != productPrice) {
                     item.setPrice(productPrice);
@@ -101,6 +105,7 @@ public class StockController implements Initializable {
                 item.setQuantity(item.getQuantity() + quantity);
                 log.info("New product has been added / resupplied");
                 refreshStockItems();
+                Popup.display("Warehouse", "New product has been added / resupplied, price has been updated", "Proceed");
             }
         }
     }

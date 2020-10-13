@@ -10,18 +10,18 @@ import javafx.stage.*;
 public class Popup {
 
 
-    public static void display()
+    public static void display(String label, String message, String button)
     {
         Stage popupwindow=new Stage();
 
         popupwindow.initModality(Modality.APPLICATION_MODAL);
-        popupwindow.setTitle("Warehouse");
+        popupwindow.setTitle(label);
 
 
-        Label label1= new Label("Units of the product was removed from the warehouse");
+        Label label1= new Label(message);
 
 
-        Button button1= new Button("Proceed");
+        Button button1= new Button(button);
 
 
         button1.setOnAction(e -> popupwindow.close());
@@ -35,7 +35,7 @@ public class Popup {
 
         layout.setAlignment(Pos.CENTER);
 
-        Scene scene1= new Scene(layout, 300, 250);
+        Scene scene1= new Scene(layout, 400, 250);
 
         popupwindow.setScene(scene1);
 
