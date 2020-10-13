@@ -91,6 +91,7 @@ public class ConsoleUI {
         System.out.println("p\t\t\t\t\t\tPurchase the shopping cart");
         System.out.println("r\t\t\t\t\t\tReset the shopping cart");
         System.out.println("t\t\t\t\t\t\tSee team information");
+        System.out.println("q\t\t\t\t\t\tQuit application");
         System.out.println("-------------------------");
     }
 

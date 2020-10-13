@@ -1,6 +1,5 @@
 package ee.ut.math.tvt.salessystem.logic;
 
-import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
