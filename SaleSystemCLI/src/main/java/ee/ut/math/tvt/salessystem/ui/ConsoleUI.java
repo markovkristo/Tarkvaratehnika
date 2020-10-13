@@ -85,6 +85,7 @@ public class ConsoleUI {
         System.out.println("w\t\t\t\t\t\tShow warehouse contents");
         System.out.println("wa IDX NR Na Desc P\t\tAdd NR of items with index IDX, name Na, description Desc and price P to the warehouse");
         System.out.println("wr IDX NR \t\t\t\tRemove NR of stock item with index IDX from the warehouse");
+        System.out.println("cp IDX P \t\t\t\tChange price P  of stock item with index IDX");
         System.out.println("c\t\t\t\t\t\tShow cart contents");
         System.out.println("a IDX NR \t\t\t\tAdd NR of stock item with index IDX to the cart");
         System.out.println("p\t\t\t\t\t\tPurchase the shopping cart");
@@ -119,6 +120,20 @@ public class ConsoleUI {
             cart.submitCurrentPurchase();
         else if (c[0].equals("r"))
             cart.cancelCurrentPurchase();
+        else if (c[0].equals("cp") && c.length == 3) {
+            try {
+                long idx = Long.parseLong(c[1]);
+                double price = Double.parseDouble(c[2]);
+                StockItem item = dao.findStockItem(idx);
+                if (item != null) {
+                    item.setPrice(price);
+                } else {
+                    System.out.println("no stock item with id " + idx);
+                }
+            } catch (SalesSystemException | NoSuchElementException e) {
+                log.error(e.getMessage(), e);
+            }
+        }
         else if (c[0].equals("a") && c.length == 3) {
             try {
                 long idx = Long.parseLong(c[1]);
@@ -141,11 +156,15 @@ public class ConsoleUI {
                 String desc = c[4];
                 double price = Double.parseDouble(c[5]);
                 List<StockItem> stockItems = dao.findStockItems();
-                StockItem item = new StockItem(idx, name, desc, price, quantity );
-                if (item != null) {
-                    stockItems.add(item);
+                StockItem item = dao.findStockItem(idx);
+                if(item == null)
+                    stockItems.add(new StockItem(idx, name, desc, price, quantity));
+                 else if (item != null) {
+                    item.setQuantity(item.getQuantity() + quantity);
+                    if(item.getPrice() != price)
+                        item.setPrice(price);
                 } else {
-                    System.out.println("no stock item with id " + idx);
+                    System.out.println("No stock item with id " + idx + ".");
                 }
             } catch (SalesSystemException | NoSuchElementException e) {
                 log.error(e.getMessage(), e);
