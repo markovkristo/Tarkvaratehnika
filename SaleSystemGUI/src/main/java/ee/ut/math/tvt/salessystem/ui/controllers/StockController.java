@@ -70,6 +70,7 @@ public class StockController implements Initializable {
             } else {
                 item.setQuantity(item.getQuantity() - quantity);
                 log.info(quantity + " units of the product was removed from the warehouse");
+                Popup.display();
             }
             refreshStockItems();
         }
