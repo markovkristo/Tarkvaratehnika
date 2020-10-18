@@ -74,6 +74,7 @@ public class SalesSystemUI extends Application {
 
         primaryStage.setTitle("Sales system");
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
 
         log.info("Salesystem GUI started");
