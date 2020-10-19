@@ -275,8 +275,9 @@ public class ConsoleUI {
     private void processCommand(String command) {
         String[] c = command.split(",");
         for (int i = 0; i < c.length; i++) {
-            if(i == 0)
-                c[i] = c[i].toLowerCase().trim();
+            if(i == 0){
+                c[i] = c[i].trim().toLowerCase();
+            }
             else
                 c[i] = c[i].trim();
         }
