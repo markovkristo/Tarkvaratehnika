@@ -1,46 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
-  <SplitPane styleClass="sub_background" dividerPositions="0.4" orientation="VERTICAL" prefHeight="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <SplitPane dividerPositions="0.4" orientation="VERTICAL" prefHeight="500.0" styleClass="sub_background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
     <HBox maxHeight="150" spacing="25">
-      <padding><Insets top="25" right="25" bottom="25" left="85"/></padding>
+      <padding><Insets bottom="25" left="85" right="25" top="25" /></padding>
       <VBox maxHeight="150" spacing="12">
-        <Label text="Bar Code:"/>
+        <Label text="Bar Code:" />
 
-        <Label text="Amount:"/>
+        <Label text="Amount:" />
 
-        <Label text="Name:"/>
+        <Label text="Name:" />
 
-        <Label text="Price:"/>
+        <Label text="Price:" />
       </VBox>
       <VBox maxHeight="150" spacing="3">
-        <TextField fx:id="barcode" maxHeight="8"/>
-        <TextField fx:id="amount" maxHeight="8"/>
-        <TextField fx:id="name" maxHeight="8"/>
-        <TextField fx:id="price" maxHeight="8"/>
+        <TextField fx:id="barcode" maxHeight="8" />
+        <TextField fx:id="amount" maxHeight="8" />
+        <TextField fx:id="name" maxHeight="8" />
+        <TextField fx:id="price" maxHeight="8" />
       </VBox>
       <VBox maxHeight="150" spacing="3">
-        <Button maxWidth="140" style="-fx-font-size: 12px"  onAction="#addProductButtonClicked" text="Add product"/>
-        <Button maxWidth="140" style="-fx-font-size: 12px"  onAction="#removeProductButtonClicked" text="Remove product"/>
+        <Button maxWidth="140" onAction="#addProductButtonClicked" style="-fx-font-size: 12px" text="Add product" />
+        <Button maxWidth="140" onAction="#removeProductButtonClicked" style="-fx-font-size: 12px" text="Remove product" />
       </VBox>
     </HBox>
-    <TitledPane alignment="BASELINE_CENTER" animated="false"  collapsible="false" text="Warehouse status">
+    <TitledPane alignment="BASELINE_CENTER" animated="false" collapsible="false" text="Warehouse status">
       <BorderPane>
         <center>
-          <TableView fx:id="warehouseTableView"  BorderPane.alignment="CENTER" >
+          <TableView fx:id="warehouseTableView" BorderPane.alignment="CENTER">
             <columns>
               <TableColumn text="Id">
                 <cellValueFactory>

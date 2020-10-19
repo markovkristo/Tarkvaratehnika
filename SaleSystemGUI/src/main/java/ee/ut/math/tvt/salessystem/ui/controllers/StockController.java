@@ -10,6 +10,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import javafx.geometry.Pos;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.stage.*;
 
 import java.net.URL;
 import java.util.List;
@@ -56,30 +61,33 @@ public class StockController implements Initializable {
     }
 
     @FXML
-    private void removeProductButtonClicked() {
+    private void removeProductButtonClicked() throws Exception{
         List<StockItem> stockItems = dao.findStockItems();
         long id = Long.parseLong(barcode.getText());
         int quantity = Integer.parseInt(amount.getText());
         StockItem item = dao.findStockItem(id);
         if (quantity > item.getQuantity()) {
-            log.info("Removable amount can't exceed item quantity.");
-            Popup.display("Error", "Removable amount can't exceed item quantity.", "Proceed");
+            String message = "Removable amount can't exceed item quantity.";
+            log.info(message);
+            display(message);
         } else {
-            if (item.getQuantity()-quantity == 0) {
+            if (item.getQuantity() - quantity == 0) {
                 stockItems.remove(item);
-                log.info("All of the product has been removed from the warehouse.");
-                Popup.display("Warehouse", "All of the product has been removed from the warehouse.", "Proceed");
+                String message = "All of the product (id: " + id + ") has been removed from the warehouse.";
+                log.info(message);
+                display(message);
             } else {
                 item.setQuantity(item.getQuantity() - quantity);
-                log.info(quantity + " units of the product was removed from the warehouse");
-                Popup.display("Warehouse", "Units of the product was removed from the warehouse", "Proceed");
+                String message = quantity + " units of the product (id: " + id + ") was removed from the warehouse";
+                log.info(message);
+                display(message);
             }
             refreshStockItems();
         }
     }
 
     @FXML
-    protected void addProductButtonClicked() {
+    protected void addProductButtonClicked() throws Exception{
         validateInstance();
         List<StockItem> stockItems = dao.findStockItems();
         long id = Long.parseLong(barcode.getText());
@@ -90,24 +98,49 @@ public class StockController implements Initializable {
         if (dao.findStockItem(id) == null) {
             StockItem item = new StockItem(id, productName, "", productPrice, quantity);
             stockItems.add(item);
-            log.info("New product has been added / resupplied");
+            String message = productName + ", " + quantity + " units - has been added to warehouse!";
+            log.info(message);
+            display(message);
             refreshStockItems();
-            Popup.display("Warehouse", "New product has been added / resupplied!", "Proceed");
+            //Popup.display("Warehouse", "New product has been added / resupplied!", "Proceed");
+
         } else {
             StockItem item = dao.findStockItem(id);
             if (!item.getName().equals(productName)) {
-                log.info("There's a different item with the same index inside the warehouse");
-                Popup.display("Error", "There's a different item with the same index inside the warehouse", "Proceed");
+                String message = "There's a different item with the same index inside the warehouse";
+                log.info(message);
+                display(message);
+                //Popup.display("Error", "There's a different item with the same index inside the warehouse", "Proceed");
             } else {
+                String message = productName + " has been resupplied by " + quantity + " units.";
                 if (item.getPrice() != productPrice) {
                     item.setPrice(productPrice);
+                    message = productName + " price has been updated to " + productPrice + " and added " + quantity + " units.";
                 }
                 item.setQuantity(item.getQuantity() + quantity);
-                log.info("New product has been added / resupplied");
+                log.info(message);
+                display(message);
                 refreshStockItems();
-                Popup.display("Warehouse", "New product has been added / resupplied, price has been updated", "Proceed");
+                //Popup.display("Warehouse", "New product has been added / resupplied, price has been updated", "Proceed");
             }
         }
+    }
+
+    private void display(String message) throws Exception{
+        Stage popupwindow = new Stage();
+        popupwindow.initModality(Modality.APPLICATION_MODAL);
+        popupwindow.setTitle("Notification");
+        Label label1 = new Label(message);
+        Button button1 = new Button("Proceed");
+        button1.setOnAction(e -> popupwindow.close());
+        VBox layout = new VBox(10);
+        layout.getChildren().addAll(label1, button1);
+        layout.setAlignment(Pos.CENTER);
+        Scene scene1 = new Scene(layout, 400, 250);
+        //scene1.getStylesheets().add(getClass().getResource("main/ee/ut/math/tvt/salessystem/ui/DefaultTheme.css").toExternalForm());
+        popupwindow.setScene(scene1);
+        popupwindow.showAndWait();
+
     }
 
     private void validateInstance() {
