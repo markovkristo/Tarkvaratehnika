@@ -125,7 +125,7 @@ public class ConsoleUI {
             System.out.println("You didn't enter enough parameters. You have to enter item index and item quantity.");
         }
         else if(c. length > 3){
-            System.out.println("You entered to many parameters. You have to enter item index and item quantity.");
+            System.out.println("You entered too many parameters. You have to enter item index and item quantity.");
         }
         System.out.println("-------------------------");
     }
@@ -149,10 +149,10 @@ public class ConsoleUI {
             }
         }
         else if(c.length < 3){
-            System.out.println("You didn't enter enough parameters. You have to enter item index and items new price.");
+            System.out.println("You didn't enter enough parameters. You have to enter item index and item's new price.");
         }
         else if(c. length > 3){
-            System.out.println("You entered to many parameters. You have to enter item index and items new price.");
+            System.out.println("You entered too many parameters. You have to enter item index and item's new price.");
         }
         System.out.println("-------------------------");
     }
@@ -177,7 +177,7 @@ public class ConsoleUI {
             System.out.println("You didn't enter enough parameters. You have to enter item index and item quantity.");
         }
         else if(c. length > 3){
-            System.out.println("You entered to many parameters. You have to enter item index and item quantity.");
+            System.out.println("You entered too many parameters. You have to enter item index and item quantity.");
         }
         System.out.println("-------------------------");
     }
@@ -199,14 +199,14 @@ public class ConsoleUI {
                     System.out.println("Added new item to " + newItem.getDescription() + " called " + newItem.getName() + " with id " + newItem.getId() + ", quantity: " + newItem.getQuantity() + " and price " + newItem.getPrice());
                 }
                 else {
-                    System.out.println("Item with id " + idx + " already exists in warehouse. If you want to add an already existing item then use command wa");
+                    System.out.println("Item with id " + idx + " already exists in warehouse. If you want to add an already existing item then use command 'wa'");
                 }
             } catch (SalesSystemException | NoSuchElementException e) {
                 log.error(e.getMessage(), e);
             }
         }
         else if(c.length < 6){
-            System.out.println("You didn't enter enough parameters. You have to enter new items index, item quantity, price, decription and name.");
+            System.out.println("You didn't enter enough parameters. You have to enter new item's index, item quantity, price, description and name.");
         }
         System.out.println("-------------------------");
     }
@@ -228,10 +228,10 @@ public class ConsoleUI {
                         int newAmount = amount - removableAmount;
                         if (newAmount == 0) {
                             stockItems.remove(item);
-                            System.out.println("Removed " + removableAmount + " " + item.getName() + " from warehouse. There is no more of this item in the warehouse. ");
+                            System.out.println("Removed " + removableAmount + " " + item.getName() + " from warehouse. All of the product has been removed from the warehouse. ");
                         }
                         else if (newAmount < 0)
-                            System.out.println("There isn't so many items in the warehouse. Exeeded the maximum quanity by " + (removableAmount - amount) + ".");
+                            System.out.println("There aren't that many items in the warehouse. Exceeded the maximum quantity by " + (removableAmount - amount) + ".");
                         else {
                             item.setQuantity(newAmount);
                             System.out.println("Removed " + removableAmount + " " + item.getName() + " from the warehouse.");
@@ -245,11 +245,10 @@ public class ConsoleUI {
             } catch (SalesSystemException | NoSuchElementException e) {
                 log.error(e.getMessage(), e);
             }
-        }else if(c.length < 3){
+        } else if(c.length < 3){
             System.out.println("You didn't enter enough parameters. You have to enter item index and item quantity.");
-        }
-        else if(c. length > 3){
-            System.out.println("You entered to many parameters. You have to enter item index and item quantity.");
+        } else {
+            System.out.println("You entered too many parameters. You have to enter item index and item quantity.");
         }
         System.out.println("-------------------------");
     }
@@ -290,53 +289,61 @@ public class ConsoleUI {
             else
                 c[i] = c[i].trim();
         }
-        if (c[0].equals("h"))
-            printUsage();
-        else if (c[0].equals("q"))
-            System.exit(0);
-        else if (c[0].equals("w"))
-            showStock();
-        else if (c[0].equals("t"))
-            showTeamInfo();
-        else if (c[0].equals("c"))
-            showCart();
-        else if (c[0].equals("p"))
-            cart.submitCurrentPurchase();
-        else if (c[0].equals("r"))
-            cart.cancelCurrentPurchase();
-        else if (c[0].equals("cp")) {
-            if(isNumeric(c[1]) && isNumeric(c[2]))
-                changePrice(c);
-            else
-                System.out.println("IDX and NR have to be numeric. ");
-        }
-        else if (c[0].equals("a")) {
-            if(isNumeric(c[1]) && isNumeric(c[2]))
-                addCart(c);
-            else
-                System.out.println("IDX, NR and P have to be numeric.");
-        }
-        else if (c[0].equals("wa")) {
-            if(isNumeric(c[1]) && isNumeric(c[2]))
-                addExistingItemToWarehouse(c);
-            else
-                System.out.println("IDX and NR have to be numeric.");
-        }
-        else if (c[0].equals("wan")) {
-            if(isNumeric(c[1]) && isNumeric(c[2]) && isNumeric(c[3]))
-                addExistingItemToWarehouse(c);
-            else
-                System.out.println("IDX and NR have to be numeric.");
+        switch (c[0]) {
+            case "h":
+                printUsage();
+                break;
+            case "q":
+                System.exit(0);
+            case "w":
+                showStock();
+                break;
+            case "t":
+                showTeamInfo();
+                break;
+            case "c":
+                showCart();
+                break;
+            case "p":
+                cart.submitCurrentPurchase();
+                break;
+            case "r":
+                cart.cancelCurrentPurchase();
+                break;
+            case "cp":
+                if (isNumeric(c[1]) && isNumeric(c[2]))
+                    changePrice(c);
+                else
+                    System.out.println("IDX and NR have to be numeric. ");
+                break;
+            case "a":
+                if (isNumeric(c[1]) && isNumeric(c[2]))
+                    addCart(c);
+                else
+                    System.out.println("IDX, NR and P have to be numeric.");
+                break;
+            case "wa":
+                if (isNumeric(c[1]) && isNumeric(c[2]))
+                    addExistingItemToWarehouse(c);
+                else
+                    System.out.println("IDX and NR have to be numeric.");
+                break;
+            case "wan":
+                if (isNumeric(c[1]) && isNumeric(c[2]) && isNumeric(c[3]))
+                    addExistingItemToWarehouse(c);
+                else
+                    System.out.println("IDX and NR have to be numeric.");
 
-        }
-        else if (c[0].equals("wr") ) {
-            if(isNumeric(c[1]) && isNumeric(c[2]))
-                removeItemFromWarehouse(c);
-            else
-                System.out.println("IDX and NR have to be numeric. ");
-        }
-        else {
-            System.out.println("unknown command");
+                break;
+            case "wr":
+                if (isNumeric(c[1]) && isNumeric(c[2]))
+                    removeItemFromWarehouse(c);
+                else
+                    System.out.println("IDX and NR have to be numeric. ");
+                break;
+            default:
+                System.out.println("unknown command");
+                break;
         }
     }
 
