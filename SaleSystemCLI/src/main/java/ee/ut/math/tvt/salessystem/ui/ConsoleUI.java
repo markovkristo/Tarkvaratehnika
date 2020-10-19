@@ -332,7 +332,7 @@ public class ConsoleUI {
                 if (isNumeric(c[1]) && isNumeric(c[2]) && isNumeric(c[3]))
                     addNewItemToWarehouse(c);
                 else
-                    System.out.println("IDX and NR have to be numeric.");
+                    System.out.println("IDX, NR and P have to be numeric.");
 
                 break;
             case "wr":
