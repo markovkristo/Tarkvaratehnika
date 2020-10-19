@@ -181,16 +181,13 @@ public class ConsoleUI {
                 int quantity = Integer.parseInt(c[2]);
                 double price = Double.parseDouble(c[3]);
                 String desc = c[4];
-                StringBuilder name = new StringBuilder();
-                for (int i = 5; i < c.length; i++) {
-                    name.append(c[i] + " ");
-                }
+                String name = c[5];
                 List<StockItem> stockItems = dao.findStockItems();
                 StockItem item = dao.findStockItem(idx);
                 if (item == null) {
-                    StockItem newItem = new StockItem(idx, name.toString(), desc, price, quantity);
+                    StockItem newItem = new StockItem(idx, name, desc, price, quantity);
                     stockItems.add(newItem);
-                    System.out.println("Added new item called " + newItem.getName() + " with id " + newItem.getId() + ", quantity: " + newItem.getQuantity() + " and price " + newItem.getPrice());
+                    System.out.println("Added new item to " + newItem.getDescription() + " called " + newItem.getName() + " with id " + newItem.getId() + ", quantity: " + newItem.getQuantity() + " and price " + newItem.getPrice());
                 }
                 else {
                     System.out.println("Item with id " + idx + " already exists in warehouse. If you want to add an already existing item then use command wa");
@@ -253,12 +250,12 @@ public class ConsoleUI {
         System.out.println("Usage:");
         System.out.println("h\t\t\t\t\t\tShow this help");
         System.out.println("w\t\t\t\t\t\tShow warehouse contents");
-        System.out.println("wan IDX NR P Desc Na\tAdd NR of new items with index IDX, price P, description Desc and name Na to the warehouse");
-        System.out.println("wa IDX NR \t\t\t\tAdd NR of of already existing stock items with index IDX to the warehouse");
-        System.out.println("wr IDX NR \t\t\t\tRemove NR of stock item with index IDX from the warehouse");
-        System.out.println("cp IDX P \t\t\t\tChange price P  of stock item with index IDX");
+        System.out.println("wan,IDX,NR,P,Desc,Na\tAdd NR of new items with index IDX, price P, description Desc and name Na to the warehouse");
+        System.out.println("wa,IDX,NR \t\t\t\tAdd NR of of already existing stock items with index IDX to the warehouse");
+        System.out.println("wr,IDX,NR \t\t\t\tRemove NR of stock item with index IDX from the warehouse");
+        System.out.println("cp,IDX,P \t\t\t\tChange price P  of stock item with index IDX");
         System.out.println("c\t\t\t\t\t\tShow cart contents");
-        System.out.println("a IDX NR \t\t\t\tAdd NR of stock item with index IDX to the cart");
+        System.out.println("a,IDX,NR \t\t\t\tAdd NR of stock item with index IDX to the cart");
         System.out.println("p\t\t\t\t\t\tPurchase the shopping cart");
         System.out.println("r\t\t\t\t\t\tReset the shopping cart");
         System.out.println("t\t\t\t\t\t\tSee team information");
@@ -276,7 +273,11 @@ public class ConsoleUI {
     }
 
     private void processCommand(String command) {
-        String[] c = command.split(" ");
+        String[] a = command.split(",");
+        String[] c = new String[a.length];
+        for (int i = 0; i < a.length; i++) {
+            c[i] = a[i].trim();
+        }
         if (c[0].equals("h"))
             printUsage();
         else if (c[0].equals("q"))
