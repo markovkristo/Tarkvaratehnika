@@ -11,7 +11,7 @@ https://bitbucket.org/dlisnuurp/lab2-kristotaunopatrik/wiki/Home
 https://bitbucket.org/dlisnuurp/lab2-kristotaunopatrik/wiki/Homework%202
 
 ## Homework 3:
-<Links to the solution>
+https://lab2-kristotaunopatrik.atlassian.net/secure/RapidBoard.jspa?rapidView=1
 
 ## Homework 4:
 <Links to the solution>
