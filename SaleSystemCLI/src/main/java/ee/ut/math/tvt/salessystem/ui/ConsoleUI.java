@@ -50,7 +50,7 @@ public class ConsoleUI {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         while (true) {
             System.out.print("> ");
-            processCommand(in.readLine().trim().toLowerCase());
+            processCommand(in.readLine().trim());
             System.out.println("Done. ");
         }
     }
@@ -273,10 +273,12 @@ public class ConsoleUI {
     }
 
     private void processCommand(String command) {
-        String[] a = command.split(",");
-        String[] c = new String[a.length];
-        for (int i = 0; i < a.length; i++) {
-            c[i] = a[i].trim();
+        String[] c = command.split(",");
+        for (int i = 0; i < c.length; i++) {
+            if(i == 0)
+                c[i] = c[i].toLowerCase().trim();
+            else
+                c[i] = c[i].trim();
         }
         if (c[0].equals("h"))
             printUsage();
