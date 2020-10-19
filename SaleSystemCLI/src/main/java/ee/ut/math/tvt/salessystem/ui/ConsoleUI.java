@@ -84,6 +84,170 @@ public class ConsoleUI {
         System.out.println("-------------------------");
     }
 
+    private void addCart(String[] c){
+        System.out.println("-------------------------");
+        if(c.length == 3) {
+            try {
+                long idx = Long.parseLong(c[1]);
+                int amount = Integer.parseInt(c[2]);
+                StockItem item = dao.findStockItem(idx);
+                List<StockItem> stockItems = dao.findStockItems();
+                if (item != null) {
+                    int newAmount = item.getQuantity() - amount;
+                    if (newAmount < 0)
+                        System.out.println("Exeeded the maximum quantity of item called " + item.getName() + " by " + (amount - item.getQuantity()));
+                    else if (newAmount == 0) {
+                        cart.addItem(new SoldItem(item, Math.min(amount, item.getQuantity())));
+                        stockItems.remove(item);
+                        System.out.println("Added " + amount + " " + item.getName() + " to the shopping cart.");
+                    } else {
+                        cart.addItem(new SoldItem(item, Math.min(amount, item.getQuantity())));
+                        item.setQuantity(newAmount);
+                        System.out.println("Added " + amount + " " + item.getName() + " to the shopping cart.");
+                    }
+                } else {
+                    System.out.println("No stock item with id " + idx + ".");
+                }
+            } catch (SalesSystemException | NoSuchElementException e) {
+                log.error(e.getMessage(), e);
+            }
+        }
+        else if(c.length < 3){
+            System.out.println("You didn't enter enough parameters. You have to enter item index and item quantity.");
+        }
+        else if(c. length > 3){
+            System.out.println("You entered to many parameters. You have to enter item index and item quantity.");
+        }
+        System.out.println("-------------------------");
+    }
+
+    private void changePrice(String[] c) {
+        System.out.println("-------------------------");
+        if(c.length == 3) {
+            try {
+                long idx = Long.parseLong(c[1]);
+                double price = Double.parseDouble(c[2]);
+                StockItem item = dao.findStockItem(idx);
+                if (item != null) {
+                    double oldPrice = item.getPrice();
+                    item.setPrice(price);
+                    System.out.println("Changed the price of " + item.getName() + " from " + oldPrice + " to " + price);
+                } else {
+                    System.out.println("No stock item with id " + idx + ".");
+                }
+            } catch (SalesSystemException | NoSuchElementException e) {
+                log.error(e.getMessage(), e);
+            }
+        }
+        else if(c.length < 3){
+            System.out.println("You didn't enter enough parameters. You have to enter item index and items new price.");
+        }
+        else if(c. length > 3){
+            System.out.println("You entered to many parameters. You have to enter item index and items new price.");
+        }
+        System.out.println("-------------------------");
+    }
+    private void addExistingItemToWarehouse(String[] c) {
+        System.out.println("-------------------------");
+        if(c.length == 3) {
+            try {
+                long idx = Long.parseLong(c[1]);
+                int quantity = Integer.parseInt(c[2]);
+                StockItem item = dao.findStockItem(idx);
+                if (item != null) {
+                    item.setQuantity(item.getQuantity() + quantity);
+                    System.out.println("Added " + quantity + " new " + item.getName() + " to warehouse. New total: " + item.getQuantity());
+                } else {
+                    System.out.println("No stock item with id " + idx + ".");
+                }
+            } catch (SalesSystemException | NoSuchElementException e) {
+                log.error(e.getMessage(), e);
+            }
+        }
+        else if(c.length < 3){
+            System.out.println("You didn't enter enough parameters. You have to enter item index and item quantity.");
+        }
+        else if(c. length > 3){
+            System.out.println("You entered to many parameters. You have to enter item index and item quantity.");
+        }
+        System.out.println("-------------------------");
+    }
+
+    private void addNewItemToWarehouse(String[] c) {
+        System.out.println("-------------------------");
+        if(c.length >= 6) {
+            try {
+                long idx = Long.parseLong(c[1]);
+                int quantity = Integer.parseInt(c[2]);
+                double price = Double.parseDouble(c[3]);
+                String desc = c[4];
+                StringBuilder name = new StringBuilder();
+                for (int i = 5; i < c.length; i++) {
+                    name.append(c[i] + " ");
+                }
+                List<StockItem> stockItems = dao.findStockItems();
+                StockItem item = dao.findStockItem(idx);
+                if (item == null) {
+                    StockItem newItem = new StockItem(idx, name.toString(), desc, price, quantity);
+                    stockItems.add(newItem);
+                    System.out.println("Added new item called " + newItem.getName() + " with id " + newItem.getId() + ", quantity: " + newItem.getQuantity() + " and price " + newItem.getPrice());
+                }
+                else {
+                    System.out.println("Item with id " + idx + " already exists in warehouse. If you want to add an already existing item then use command wa");
+                }
+            } catch (SalesSystemException | NoSuchElementException e) {
+                log.error(e.getMessage(), e);
+            }
+        }
+        else if(c.length < 6){
+            System.out.println("You didn't enter enough parameters. You have to enter new items index, item quantity, price, decription and name.");
+        }
+        System.out.println("-------------------------");
+    }
+
+    private void removeItemFromWarehouse(String[] c) {
+        System.out.println("-------------------------");
+        if(c.length == 3) {
+            try {
+                long idx = Long.parseLong(c[1]);
+                int removableAmount = Integer.parseInt(c[2]);
+                StockItem item = dao.findStockItem(idx);
+                List<StockItem> stockItems = dao.findStockItems();
+                if (item != null) {
+                    System.out.println("Are you sure that you want to remove this item from the warehouse? (Yes/No)");
+                    Scanner choice = new Scanner(System.in);
+                    String input = choice.nextLine().toLowerCase();
+                    if (input.equals("yes")) {
+                        int amount = item.getQuantity();
+                        int newAmount = amount - removableAmount;
+                        if (newAmount == 0) {
+                            stockItems.remove(item);
+                            System.out.println("Removed " + removableAmount + " " + item.getName() + " from warehouse. There is no more of this item in the warehouse. ");
+                        }
+                        else if (newAmount < 0)
+                            System.out.println("There isn't so many items in the warehouse. Exeeded the maximum quanity by " + (removableAmount - amount) + ".");
+                        else {
+                            item.setQuantity(newAmount);
+                            System.out.println("Removed " + removableAmount + " " + item.getName() + " from the warehouse.");
+                        }
+                    } else{
+                        System.out.println("Didn't remove the item. ");
+                    }
+                }else {
+                    System.out.println("No stock item with id " + idx + ".");
+                }
+            } catch (SalesSystemException | NoSuchElementException e) {
+                log.error(e.getMessage(), e);
+            }
+        }else if(c.length < 3){
+            System.out.println("You didn't enter enough parameters. You have to enter item index and item quantity.");
+        }
+        else if(c. length > 3){
+            System.out.println("You entered to many parameters. You have to enter item index and item quantity.");
+        }
+        System.out.println("-------------------------");
+    }
+
     private void printUsage() {
         System.out.println("-------------------------");
         System.out.println("Usage:");
@@ -128,141 +292,27 @@ public class ConsoleUI {
         else if (c[0].equals("r"))
             cart.cancelCurrentPurchase();
         else if (c[0].equals("cp")) {
-            if(c.length == 3) {
-                try {
-                    long idx = Long.parseLong(c[1]);
-                    double price = Double.parseDouble(c[2]);
-                    StockItem item = dao.findStockItem(idx);
-                    if (item != null) {
-                        item.setPrice(price);
-                    } else {
-                        System.out.println("No stock item with this id " + idx + ".");
-                    }
-                } catch (SalesSystemException | NoSuchElementException e) {
-                    log.error(e.getMessage(), e);
-                }
-            }
-            else if(c.length < 3){
-                System.out.println("You didn't enter enough parameters. You have to enter item index and items new price.");
-            }
-            else if(c. length > 3){
-                System.out.println("You entered to many parameters. You have to enter item index and items new price.");
-            }
+            changePrice(c);
         }
         else if (c[0].equals("a")) {
-            if(c.length == 3) {
-                try {
-                    long idx = Long.parseLong(c[1]);
-                    int amount = Integer.parseInt(c[2]);
-                    StockItem item = dao.findStockItem(idx);
-                    List<StockItem> stockItems = dao.findStockItems();
-                    if (item != null) {
-                        int newAmount = item.getQuantity() - amount;
-                        if (newAmount < 0)
-                            System.out.println("Exeeded the maximum quantity of item called " + item.getName() + " by " + (amount - item.getQuantity()));
-                        else if (newAmount == 0) {
-                            cart.addItem(new SoldItem(item, Math.min(amount, item.getQuantity())));
-                            stockItems.remove(item);
-                        } else {
-                            cart.addItem(new SoldItem(item, Math.min(amount, item.getQuantity())));
-                            item.setQuantity(newAmount);
-                        }
-                    } else {
-                        System.out.println("No stock item with id " + idx + ".");
-                    }
-                } catch (SalesSystemException | NoSuchElementException e) {
-                    log.error(e.getMessage(), e);
-                }
-            }
-            else if(c.length < 3){
-                System.out.println("You didn't enter enough parameters. You have to enter item index and item quantity.");
-            }
-            else if(c. length > 3){
-                System.out.println("You entered to many parameters. You have to enter item index and item quantity.");
-            }
+            addCart(c);
         }
         else if (c[0].equals("wa")) {
-            if(c.length == 3) {
-                try {
-                    long idx = Long.parseLong(c[1]);
-                    int quantity = Integer.parseInt(c[2]);
-                    StockItem item = dao.findStockItem(idx);
-                    if (item != null) {
-                        item.setQuantity(item.getQuantity() + quantity);
-                    } else {
-                        System.out.println("No stock item with id " + idx + ".");
-                    }
-                } catch (SalesSystemException | NoSuchElementException e) {
-                    log.error(e.getMessage(), e);
-                }
-            }
-            else if(c.length < 3){
-                System.out.println("You didn't enter enough parameters. You have to enter item index and item quantity.");
-            }
-            else if(c. length > 3){
-                System.out.println("You entered to many parameters. You have to enter item index and item quantity.");
-            }
+            addExistingItemToWarehouse(c);
         }
         else if (c[0].equals("wan")) {
-            if(c.length >= 6) {
-                try {
-                    long idx = Long.parseLong(c[1]);
-                    int quantity = Integer.parseInt(c[2]);
-                    double price = Double.parseDouble(c[3]);
-                    String desc = c[4];
-                    StringBuilder name = new StringBuilder();
-                    for (int i = 5; i < c.length; i++) {
-                        name.append(c[i] + " ");
-                    }
-                    List<StockItem> stockItems = dao.findStockItems();
-                    StockItem item = dao.findStockItem(idx);
-                    if (item == null)
-                        stockItems.add(new StockItem(idx, name.toString(), desc, price, quantity));
-                    else {
-                        System.out.println("Item with id " + idx + " already exists in warehouse. If you want to add an already existing item then use command wa");
-                    }
-                } catch (SalesSystemException | NoSuchElementException e) {
-                    log.error(e.getMessage(), e);
-                }
-            }
-            else if(c.length < 6){
-                System.out.println("You didn't enter enough parameters. You have to enter new items index, item quantity, price, decription and name.");
-            }
+            addNewItemToWarehouse(c);
+
         }
         else if (c[0].equals("wr") ) {
-            if(c.length == 3) {
-                try {
-                    long idx = Long.parseLong(c[1]);
-                    int removableAmount = Integer.parseInt(c[2]);
-                    StockItem item = dao.findStockItem(idx);
-                    List<StockItem> stockItems = dao.findStockItems();
-                    if (item != null) {
-                        System.out.println("Are you sure that you want to remove this item from the warehouse? (Yes/No)");
-                        Scanner choice = new Scanner(System.in);
-                        String input = choice.nextLine().toLowerCase();
-                        if (input.equals("yes")) {
-                            int amount = item.getQuantity();
-                            int newAmount = amount - removableAmount;
-                            if (newAmount <= 0) {
-                                stockItems.remove(item);
-                            }
-                            item.setQuantity(newAmount);
-                        }
-                    }else {
-                        System.out.println("No stock item with id " + idx + ".");
-                    }
-                } catch (SalesSystemException | NoSuchElementException e) {
-                    log.error(e.getMessage(), e);
-                }
-            }else if(c.length < 3){
-                System.out.println("You didn't enter enough parameters. You have to enter item index and item quantity.");
-            }
-            else if(c. length > 3){
-                System.out.println("You entered to many parameters. You have to enter item index and item quantity.");
-            }
+            removeItemFromWarehouse(c);
         }
         else {
             System.out.println("unknown command");
         }
     }
+
+
+
+
 }
