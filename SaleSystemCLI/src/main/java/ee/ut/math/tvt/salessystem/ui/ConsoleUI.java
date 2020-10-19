@@ -55,6 +55,15 @@ public class ConsoleUI {
         }
     }
 
+    public static boolean isNumeric(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch(NumberFormatException e){
+            return false;
+        }
+    }
+
     private void showStock() {
         List<StockItem> stockItems = dao.findStockItems();
         System.out.println("-------------------------");
@@ -296,20 +305,35 @@ public class ConsoleUI {
         else if (c[0].equals("r"))
             cart.cancelCurrentPurchase();
         else if (c[0].equals("cp")) {
-            changePrice(c);
+            if(isNumeric(c[1]) && isNumeric(c[2]))
+                changePrice(c);
+            else
+                System.out.println("IDX and NR have to be numeric. ");
         }
         else if (c[0].equals("a")) {
-            addCart(c);
+            if(isNumeric(c[1]) && isNumeric(c[2]))
+                addCart(c);
+            else
+                System.out.println("IDX, NR and P have to be numeric.");
         }
         else if (c[0].equals("wa")) {
-            addExistingItemToWarehouse(c);
+            if(isNumeric(c[1]) && isNumeric(c[2]))
+                addExistingItemToWarehouse(c);
+            else
+                System.out.println("IDX and NR have to be numeric.");
         }
         else if (c[0].equals("wan")) {
-            addNewItemToWarehouse(c);
+            if(isNumeric(c[1]) && isNumeric(c[2]) && isNumeric(c[3]))
+                addExistingItemToWarehouse(c);
+            else
+                System.out.println("IDX and NR have to be numeric.");
 
         }
         else if (c[0].equals("wr") ) {
-            removeItemFromWarehouse(c);
+            if(isNumeric(c[1]) && isNumeric(c[2]))
+                removeItemFromWarehouse(c);
+            else
+                System.out.println("IDX and NR have to be numeric. ");
         }
         else {
             System.out.println("unknown command");
