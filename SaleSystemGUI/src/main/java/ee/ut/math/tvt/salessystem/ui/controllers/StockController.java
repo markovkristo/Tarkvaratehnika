@@ -4,6 +4,7 @@ import ee.ut.math.tvt.salessystem.dao.SalesSystemDAO;
 import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
@@ -69,7 +70,7 @@ public class StockController implements Initializable {
         if (quantity > item.getQuantity()) {
             String message = "Removable amount can't exceed item quantity.";
             log.info(message);
-            display(message);
+            //display(message);
         } else {
             if (item.getQuantity() - quantity == 0) {
                 stockItems.remove(item);
@@ -80,7 +81,7 @@ public class StockController implements Initializable {
                 item.setQuantity(item.getQuantity() - quantity);
                 String message = quantity + " units of the product (id: " + id + ") was removed from the warehouse";
                 log.info(message);
-                display(message);
+                //display(message);
             }
             refreshStockItems();
         }
@@ -100,7 +101,7 @@ public class StockController implements Initializable {
             stockItems.add(item);
             String message = productName + ", " + quantity + " units - has been added to warehouse!";
             log.info(message);
-            display(message);
+            //display(message);
             refreshStockItems();
             //Popup.display("Warehouse", "New product has been added / resupplied!", "Proceed");
 
@@ -109,7 +110,7 @@ public class StockController implements Initializable {
             if (!item.getName().equals(productName)) {
                 String message = "There's a different item with the same index inside the warehouse";
                 log.info(message);
-                display(message);
+                //display(message);
                 //Popup.display("Error", "There's a different item with the same index inside the warehouse", "Proceed");
             } else {
                 String message = productName + " has been resupplied by " + quantity + " units.";
@@ -119,7 +120,7 @@ public class StockController implements Initializable {
                 }
                 item.setQuantity(item.getQuantity() + quantity);
                 log.info(message);
-                display(message);
+                //display(message);
                 refreshStockItems();
                 //Popup.display("Warehouse", "New product has been added / resupplied, price has been updated", "Proceed");
             }
