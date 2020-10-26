@@ -5,6 +5,7 @@ import ee.ut.math.tvt.salessystem.dao.InMemorySalesSystemDAO;
 import ee.ut.math.tvt.salessystem.dao.SalesSystemDAO;
 import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
 import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
+import ee.ut.math.tvt.salessystem.logic.History;
 import ee.ut.math.tvt.salessystem.logic.ShoppingCart;
 import ee.ut.math.tvt.salessystem.logic.TeamInfoSupplier;
 import org.apache.logging.log4j.LogManager;
@@ -30,6 +31,7 @@ public class ConsoleUI {
     public ConsoleUI(SalesSystemDAO dao) {
         this.dao = dao;
         cart = new ShoppingCart(dao);
+        //history = new History();
         teamInfoSupplier = new TeamInfoSupplier();
     }
 
@@ -46,6 +48,7 @@ public class ConsoleUI {
         System.out.println("===========================");
         System.out.println("=       Sales System      =");
         System.out.println("===========================");
+        log.info("Salesystem CLI started");
         printUsage();
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         while (true) {
@@ -76,6 +79,10 @@ public class ConsoleUI {
         System.out.println("-------------------------");
     }
 
+    private void showHistory(){
+
+    }
+
     private void showCart() {
         System.out.println("-------------------------");
         double totalSum = 0;
@@ -103,15 +110,23 @@ public class ConsoleUI {
                 List<StockItem> stockItems = dao.findStockItems();
                 if (item != null) {
                     int newAmount = item.getQuantity() - amount;
-                    if (newAmount < 0)
+                    if (newAmount < 0) {
                         System.out.println("Exeeded the maximum quantity of item called " + item.getName() + " by " + (amount - item.getQuantity()));
+                        String message = "Removable amount can't exceed item quantity.";
+                        log.info(message);
+                    }
                     else if (newAmount == 0) {
                         cart.addItem(new SoldItem(item, Math.min(amount, item.getQuantity())));
-                        stockItems.remove(item);
+                        //stockItems.remove(item);
                         System.out.println("Added " + amount + " " + item.getName() + " to the shopping cart.");
+                        //stockItems.remove(item);
+                        String message = "All of the product (id: " + idx + ") has been removed from the warehouse.";
+                        log.info(message);
                     } else {
                         cart.addItem(new SoldItem(item, Math.min(amount, item.getQuantity())));
                         item.setQuantity(newAmount);
+                        String message = amount + " units of the product (id: " + idx + ") was removed from the warehouse";
+                        log.info(message);
                         System.out.println("Added " + amount + " " + item.getName() + " to the shopping cart.");
                     }
                 } else {
@@ -141,6 +156,7 @@ public class ConsoleUI {
                     double oldPrice = item.getPrice();
                     item.setPrice(price);
                     System.out.println("Changed the price of " + item.getName() + " from " + oldPrice + " to " + price);
+                    log.info("Changed the price of " + item.getName() + " from " + oldPrice + " to " + price);
                 } else {
                     System.out.println("No stock item with id " + idx + ".");
                 }
@@ -166,6 +182,7 @@ public class ConsoleUI {
                 if (item != null) {
                     item.setQuantity(item.getQuantity() + quantity);
                     System.out.println("Added " + quantity + " new " + item.getName() + " to warehouse. New total: " + item.getQuantity());
+                    log.info("Added " + quantity + " new " + item.getName() + " to warehouse. New total: " + item.getQuantity());
                 } else {
                     System.out.println("No stock item with id " + idx + ".");
                 }
@@ -196,7 +213,9 @@ public class ConsoleUI {
                 if (item == null) {
                     StockItem newItem = new StockItem(idx, name, desc, price, quantity);
                     stockItems.add(newItem);
+                    log.debug("Added new item ");
                     System.out.println("Added new item to " + newItem.getDescription() + " called " + newItem.getName() + " with id " + newItem.getId() + ", quantity: " + newItem.getQuantity() + " and price " + newItem.getPrice());
+                    log.info("Added new item to " + newItem.getDescription() + " called " + newItem.getName() + " with id " + newItem.getId() + ", quantity: " + newItem.getQuantity() + " and price " + newItem.getPrice());
                 }
                 else {
                     System.out.println("Item with id " + idx + " already exists in warehouse. If you want to add an already existing item then use command 'wa'");
@@ -229,12 +248,14 @@ public class ConsoleUI {
                         if (newAmount == 0) {
                             stockItems.remove(item);
                             System.out.println("Removed " + removableAmount + " " + item.getName() + " from warehouse. All of the product has been removed from the warehouse. ");
+                            log.info("Removed " + removableAmount + " " + item.getName() + " from warehouse. All of the product has been removed from the warehouse. ");
                         }
                         else if (newAmount < 0)
                             System.out.println("There aren't that many items in the warehouse. Exceeded the maximum quantity by " + (removableAmount - amount) + ".");
                         else {
                             item.setQuantity(newAmount);
                             System.out.println("Removed " + removableAmount + " " + item.getName() + " from the warehouse.");
+                            log.info("Removed " + removableAmount + " " + item.getName() + " from the warehouse.");
                         }
                     } else{
                         System.out.println("Didn't remove the item. ");
@@ -293,8 +314,10 @@ public class ConsoleUI {
             case "h":
                 printUsage();
                 break;
-            case "q":
+            case "q": {
+                log.info("Salesystem CLI shutdown.");
                 System.exit(0);
+            }
             case "w":
                 showStock();
                 break;
@@ -304,43 +327,69 @@ public class ConsoleUI {
             case "c":
                 showCart();
                 break;
-            case "p":
+            case "p": {
                 cart.submitCurrentPurchase();
                 break;
+            }
             case "r":
                 cart.cancelCurrentPurchase();
                 break;
             case "cp":
-                if (isNumeric(c[1]) && isNumeric(c[2]))
-                    changePrice(c);
+                if (isNumeric(c[1]) && isNumeric(c[2])) {
+                    if(Integer.parseInt(c[1]) > 0 && Integer.parseInt(c[2]) > 0)
+                        changePrice(c);
+                    else
+                        System.out.println("IDX and P can't have negative values. ");
+                }
                 else
                     System.out.println("IDX and NR have to be numeric. ");
+                log.debug("User entered index " + c[1] + " and price " + c[2]);
                 break;
             case "a":
-                if (isNumeric(c[1]) && isNumeric(c[2]))
-                    addCart(c);
+                if (isNumeric(c[1]) && isNumeric(c[2])){
+                    if(Integer.parseInt(c[1]) > 0 && Integer.parseInt(c[2]) > 0)
+                        addCart(c);
+                    else
+                        System.out.println("IDX and NR can't have negative values.");
+                }
                 else
                     System.out.println("IDX, NR and P have to be numeric.");
+                log.debug("User entered index " + c[1] + " and quantity " + c[2]);
                 break;
             case "wa":
-                if (isNumeric(c[1]) && isNumeric(c[2]))
-                    addExistingItemToWarehouse(c);
+                if (isNumeric(c[1]) && isNumeric(c[2])){
+                    if(Integer.parseInt(c[1]) > 0 && Integer.parseInt(c[2]) > 0)
+                        addExistingItemToWarehouse(c);
+                    else
+                        System.out.println("IDX and NR can't have negative values.");
+                }
                 else
                     System.out.println("IDX and NR have to be numeric.");
+                log.debug("User entered index " + c[1] + " and quantity " + c[2]);
                 break;
             case "wan":
-                if (isNumeric(c[1]) && isNumeric(c[2]) && isNumeric(c[3]))
-                    addNewItemToWarehouse(c);
+                if (isNumeric(c[1]) && isNumeric(c[2]) && isNumeric(c[3])){
+                    if (Integer.parseInt(c[1]) > 0 && Integer.parseInt(c[2]) > 0 && Double.parseDouble(c[3]) > 0.0)
+                        addNewItemToWarehouse(c);
+                    else
+                        System.out.println("IDX, NR and P can't have negative values.");
+                }
                 else
                     System.out.println("IDX, NR and P have to be numeric.");
-
+                log.debug("User entered index " + c[1] + ", quantity " + c[2] + ", price " + c[3] + ", decription " + c[4] + " and name " + c[5]);
                 break;
             case "wr":
-                if (isNumeric(c[1]) && isNumeric(c[2]))
-                    removeItemFromWarehouse(c);
+                if (isNumeric(c[1]) && isNumeric(c[2])) {
+                    if (Integer.parseInt(c[1]) > 0 && Integer.parseInt(c[2]) > 0)
+                        removeItemFromWarehouse(c);
+                    else
+                        System.out.println("IDX and NR can't have negative values.");
+                }
                 else
                     System.out.println("IDX and NR have to be numeric. ");
+                log.debug("User entered index " + c[1] + " and quantity " + c[2]);
                 break;
+
             default:
                 System.out.println("unknown command");
                 break;

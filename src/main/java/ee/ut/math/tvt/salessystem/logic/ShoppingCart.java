@@ -3,12 +3,16 @@ package ee.ut.math.tvt.salessystem.logic;
 import ee.ut.math.tvt.salessystem.SalesSystemException;
 import ee.ut.math.tvt.salessystem.dao.SalesSystemDAO;
 import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
+import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ShoppingCart {
 
+    private static final Logger log =LogManager.getLogger(ShoppingCart.class);
     private final SalesSystemDAO dao;
     private final List<SoldItem> items = new ArrayList<>();
 
@@ -21,10 +25,10 @@ public class ShoppingCart {
      */
     public void addItem(SoldItem item) {
         // TODO In case such stockItem already exists increase the quantity of the existing stock
-        // TODO verify that warehouse items' quantity remains at least zero or throw an exception
+        // TODO verify that warehouse items' quantity remains at least zero or throw an except
 
         items.add(item);
-        //log.debug("Added " + item.getName() + " quantity of " + item.getQuantity());
+        log.debug("Added " + item.getName() + " quantity of " + item.getQuantity());
     }
 
     public void removeItem(SoldItem item) {

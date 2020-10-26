@@ -1,8 +1,16 @@
 apply plugin: 'java'
-
+repositories {
+    mavenCentral()
+}
+dependencies {
+    testCompile("junit:junit:4.+")
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.6.2'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.6.2'
+}
 java {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
 }
-
 version = '1.0'
+
+

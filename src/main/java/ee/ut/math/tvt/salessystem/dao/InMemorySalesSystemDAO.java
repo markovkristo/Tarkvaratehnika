@@ -35,6 +35,14 @@ public class InMemorySalesSystemDAO implements SalesSystemDAO {
         return null;
     }
 
+    public SoldItem findSoldItem(long id){
+        for (SoldItem item : soldItemList) {
+            if(item.getId() == id)
+                return item;
+        }
+        return null;
+    }
+
     @Override
     public void saveSoldItem(SoldItem item) {
         soldItemList.add(item);
