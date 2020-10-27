@@ -1,14 +1,12 @@
 package ee.ut.math.tvt.salessystem.logic;
 
-import ee.ut.math.tvt.salessystem.SalesSystemException;
 import ee.ut.math.tvt.salessystem.dao.SalesSystemDAO;
 import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
-import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class ShoppingCart {
 
@@ -60,6 +58,7 @@ public class ShoppingCart {
             dao.rollbackTransaction();
             throw e;
         }
+        log.info("Purchase is completed");
     }
 
     private boolean isItemInCart(SoldItem item) {

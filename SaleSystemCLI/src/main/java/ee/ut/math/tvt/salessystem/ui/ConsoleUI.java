@@ -48,7 +48,7 @@ public class ConsoleUI {
         System.out.println("===========================");
         System.out.println("=       Sales System      =");
         System.out.println("===========================");
-        log.info("Salesystem CLI started");
+        log.info("SalesSystem CLI started");
         printUsage();
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         while (true) {
@@ -136,10 +136,10 @@ public class ConsoleUI {
                 log.error(e.getMessage(), e);
             }
         }
-        else if(c.length < 3){
+        else if (c.length < 3) {
             System.out.println("You didn't enter enough parameters. You have to enter item index and item quantity.");
         }
-        else if(c. length > 3){
+        else {
             System.out.println("You entered too many parameters. You have to enter item index and item quantity.");
         }
         System.out.println("-------------------------");
@@ -164,10 +164,10 @@ public class ConsoleUI {
                 log.error(e.getMessage(), e);
             }
         }
-        else if(c.length < 3){
+        else if (c.length < 3) {
             System.out.println("You didn't enter enough parameters. You have to enter item index and item's new price.");
         }
-        else if(c. length > 3){
+        else {
             System.out.println("You entered too many parameters. You have to enter item index and item's new price.");
         }
         System.out.println("-------------------------");
@@ -190,10 +190,10 @@ public class ConsoleUI {
                 log.error(e.getMessage(), e);
             }
         }
-        else if(c.length < 3){
+        else if (c.length < 3) {
             System.out.println("You didn't enter enough parameters. You have to enter item index and item quantity.");
         }
-        else if(c. length > 3){
+        else {
             System.out.println("You entered too many parameters. You have to enter item index and item quantity.");
         }
         System.out.println("-------------------------");
@@ -224,7 +224,7 @@ public class ConsoleUI {
                 log.error(e.getMessage(), e);
             }
         }
-        else if(c.length < 6){
+        else {
             System.out.println("You didn't enter enough parameters. You have to enter new item's index, item quantity, price, description and name.");
         }
         System.out.println("-------------------------");
@@ -395,8 +395,4 @@ public class ConsoleUI {
                 break;
         }
     }
-
-
-
-
 }

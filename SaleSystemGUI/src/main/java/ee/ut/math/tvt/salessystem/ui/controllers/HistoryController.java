@@ -25,15 +25,15 @@ public class HistoryController implements Initializable {
         // TODO: implement
     }
 
-    public void showAllHistoryButtonClicked() {
+    public void showAll() {
         log.info("All history is shown.");
     }
 
-    public void showHistoryBetweenSpecificDatesButtonClicked() {
+    public void showBetweenDates() {
         log.info("History between " + startDate.getText() + " and " + endDate.getText() + " is shown.");
     }
 
-    public void showLastTenPurchasesButtonClicked() {
+    public void showLastTen() {
         log.info("History of last 10 transactions is shown.");
     }
 
