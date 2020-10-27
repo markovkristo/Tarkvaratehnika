@@ -1,7 +1,6 @@
 package ee.ut.math.tvt.salessystem.ui.controllers;
 
 import ee.ut.math.tvt.salessystem.SalesSystemException;
-import ee.ut.math.tvt.salessystem.dao.InMemorySalesSystemDAO;
 import ee.ut.math.tvt.salessystem.dao.SalesSystemDAO;
 import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
 import ee.ut.math.tvt.salessystem.logic.Warehouse;
@@ -20,7 +19,6 @@ import javafx.scene.layout.*;
 import javafx.stage.*;
 
 import java.net.URL;
-import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -74,10 +72,10 @@ public class StockController implements Initializable {
                     Long.parseLong(barcode.getText()),
                     Integer.parseInt(amount.getText())
             );
+            refreshStockItems();
         } catch (SalesSystemException e) {
             display(e.getMessage());
         }
-        refreshStockItems();
     }
 
     @FXML
@@ -85,7 +83,7 @@ public class StockController implements Initializable {
         if (!isInputDataValidForAdding()) {
             return;
         }
-        StockItem addedItem = getItemFromTextFields();
+        StockItem addedItem = getAddedItemFromTextfields();
         List<StockItem> stockItems = dao.findStockItems();
         try {
             warehouse.addItemToWarehouse(dao.findStockItem(addedItem.getId()), addedItem, stockItems);
@@ -136,7 +134,7 @@ public class StockController implements Initializable {
         return true;
     }
 
-    private StockItem getItemFromTextFields() {
+    private StockItem getAddedItemFromTextfields() {
         return new StockItem(
                 Long.parseLong(barcode.getText()),
                 name.getText(),
