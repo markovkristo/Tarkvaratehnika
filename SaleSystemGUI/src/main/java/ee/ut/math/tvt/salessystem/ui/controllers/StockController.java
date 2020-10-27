@@ -88,7 +88,7 @@ public class StockController implements Initializable {
         try {
             warehouse.addItemToWarehouse(dao.findStockItem(addedItem.getId()), addedItem, stockItems);
             refreshStockItems();
-        } catch (SalesSystemException e) {
+        } catch (SalesSystemException | NumberFormatException e) {
             display(e.getMessage());
         }
     }
@@ -115,7 +115,7 @@ public class StockController implements Initializable {
             Integer.parseInt(amount.getText());
         } catch(NumberFormatException e) {
             display("You have entered invalid or missing data for one of the cells. \n" +
-                    "Amount, price, barcode and name must be set.");
+                    "Amount and barcode must be set.");
             return false;
         }
         return true;
@@ -128,7 +128,7 @@ public class StockController implements Initializable {
             Integer.parseInt(amount.getText());
         } catch(NumberFormatException e) {
             display("You have entered invalid or missing data for one of the cells. \n" +
-                    "Amount and barcode must be set.");
+                    "Amount, price, barcode and name must be set.");
             return false;
         }
         return true;

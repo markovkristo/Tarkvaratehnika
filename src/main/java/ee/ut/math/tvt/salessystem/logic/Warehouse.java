@@ -13,6 +13,18 @@ public class Warehouse {
     private static final Logger log = LogManager.getLogger(Warehouse.class);
 
     public void addItemToWarehouse(StockItem item, StockItem addedItem, List<StockItem> stockItems) {
+        if (!chosenDataIsValidForAdding(
+                addedItem.getId(),
+                addedItem.getName(),
+                addedItem.getQuantity(),
+                addedItem.getPrice())
+        ) {
+            return;
+        }
+        if (!chosenQuantityIsValid(addedItem.getQuantity())) {
+            throw new SalesSystemException("Must choose a realistic quantity. Currently you chose: "
+                    + addedItem.getQuantity());
+        }
         if (itemExistsInWarehouseGUI(item) && itemHasSameName(item, addedItem.getName())) {
             addExistingItemToWarehouseGUI(item, addedItem.getQuantity(), addedItem.getPrice());
         } else if (itemExistsInWarehouseGUI(item) && !itemHasSameName(item, addedItem.getName())) {
@@ -24,6 +36,9 @@ public class Warehouse {
     }
 
     public void removeItemFromWarehouse(List<StockItem> stockItems, long id, int removableQuantity) {
+        if (!chosenDataIsValidForRemoval(id, removableQuantity)) {
+            return;
+        }
         if (!productWithGivenIdExists(id, stockItems)) {
             throw new SalesSystemException("There is no product with id of " + id);
         }
@@ -45,6 +60,7 @@ public class Warehouse {
     }
 
     private void addNewItemToWarehouseGUI(StockItem addedItem, List<StockItem> stockItems) {
+        addedItem.setName(addedItem.getName().trim());
         stockItems.add(addedItem);
         stockItems.sort(Comparator.comparing(StockItem::getId));
     }
@@ -74,5 +90,47 @@ public class Warehouse {
             String message = quantity + " units of the product (id: " + item.getId() + ") was removed from the warehouse";
             log.info(message);
         }
+    }
+
+    private boolean chosenQuantityIsValid(int quantity) {
+        return quantity > 0;
+    }
+
+    private boolean chosenPriceIsValid(double price) {
+        return price > 0;
+    }
+
+    private boolean chosenIdIsNotNegative(long id) {
+        return id > 0;
+    }
+
+    private boolean chosenNameIsNotEmpty(String name) {
+        return !name.replaceAll("\\s+","").equals("");
+    }
+
+    private boolean chosenDataIsValidForAdding(long id, String name, int quantity, double price) {
+        if (!chosenIdIsNotNegative(id)) {
+            throw new SalesSystemException("Must choose an ID that is positive. Currently you chose: "
+                    + id);
+        } else if (!chosenQuantityIsValid(quantity)) {
+            throw new SalesSystemException("Must choose a realistic quantity. Currently you chose: "
+                    + quantity);
+        } else if (!chosenNameIsNotEmpty(name)) {
+            throw new SalesSystemException("Must choose a name that contains characters.");
+        } else if (!chosenPriceIsValid(price)) {
+            throw new SalesSystemException("Must choose a price that is larger than 0 euros.");
+        }
+        return true;
+    }
+
+    private boolean chosenDataIsValidForRemoval(long id, int quantity) {
+        if (!chosenIdIsNotNegative(id)) {
+            throw new SalesSystemException("Must choose an ID that is positive. Currently you chose: "
+                    + id);
+        } else if (!chosenQuantityIsValid(quantity)) {
+            throw new SalesSystemException("Must choose a realistic quantity. Currently you chose: "
+                    + quantity);
+        }
+        return true;
     }
 }
