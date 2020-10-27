@@ -15,13 +15,10 @@ public class WarehouseFunctionalityTests {
 
     private Warehouse warehouse = new Warehouse();
 
-
     @Test
     public void testAddingNewItem() {
-        InMemorySalesSystemDAO dao = Mockito.spy(InMemorySalesSystemDAO.class);
-        dao.addTemporaryItems();
+        InMemorySalesSystemDAO dao = new InMemorySalesSystemDAO();
         long itemId = 5L;
-        System.out.println(dao.findStockItems());
         StockItem addedItem = new StockItem(itemId, "Burger", "Juicy", 5.2, 10);
         List<StockItem> stockItems = dao.findStockItems();
         int currentSize = stockItems.size();
