@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ShoppingCart {
 
-    private static final Logger log =LogManager.getLogger(ShoppingCart.class);
+    private static final Logger log = LogManager.getLogger(ShoppingCart.class);
     private final SalesSystemDAO dao;
     private final List<SoldItem> items = new ArrayList<>();
 
@@ -22,15 +22,21 @@ public class ShoppingCart {
      * Add new SoldItem to table.
      */
     public void addItem(SoldItem item) {
-        // TODO In case such stockItem already exists increase the quantity of the existing stock
-        // TODO verify that warehouse items' quantity remains at least zero or throw an except
-
-        items.add(item);
+        if (itemIsInCart(item)) {
+            items
+                .stream()
+                .filter(i -> i.getName().equals(item.getName()))
+                .findFirst()
+                .get()
+                .addMoreQuantity(item.getQuantity());
+        } else {
+            items.add(item);
+        }
         log.debug("Added " + item.getName() + " quantity of " + item.getQuantity());
     }
 
     public void removeItem(SoldItem item) {
-
+        items.remove(item);
     }
 
     public List<SoldItem> getAll() {
@@ -61,8 +67,8 @@ public class ShoppingCart {
         log.info("Purchase is completed");
     }
 
-    private boolean isItemInCart(SoldItem item) {
-        return items.contains(item);
+    private boolean itemIsInCart(SoldItem item) {
+        return items.stream().anyMatch(e -> e.getName().equals(item.getName()));
     }
 
     private boolean isItemInStock(SoldItem item) {

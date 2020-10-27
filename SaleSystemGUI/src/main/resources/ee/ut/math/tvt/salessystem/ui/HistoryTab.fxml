@@ -18,7 +18,7 @@
 <AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <SplitPane dividerPositions="0.4" orientation="VERTICAL" prefHeight="500.0" styleClass="sub_background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <HBox maxHeight="150" spacing="25">
-            <padding><Insets bottom="25" left="85" right="25" top="25" /></padding>
+            <padding><Insets bottom="15" left="85" right="25" top="25" /></padding>
             <VBox maxHeight="150" spacing="3">
                 <Button maxWidth="180" onAction="#showBetweenDates" style="-fx-font-size: 12px" text="Show between dates"/>
                 <Button maxWidth="180" onAction="#showLastTen" style="-fx-font-size: 12px" text="Show last 10" />

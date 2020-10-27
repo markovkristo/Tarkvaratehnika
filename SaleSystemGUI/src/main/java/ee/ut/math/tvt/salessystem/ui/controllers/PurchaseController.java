@@ -103,7 +103,6 @@ public class PurchaseController implements Initializable {
      */
     @FXML
     protected void submitPurchaseButtonClicked() {
-        log.info("Sale complete");
         try {
             log.debug("Contents of the current basket:\n" + shoppingCart.getAll());
             shoppingCart.submitCurrentPurchase();
@@ -112,6 +111,7 @@ public class PurchaseController implements Initializable {
         } catch (SalesSystemException e) {
             log.error(e.getMessage(), e);
         }
+        log.info("Sale complete");
     }
 
     // switch UI to the state that allows to proceed with the purchase

@@ -54,6 +54,10 @@ public class SoldItem {
         this.quantity = quantity;
     }
 
+    public void addMoreQuantity(Integer quantity) {
+        this.quantity += quantity;
+    }
+
     public double getSum() {
         return price * ((double) quantity);
     }
