@@ -2,15 +2,11 @@ package ee.ut.math.tvt.salessystem.logic;
 
 import ee.ut.math.tvt.salessystem.SalesSystemException;
 import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.Comparator;
 import java.util.List;
 
 public class Warehouse {
-
-    private static final Logger log = LogManager.getLogger(Warehouse.class);
 
     public void addItemToWarehouse(StockItem item, StockItem addedItem, List<StockItem> stockItems) {
         if (!chosenDataIsValidForAdding(
@@ -83,12 +79,8 @@ public class Warehouse {
     private void removeItemQuantity(List<StockItem> stockItems, StockItem item, int quantity) {
         if (item.getQuantity() - quantity == 0) {
             stockItems.remove(item);
-            String message = "All of the product (id: " + item.getId() + ") has been removed from the warehouse.";
-            log.info(message);
         } else {
             item.setQuantity(item.getQuantity() - quantity);
-            String message = quantity + " units of the product (id: " + item.getId() + ") was removed from the warehouse";
-            log.info(message);
         }
     }
 

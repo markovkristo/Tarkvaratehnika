@@ -6,6 +6,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,6 +23,8 @@ public class TeamInfoController implements Initializable {
     @FXML
     private ImageView teamImage;
 
+    private static final Logger log = LogManager.getLogger(TeamInfoController.class);
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         showTeamInfo();
@@ -32,5 +36,6 @@ public class TeamInfoController implements Initializable {
         teamContactPerson.setText(teamInfoSupplier.getTeamLeaderName());
         teamMembers.setText(teamInfoSupplier.getTeamMembers());
         teamImage.setImage(new Image(teamInfoSupplier.getTeamInfoImage()));
+        log.info("Team info is shown.");
     }
 }

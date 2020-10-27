@@ -63,6 +63,7 @@ public class StockController implements Initializable {
     @FXML
     private void removeProductButtonClicked() {
         if (!isInputDataValidForRemoval()) {
+            log.error("Found invalid input data.");
             return;
         }
         List <StockItem> stockItems = dao.findStockItems();
@@ -72,25 +73,32 @@ public class StockController implements Initializable {
                     Long.parseLong(barcode.getText()),
                     Integer.parseInt(amount.getText())
             );
+            log.debug("Item with id " + barcode.getText() + " and amount " + amount.getText() + "was removed");
             refreshStockItems();
         } catch (SalesSystemException e) {
+            log.error("An exception thrown because of data entered, see info in pop-up.");
             display(e.getMessage());
         }
+        log.info("Product removed from warehouse");
     }
 
     @FXML
     protected void addProductButtonClicked() {
         if (!isInputDataValidForAdding()) {
+            log.error("Found invalid input data.");
             return;
         }
         StockItem addedItem = getAddedItemFromTextfields();
         List<StockItem> stockItems = dao.findStockItems();
         try {
             warehouse.addItemToWarehouse(dao.findStockItem(addedItem.getId()), addedItem, stockItems);
+            log.debug("Item " + addedItem.toString() + " was added");
             refreshStockItems();
         } catch (SalesSystemException | NumberFormatException e) {
+            log.error("An exception thrown because of data entered, see info in pop-up.");
             display(e.getMessage());
         }
+        log.info("Product added to warehouse.");
     }
 
     private void display(String message) {
