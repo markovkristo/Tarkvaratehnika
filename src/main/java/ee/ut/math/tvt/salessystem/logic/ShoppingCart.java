@@ -37,8 +37,22 @@ public class ShoppingCart {
         log.debug("Added " + item.getName() + " quantity of ");
     }
 
-    public void removeItem(SoldItem item) {
-        items.remove(item);
+    public void removeItem(SoldItem item, int amount) {
+        for (int i = 0; i < items.size(); i++) {
+            if (item.getName().equals(items.get(i).getName())) {
+                int cartAmount = items.get(i).getQuantity();
+                int newAmount = cartAmount - amount;
+                if (newAmount > 0) {
+                    items.get(i).setQuantity(newAmount);
+                    log.info("Removed " + amount + " of " + item.getName() + " from shopping cart.");
+                }else if( newAmount == 0){
+                    items.remove(items.get(i));
+                    log.info("Removed " + amount + " of " + item.getName() + " from shopping cart.");
+                }else
+                    System.out.println("Removable amount exeeds the items quantity in the cart, removable amount: " + amount + ", items quantity in cart: " + cartAmount);
+                break;
+            }
+        }
     }
 
     public List<SoldItem> getAll() {
@@ -58,7 +72,7 @@ public class ShoppingCart {
         System.out.println("Are you sure that you want to submit current purchase? (Yes/No)");
         Scanner choice = new Scanner(System.in);
         String input = choice.nextLine().toLowerCase();
-        if(input.equals("yes")){
+        if (input.equals("yes")) {
             dao.beginTransaction();
             try {
                 List<StockItem> stockItems = dao.findStockItems();
@@ -67,7 +81,7 @@ public class ShoppingCart {
                     String name = item.getName();
                     long idx = 0;
                     for (int i = 0; i < stockItems.size(); i++) {
-                        if(name.equals(stockItems.get(i).getName()))
+                        if (name.equals(stockItems.get(i).getName()))
                             idx = stockItems.get(i).getId();
                     }
                     StockItem stockItem = dao.findStockItem(idx);
@@ -91,7 +105,7 @@ public class ShoppingCart {
                 throw e;
             }
             log.info("Purchase is completed");
-        }else{
+        } else {
             System.out.println("Didn't commit current purchase.");
         }
     }

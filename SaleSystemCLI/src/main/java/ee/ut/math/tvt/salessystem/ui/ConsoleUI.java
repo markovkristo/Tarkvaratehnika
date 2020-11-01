@@ -66,9 +66,43 @@ public class ConsoleUI {
         try {
             Double.parseDouble(str);
             return true;
-        } catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    private boolean checkCommands2(String[] c) {
+        if (c.length < 6) {
+            System.out.println("You didn't enter enough parameters. You have to enter new item's index, item quantity, price, description and name.");
+            return false;
+        } else if (c.length > 6) {
+            System.out.println("You entered too many parameters. You have to enter new item's index, item quantity, price, description and name.");
+            return false;
+        } else if (!(isNumeric(c[1]) && (isNumeric(c[2])) && isNumeric(c[3]))) {
+            System.out.println("IDX, NR and P have to be numeric.");
+            return false;
+        } else if (Integer.parseInt(c[1]) < 0 || Integer.parseInt(c[2]) < 0 || Double.parseDouble(c[3]) < 0.0) {
+            System.out.println("IDX, NR and P can't have negative values.");
+            return false;
+        } else
+            return true;
+    }
+
+    private boolean checkCommands(String[] c) {
+        if (c.length > 3) {
+            System.out.println("You entered too many parameters. You have to enter item index and item quantity.");
+            return false;
+        } else if (c.length < 3) {
+            System.out.println("You didn't enter enough parameters. You have to enter item index and item quantity.");
+            return false;
+        } else if (!(isNumeric(c[1]) && isNumeric(c[2]))) {
+            System.out.println("IDX and NR have to be numeric. ");
+            return false;
+        } else if (Integer.parseInt(c[1]) < 0 || Integer.parseInt(c[2]) < 0) {
+            System.out.println("IDX and P can't have negative values. ");
+            return false;
+        } else
+            return true;
     }
 
     private void showStock() {
@@ -89,7 +123,7 @@ public class ConsoleUI {
         double totalSum = 0;
         int totalProducts = 0;
         for (SoldItem si : cart.getAll()) {
-            System.out.println(si.getName() + " " + si.getPrice() + " Euro (" + si.getQuantity() + " items, total: " + si.getPrice() * si.getQuantity() + ")" );
+            System.out.println(si.getName() + " " + si.getPrice() + " Euro (" + si.getQuantity() + " items, total: " + si.getPrice() * si.getQuantity() + ")");
             totalSum += si.getQuantity() * si.getPrice();
             totalProducts += si.getQuantity();
         }
@@ -102,47 +136,56 @@ public class ConsoleUI {
     }
 
     private void addCart(String[] c) {
-        if (c.length == 3) {
-            try {
-                long idx = Long.parseLong(c[1]);
-                int amount = Integer.parseInt(c[2]);
-                StockItem item = dao.findStockItem(idx);
-                if (item != null)
-                    cart.addItem(new SoldItem(item, Math.min(amount, item.getQuantity())));
-            } catch (SalesSystemException | NoSuchElementException e) {
-                log.error(e.getMessage(), e);
+        System.out.println("-------------------------");
+        try {
+            long idx = Long.parseLong(c[1]);
+            int amount = Integer.parseInt(c[2]);
+            StockItem item = dao.findStockItem(idx);
+            if (item != null) {
+                cart.addItem(new SoldItem(item, Math.min(amount, item.getQuantity())));
+                log.info("Added " + amount + " " + item.getName() + " to the cart ");
             }
-
+        } catch (SalesSystemException | NoSuchElementException e) {
+            log.error(e.getMessage(), e);
         }
+        System.out.println("-------------------------");
+    }
+
+    private void removeItemFromCart(String[] c) {
+        System.out.println("-------------------------");
+        try {
+            long idx = Integer.parseInt(c[1]);
+            int amount = Integer.parseInt(c[2]);
+            StockItem item = dao.findStockItem(idx);
+            SoldItem soldItem = new SoldItem(item, amount);
+            cart.removeItem(soldItem, amount);
+
+        } catch (SalesSystemException | NoSuchElementException e) {
+            log.error(e.getMessage(), e);
+        }
+        System.out.println("-------------------------");
     }
 
     private void changePrice(String[] c) {
         System.out.println("-------------------------");
-        if(c.length == 3) {
-            try {
-                long idx = Long.parseLong(c[1]);
-                double price = Double.parseDouble(c[2]);
-                StockItem item = dao.findStockItem(idx);
-                if (item != null) {
-                    double oldPrice = item.getPrice();
-                    item.setPrice(price);
-                    System.out.println("Changed the price of " + item.getName() + " from " + oldPrice + " to " + price);
-                    log.info("Changed the price of " + item.getName() + " from " + oldPrice + " to " + price);
-                } else {
-                    System.out.println("No stock item with id " + idx + ".");
-                }
-            } catch (SalesSystemException | NoSuchElementException e) {
-                log.error(e.getMessage(), e);
+        try {
+            long idx = Long.parseLong(c[1]);
+            double price = Double.parseDouble(c[2]);
+            StockItem item = dao.findStockItem(idx);
+            if (item != null) {
+                double oldPrice = item.getPrice();
+                item.setPrice(price);
+                System.out.println("Changed the price of " + item.getName() + " from " + oldPrice + " to " + price);
+                log.info("Changed the price of " + item.getName() + " from " + oldPrice + " to " + price);
+            } else {
+                System.out.println("No stock item with id " + idx + ".");
             }
-        }
-        else if (c.length < 3) {
-            System.out.println("You didn't enter enough parameters. You have to enter item index and item's new price.");
-        }
-        else {
-            System.out.println("You entered too many parameters. You have to enter item index and item's new price.");
+        } catch (SalesSystemException | NoSuchElementException e) {
+            log.error(e.getMessage(), e);
         }
         System.out.println("-------------------------");
     }
+
     /*private void addExistingItemToWarehouse2(String[] c) {
         System.out.println("-------------------------");
         if(c.length == 3) {
@@ -170,17 +213,17 @@ public class ConsoleUI {
         System.out.println("-------------------------");
     }
      */
-    private void addExistingItemToWarehouse(String[] c){
+    private void addExistingItemToWarehouse(String[] c) {
         System.out.println("-------------------------");
-        try{
+        try {
             long idx = Long.parseLong(c[1]);
             int amount = Integer.parseInt(c[2]);
             StockItem item = dao.findStockItem(idx);
-            StockItem newItem = new StockItem(idx, item.getName(),item.getDescription(),item.getPrice(),amount);
+            StockItem newItem = new StockItem(idx, item.getName(), item.getDescription(), item.getPrice(), amount);
             List<StockItem> stockItems = dao.findStockItems();
             warehouse.addItemToWarehouse(item, newItem, stockItems);
             log.info("Added " + amount + " new " + item.getName() + " to warehouse. New total: " + item.getQuantity());
-        }catch (SalesSystemException | NoSuchElementException e) {
+        } catch (SalesSystemException | NoSuchElementException e) {
             log.error(e.getMessage(), e);
         }
         System.out.println("-------------------------");
@@ -213,7 +256,7 @@ public class ConsoleUI {
 
      */
 
-    private void addNewItemToWarehouse(String[] c){
+    private void addNewItemToWarehouse(String[] c) {
         System.out.println("-------------------------");
         try {
             long idx = Long.parseLong(c[1]);
@@ -226,69 +269,70 @@ public class ConsoleUI {
             StockItem newItem = new StockItem(idx, name, desc, price, quantity);
             warehouse.addItemToWarehouse(item, newItem, stockItems);
             log.info("Added new item to " + newItem.getDescription() + " called " + newItem.getName() + " with id " + newItem.getId() + ", quantity: " + newItem.getQuantity() + " and price " + newItem.getPrice());
-        }catch (SalesSystemException | NoSuchElementException e) {
+        } catch (SalesSystemException | NoSuchElementException e) {
             log.error(e.getMessage(), e);
         }
         System.out.println("-------------------------");
     }
 
-   /* private void removeItemFromWarehouse2(String[] c) {
-        System.out.println("-------------------------");
-        if(c.length == 3) {
-            try {
-                long idx = Long.parseLong(c[1]);
-                int removableAmount = Integer.parseInt(c[2]);
-                StockItem item = dao.findStockItem(idx);
-                List<StockItem> stockItems = dao.findStockItems();
-                if (item != null) {
-                    System.out.println("Are you sure that you want to remove this item from the warehouse? (Yes/No)");
-                    Scanner choice = new Scanner(System.in);
-                    String input = choice.nextLine().toLowerCase();
-                    if (input.equals("yes")) {
-                        int amount = item.getQuantity();
-                        int newAmount = amount - removableAmount;
-                        if (newAmount == 0) {
-                            stockItems.remove(item);
-                            System.out.println("Removed " + removableAmount + " " + item.getName() + " from warehouse. All of the product has been removed from the warehouse. ");
-                            log.info("Removed " + removableAmount + " " + item.getName() + " from warehouse. All of the product has been removed from the warehouse. ");
-                        }
-                        else if (newAmount < 0)
-                            System.out.println("There aren't that many items in the warehouse. Exceeded the maximum quantity by " + (removableAmount - amount) + ".");
-                        else {
-                            item.setQuantity(newAmount);
+    /* private void removeItemFromWarehouse2(String[] c) {
+         System.out.println("-------------------------");
+         if(c.length == 3) {
+             try {
+                 long idx = Long.parseLong(c[1]);
+                 int removableAmount = Integer.parseInt(c[2]);
+                 StockItem item = dao.findStockItem(idx);
+                 List<StockItem> stockItems = dao.findStockItems();
+                 if (item != null) {
+                     System.out.println("Are you sure that you want to remove this item from the warehouse? (Yes/No)");
+                     Scanner choice = new Scanner(System.in);
+                     String input = choice.nextLine().toLowerCase();
+                     if (input.equals("yes")) {
+                         int amount = item.getQuantity();
+                         int newAmount = amount - removableAmount;
+                         if (newAmount == 0) {
+                             stockItems.remove(item);
+                             System.out.println("Removed " + removableAmount + " " + item.getName() + " from warehouse. All of the product has been removed from the warehouse. ");
+                             log.info("Removed " + removableAmount + " " + item.getName() + " from warehouse. All of the product has been removed from the warehouse. ");
+                         }
+                         else if (newAmount < 0)
+                             System.out.println("There aren't that many items in the warehouse. Exceeded the maximum quantity by " + (removableAmount - amount) + ".");
+                         else {
+                             item.setQuantity(newAmount);
 
-                        }
-                    } else{
-                        System.out.println("Didn't remove the item. ");
-                    }
-                }else {
-                    System.out.println("No stock item with id " + idx + ".");
-                }
-            } catch (SalesSystemException | NoSuchElementException e) {
-                log.error(e.getMessage(), e);
-            }
-        } else if(c.length < 3){
-            System.out.println("You didn't enter enough parameters. You have to enter item index and item quantity.");
-        } else {
-            System.out.println("You entered too many parameters. You have to enter item index and item quantity.");
+                         }
+                     } else{
+                         System.out.println("Didn't remove the item. ");
+                     }
+                 }else {
+                     System.out.println("No stock item with id " + idx + ".");
+                 }
+             } catch (SalesSystemException | NoSuchElementException e) {
+                 log.error(e.getMessage(), e);
+             }
+         } else if(c.length < 3){
+             System.out.println("You didn't enter enough parameters. You have to enter item index and item quantity.");
+         } else {
+             System.out.println("You entered too many parameters. You have to enter item index and item quantity.");
+         }
+         System.out.println("-------------------------");
+     }*/
+    private void removeItemFromWarehouse(String[] c) {
+        System.out.println("-------------------------");
+        try {
+            long idx = Long.parseLong(c[1]);
+            int removableAmount = Integer.parseInt(c[2]);
+            StockItem item = dao.findStockItem(idx);
+            List<StockItem> stockItems = dao.findStockItems();
+            warehouse.removeItemFromWarehouse(stockItems, idx, removableAmount);
+            //System.out.println("Removed " + removableAmount + " " + item.getName() + " from warehouse. All of the product has been removed from the warehouse. ");
+            log.info("Removed " + removableAmount + " " + item.getName() + " from warehouse. All of the product has been removed from the warehouse. ");
+        } catch (SalesSystemException | NoSuchElementException e) {
+            log.error(e.getMessage(), e);
         }
         System.out.println("-------------------------");
-    }*/
-    private void removeItemFromWarehouse(String[] c){
-        System.out.println("-------------------------");
-               try{
-                   long idx = Long.parseLong(c[1]);
-                   int removableAmount = Integer.parseInt(c[2]);
-                   StockItem item = dao.findStockItem(idx);
-                   List<StockItem> stockItems = dao.findStockItems();
-                   warehouse.removeItemFromWarehouse(stockItems, idx, removableAmount);
-                   //System.out.println("Removed " + removableAmount + " " + item.getName() + " from warehouse. All of the product has been removed from the warehouse. ");
-                   log.info("Removed " + removableAmount + " " + item.getName() + " from warehouse. All of the product has been removed from the warehouse. ");
-               } catch (SalesSystemException | NoSuchElementException e) {
-                   log.error(e.getMessage(), e);
-               }
-        System.out.println("-------------------------");
     }
+
     private void printUsage() {
         System.out.println("-------------------------");
         System.out.println("Usage:");
@@ -303,6 +347,7 @@ public class ConsoleUI {
         System.out.println("a,IDX,NR \t\t\t\tAdd NR of stock item with index IDX to the cart");
         System.out.println("p\t\t\t\t\t\tPurchase the shopping cart");
         System.out.println("r\t\t\t\t\t\tReset the shopping cart");
+        System.out.println("cr,IDX,NR\t\t\t\t\t\tRemove NR of products with index IDX from the cart");
         System.out.println("t\t\t\t\t\t\tSee team information");
         System.out.println("q\t\t\t\t\t\tQuit application");
         System.out.println("-------------------------");
@@ -320,10 +365,9 @@ public class ConsoleUI {
     private void processCommand(String command) {
         String[] c = command.split(",");
         for (int i = 0; i < c.length; i++) {
-            if(i == 0){
+            if (i == 0) {
                 c[i] = c[i].trim().toLowerCase();
-            }
-            else
+            } else
                 c[i] = c[i].trim();
         }
         switch (c[0]) {
@@ -346,90 +390,38 @@ public class ConsoleUI {
             case "c":
                 showCart();
                 break;
-            case "p": {
+            case "p":
                 cart.submitCurrentPurchase();
                 break;
-            }
+
             case "r":
                 cart.cancelCurrentPurchase();
                 break;
+            case "cr":
+                if (checkCommands(c))
+                    removeItemFromCart(c);
+                break;
             case "cp":
-                if (isNumeric(c[1]) && isNumeric(c[2])) {
-                    if (Integer.parseInt(c[1]) > 0 && Integer.parseInt(c[2]) > 0)
-                        changePrice(c);
-                    else
-                        System.out.println("IDX and P can't have negative values. ");
-                } else
-                    System.out.println("IDX and NR have to be numeric. ");
-                log.debug("User entered index " + c[1] + " and price " + c[2]);
+                if (checkCommands(c))
+                    changePrice(c);
                 break;
             case "a":
-                if (c.length == 3){
-                    if (isNumeric(c[1]) && isNumeric(c[2])) {
-                        if (Integer.parseInt(c[1]) > 0 && Integer.parseInt(c[2]) > 0)
-                            addCart(c);
-                        else
-                            System.out.println("IDX and NR can't have negative values.");
-                    } else
-                        System.out.println("IDX, NR and P have to be numeric.");
-                log.debug("User entered index " + c[1] + " and quantity " + c[2]);
-                }
-                else if (c.length < 3) {
-                    System.out.println("You didn't enter enough parameters. You have to enter item index and item quantity.");
-                }
-                else {
-                    System.out.println("You entered too many parameters. You have to enter item index and item quantity.");
-                }
+                if (checkCommands(c))
+                    addCart(c);
                 break;
             case "wa":
-                if(c.length == 3) {
-                    if (isNumeric(c[1]) && isNumeric(c[2])) {
-                        if (Integer.parseInt(c[1]) > 0 && Integer.parseInt(c[2]) > 0) {
-                            addExistingItemToWarehouse(c);
-                            log.debug("User entered index " + c[1] + " and quantity " + c[2]);
-                        } else
-                            System.out.println("IDX and NR can't have negative values.");
-                    } else
-                        System.out.println("IDX and NR have to be numeric.");
-                }else if(c.length < 3){
-                    System.out.println("You didn't enter enough parameters. You have to enter item index and item quantity.");
-                } else {
-                    System.out.println("You entered too many parameters. You have to enter item index and item quantity.");
-                }
+                if (checkCommands(c))
+                    addExistingItemToWarehouse(c);
                 break;
             case "wan":
-                if(c.length >= 6) {
-                    if (isNumeric(c[1]) && isNumeric(c[2]) && isNumeric(c[3])) {
-                        if (Integer.parseInt(c[1]) > 0 && Integer.parseInt(c[2]) > 0 && Double.parseDouble(c[3]) > 0.0) {
-                            addNewItemToWarehouse(c);
-                            log.debug("User entered index " + c[1] + ", quantity " + c[2] + ", price " + c[3] + ", decription " + c[4] + " and name " + c[5]);
-                        } else
-                            System.out.println("IDX, NR and P can't have negative values.");
-                    } else
-                        System.out.println("IDX, NR and P have to be numeric.");
-                }else {
-                    System.out.println("You didn't enter enough parameters. You have to enter new item's index, item quantity, price, description and name.");
+                if (checkCommands2(c)) {
+                    addNewItemToWarehouse(c);
+                    log.debug("User entered index " + c[1] + ", quantity " + c[2] + ", price " + c[3] + ", decription " + c[4] + " and name " + c[5]);
                 }
                 break;
             case "wr":
-                if(c.length == 3) {
-                    if (isNumeric(c[1]) && isNumeric(c[2])) {
-                        System.out.println("Are you sure that you want to remove this item from the warehouse? (Yes/No)");
-                        Scanner choice = new Scanner(System.in);
-                        String input = choice.nextLine().toLowerCase();
-                        if(input.equals("yes")) {
-                            removeItemFromWarehouse(c);
-                            log.debug("User entered index " + c[1] + " and quantity " + c[2]);
-                        }else {
-                            System.out.println("Didn't remove the item. ");
-                        }
-                    } else
-                        System.out.println("IDX and NR have to be numeric. ");
-                }else if(c.length < 3){
-                    System.out.println("You didn't enter enough parameters. You have to enter item index and item quantity.");
-                } else {
-                    System.out.println("You entered too many parameters. You have to enter item index and item quantity.");
-                }
+                if (checkCommands(c))
+                    removeItemFromWarehouse(c);
                 break;
 
             default:
