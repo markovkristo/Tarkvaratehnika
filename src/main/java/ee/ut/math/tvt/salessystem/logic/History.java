@@ -1,5 +1,6 @@
 package ee.ut.math.tvt.salessystem.logic;
 
+import ee.ut.math.tvt.salessystem.dao.SalesSystemDAO;
 import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
 import ee.ut.math.tvt.salessystem.dataobjects.Transaction;
 
@@ -7,16 +8,14 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class History {
-    private String startDate;
-    private String endDate;
     private List<Transaction> transactions;
+    private  SalesSystemDAO dao;
 
-    public History(String startDate, String endDate) {
-        this.startDate = startDate;
-        this.endDate = endDate;
+    public History(SalesSystemDAO dao) {
+        this.dao = dao;
     }
 
-    public void showLastTenPurchases() {
+    public void showLastTenPurchases(String startDate, String endDate) {
         System.out.println("Last 10 purchases are: ");
         int size = transactions.size();
         for (int i = 0; i < 10; i++) {
@@ -32,7 +31,7 @@ public class History {
         }
     }
 
-    public void showPurchaseHistoryBetweenDates() {
+    public void showPurchaseHistoryBetweenDates(String startDate, String endDate) {
         System.out.println("All purchases which were made between " + startDate + " and " + endDate + ", were: ");
         for (Transaction ts: transactions) {
             LocalDate date = ts.getLocalDate();
