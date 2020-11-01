@@ -25,6 +25,7 @@ public class History {
     }
 
     public void showAllPurchases() {
+
         System.out.println("All purchases are: ");
         for (Transaction ts: transactions){
             System.out.println(ts.toString() + " ");
@@ -39,4 +40,5 @@ public class History {
                 System.out.print(ts.toString() + " ");
         }
     }
+
 }

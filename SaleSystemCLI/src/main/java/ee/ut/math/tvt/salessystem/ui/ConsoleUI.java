@@ -83,9 +83,6 @@ public class ConsoleUI {
         System.out.println("-------------------------");
     }
 
-    private void showHistory(){
-        showHistory();
-    }
 
     private void showCart() {
         System.out.println("-------------------------");
@@ -104,49 +101,19 @@ public class ConsoleUI {
         System.out.println("-------------------------");
     }
 
-    private void addCart(String[] c){
-        System.out.println("-------------------------");
-        if(c.length == 3) {
+    private void addCart(String[] c) {
+        if (c.length == 3) {
             try {
                 long idx = Long.parseLong(c[1]);
                 int amount = Integer.parseInt(c[2]);
                 StockItem item = dao.findStockItem(idx);
-                List<StockItem> stockItems = dao.findStockItems();
-                if (item != null) {
-                    int newAmount = item.getQuantity() - amount;
-                    if (newAmount < 0) {
-                        System.out.println("Exeeded the maximum quantity of item called " + item.getName() + " by " + (amount - item.getQuantity()));
-                        String message = "Removable amount can't exceed item quantity.";
-                        log.info(message);
-                    }
-                    else if (newAmount == 0) {
-                        cart.addItem(new SoldItem(item, Math.min(amount, item.getQuantity())));
-                        //stockItems.remove(item);
-                        System.out.println("Added " + amount + " " + item.getName() + " to the shopping cart.");
-                        //stockItems.remove(item);
-                        String message = "All of the product (id: " + idx + ") has been removed from the warehouse.";
-                        log.info(message);
-                    } else {
-                        cart.addItem(new SoldItem(item, Math.min(amount, item.getQuantity())));
-                        item.setQuantity(newAmount);
-                        String message = amount + " units of the product (id: " + idx + ") was removed from the warehouse";
-                        log.info(message);
-                        System.out.println("Added " + amount + " " + item.getName() + " to the shopping cart.");
-                    }
-                } else {
-                    System.out.println("No stock item with id " + idx + ".");
-                }
+                if (item != null)
+                    cart.addItem(new SoldItem(item, Math.min(amount, item.getQuantity())));
             } catch (SalesSystemException | NoSuchElementException e) {
                 log.error(e.getMessage(), e);
             }
+
         }
-        else if (c.length < 3) {
-            System.out.println("You didn't enter enough parameters. You have to enter item index and item quantity.");
-        }
-        else {
-            System.out.println("You entered too many parameters. You have to enter item index and item quantity.");
-        }
-        System.out.println("-------------------------");
     }
 
     private void changePrice(String[] c) {
@@ -326,6 +293,7 @@ public class ConsoleUI {
         System.out.println("-------------------------");
         System.out.println("Usage:");
         System.out.println("h\t\t\t\t\t\tShow this help");
+        System.out.println("hi\t\t\t\t\t\tShow purchase history");
         System.out.println("w\t\t\t\t\t\tShow warehouse contents");
         System.out.println("wan,IDX,NR,P,Desc,Na\tAdd NR of new items with index IDX, price P, description Desc and name Na to the warehouse");
         System.out.println("wa,IDX,NR \t\t\t\tAdd NR of of already existing stock items with index IDX to the warehouse");
@@ -369,6 +337,9 @@ public class ConsoleUI {
             case "w":
                 showStock();
                 break;
+            case "hi":
+                history.showAllPurchases();
+                break;
             case "t":
                 showTeamInfo();
                 break;
@@ -384,25 +355,31 @@ public class ConsoleUI {
                 break;
             case "cp":
                 if (isNumeric(c[1]) && isNumeric(c[2])) {
-                    if(Integer.parseInt(c[1]) > 0 && Integer.parseInt(c[2]) > 0)
+                    if (Integer.parseInt(c[1]) > 0 && Integer.parseInt(c[2]) > 0)
                         changePrice(c);
                     else
                         System.out.println("IDX and P can't have negative values. ");
-                }
-                else
+                } else
                     System.out.println("IDX and NR have to be numeric. ");
                 log.debug("User entered index " + c[1] + " and price " + c[2]);
                 break;
             case "a":
-                if (isNumeric(c[1]) && isNumeric(c[2])){
-                    if(Integer.parseInt(c[1]) > 0 && Integer.parseInt(c[2]) > 0)
-                        addCart(c);
-                    else
-                        System.out.println("IDX and NR can't have negative values.");
-                }
-                else
-                    System.out.println("IDX, NR and P have to be numeric.");
+                if (c.length == 3){
+                    if (isNumeric(c[1]) && isNumeric(c[2])) {
+                        if (Integer.parseInt(c[1]) > 0 && Integer.parseInt(c[2]) > 0)
+                            addCart(c);
+                        else
+                            System.out.println("IDX and NR can't have negative values.");
+                    } else
+                        System.out.println("IDX, NR and P have to be numeric.");
                 log.debug("User entered index " + c[1] + " and quantity " + c[2]);
+                }
+                else if (c.length < 3) {
+                    System.out.println("You didn't enter enough parameters. You have to enter item index and item quantity.");
+                }
+                else {
+                    System.out.println("You entered too many parameters. You have to enter item index and item quantity.");
+                }
                 break;
             case "wa":
                 if(c.length == 3) {
@@ -437,8 +414,15 @@ public class ConsoleUI {
             case "wr":
                 if(c.length == 3) {
                     if (isNumeric(c[1]) && isNumeric(c[2])) {
-                        removeItemFromWarehouse(c);
-                        log.debug("User entered index " + c[1] + " and quantity " + c[2]);
+                        System.out.println("Are you sure that you want to remove this item from the warehouse? (Yes/No)");
+                        Scanner choice = new Scanner(System.in);
+                        String input = choice.nextLine().toLowerCase();
+                        if(input.equals("yes")) {
+                            removeItemFromWarehouse(c);
+                            log.debug("User entered index " + c[1] + " and quantity " + c[2]);
+                        }else {
+                            System.out.println("Didn't remove the item. ");
+                        }
                     } else
                         System.out.println("IDX and NR have to be numeric. ");
                 }else if(c.length < 3){
