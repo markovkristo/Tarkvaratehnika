@@ -71,7 +71,8 @@ public class InMemorySalesSystemDAO implements SalesSystemDAO {
 
     @Override
     public void rollbackTransaction() {
-        transactionList.clear();
+        transactionList.remove(transaction);
+        beginTransaction();
     }
 
     @Override
