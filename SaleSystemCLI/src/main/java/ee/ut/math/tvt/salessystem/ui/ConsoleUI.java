@@ -126,6 +126,12 @@ public class ConsoleUI {
         }
         return true;
     }
+    private boolean ifItemExists(StockItem item){
+        if(item != null)
+            return true;
+        else
+            throw new SalesSystemException("There aren't any items with this ID.");
+    }
 
     private void showStock() {
         List<StockItem> stockItems = dao.findStockItems();
@@ -163,16 +169,13 @@ public class ConsoleUI {
             long idx = Long.parseLong(c[1]);
             int amount = Integer.parseInt(c[2]);
             StockItem item = dao.findStockItem(idx);
-            if (item != null) {
+            if(ifItemExists(item))
                 if (amount <= item.getQuantity()) {
                     cart.addItem(new SoldItem(item, Math.min(amount, item.getQuantity())));
                     log.info("Added " + amount + " " + item.getName() + " to the cart ");
                 }
                 else
                     throw new SalesSystemException("Added items quantity exceeds warehouse quantity. ");
-            }else{
-                throw new SalesSystemException("There aren't any items with ID of " + idx);
-            }
         } catch (SalesSystemException | NoSuchElementException e) {
             log.error(e.getMessage(), e);
         }
@@ -186,18 +189,15 @@ public class ConsoleUI {
             int amount = Integer.parseInt(c[2]);
             StockItem item = dao.findStockItem(idx);
             List<SoldItem> soldItems = cart.getAll();
-            if(item != null) {
+            if(ifItemExists(item)) {
                 if (soldItems.stream().noneMatch(i -> i.getId() == idx)) {
-                    throw new SalesSystemException("There aren't any items with ID of " + idx + "in the cart");
+                    throw new SalesSystemException("There aren't any items with ID of " + idx + " in the cart.");
                 }
                 else {
                     SoldItem soldItem = new SoldItem(item, amount);
                     cart.removeItem(soldItem, amount);
                 }
-            }else{
-                throw new SalesSystemException("There aren't any items with ID of " + idx);
             }
-
         } catch (SalesSystemException | NoSuchElementException e) {
             log.error(e.getMessage(), e);
         }
@@ -210,13 +210,10 @@ public class ConsoleUI {
             long idx = Long.parseLong(c[1]);
             double price = Double.parseDouble(c[2]);
             StockItem item = dao.findStockItem(idx);
-            if (item != null) {
+            if (ifItemExists(item)) {
                 double oldPrice = item.getPrice();
                 item.setPrice(price);
-               // System.out.println("Changed the price of " + item.getName() + " from " + oldPrice + " to " + price);
-                log.info("Changed the price of " + item.getName() + " from " + oldPrice + " to " + price);
-            } else {
-               throw new SalesSystemException("No stock item with id " + idx + ".");
+                log.info("Changed the price of " + item.getName() + " from " + oldPrice + " to " + price + ".");
             }
         } catch (SalesSystemException | NoSuchElementException e) {
             log.error(e.getMessage(), e);
