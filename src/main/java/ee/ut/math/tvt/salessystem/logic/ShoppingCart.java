@@ -66,7 +66,7 @@ public class ShoppingCart {
 
     public void removeItem(SoldItem item, int amount) {
         if (items.isEmpty())
-            System.out.println("Shopping cart is empty. ");
+           throw new SalesSystemException("Shopping cart is empty. ");
         else {
             for (int i = 0; i < items.size(); i++) {
                 if (item.getName().equals(items.get(i).getName())) {
@@ -79,7 +79,7 @@ public class ShoppingCart {
                         items.remove(items.get(i));
                         log.info("Removed " + amount + " of " + item.getName() + " from shopping cart.");
                     } else
-                        System.out.println("Removable amount exeeds the items quantity in the cart, removable amount: " + amount + ", items quantity in cart: " + cartAmount);
+                        throw new SalesSystemException("Removable amount exceeds the items quantity in the cart, removable amount: " + amount + ", items quantity in cart: " + cartAmount);
                     break;
                 }
             }
@@ -138,13 +138,14 @@ public class ShoppingCart {
                         int newAmount = amount - soldAmount;
                         if (newAmount < 0) {
                             log.info("Removable amount can't exceed item quantity.");
-                            throw new Exception();
+                            dao.rollbackTransaction();
+                            throw new SalesSystemException("Removable amount excceeds item quantity.");
                         } else if (newAmount == 0) {
                             stockItems.remove(stockItem);
                             log.info("All of the product (id: " + idx + ") has been removed from the warehouse.");
                         } else {
                             stockItem.setQuantity(newAmount);
-                            log.info(soldAmount + " units of the product (id: " + idx + ") was removed from the warehouse");
+                            log.info(soldAmount + " units of the product (id: " + idx + ") was removed from the warehouse.");
                             Purchase purchase = new Purchase(idx, name, stockItem.getPrice(), soldAmount);
                             purchases.add(purchase);
 
@@ -153,7 +154,7 @@ public class ShoppingCart {
                     transaction.setPurchases(purchases);
                     transaction.setTotalQuantity(items.stream().mapToLong(SoldItem::getQuantity).sum());
                     dao.commitTransaction();
-                    log.info("Purchase is completed");
+                    log.info("Purchase is completed. ");
                     items.clear();
                 }
                 else{

@@ -164,8 +164,14 @@ public class ConsoleUI {
             int amount = Integer.parseInt(c[2]);
             StockItem item = dao.findStockItem(idx);
             if (item != null) {
-                cart.addItem(new SoldItem(item, Math.min(amount, item.getQuantity())));
-                log.info("Added " + amount + " " + item.getName() + " to the cart ");
+                if (amount <= item.getQuantity()) {
+                    cart.addItem(new SoldItem(item, Math.min(amount, item.getQuantity())));
+                    log.info("Added " + amount + " " + item.getName() + " to the cart ");
+                }
+                else
+                    throw new SalesSystemException("Added items quantity exceeds warehouse quantity. ");
+            }else{
+                throw new SalesSystemException("There aren't any items with ID of " + idx);
             }
         } catch (SalesSystemException | NoSuchElementException e) {
             log.error(e.getMessage(), e);
@@ -179,8 +185,18 @@ public class ConsoleUI {
             long idx = Integer.parseInt(c[1]);
             int amount = Integer.parseInt(c[2]);
             StockItem item = dao.findStockItem(idx);
-            SoldItem soldItem = new SoldItem(item, amount);
-            cart.removeItem(soldItem, amount);
+            List<SoldItem> soldItems = cart.getAll();
+            if(item != null) {
+                if (soldItems.stream().noneMatch(i -> i.getId() == idx)) {
+                    throw new SalesSystemException("There aren't any items with ID of " + idx + "in the cart");
+                }
+                else {
+                    SoldItem soldItem = new SoldItem(item, amount);
+                    cart.removeItem(soldItem, amount);
+                }
+            }else{
+                throw new SalesSystemException("There aren't any items with ID of " + idx);
+            }
 
         } catch (SalesSystemException | NoSuchElementException e) {
             log.error(e.getMessage(), e);
@@ -197,10 +213,10 @@ public class ConsoleUI {
             if (item != null) {
                 double oldPrice = item.getPrice();
                 item.setPrice(price);
-                System.out.println("Changed the price of " + item.getName() + " from " + oldPrice + " to " + price);
+               // System.out.println("Changed the price of " + item.getName() + " from " + oldPrice + " to " + price);
                 log.info("Changed the price of " + item.getName() + " from " + oldPrice + " to " + price);
             } else {
-                System.out.println("No stock item with id " + idx + ".");
+               throw new SalesSystemException("No stock item with id " + idx + ".");
             }
         } catch (SalesSystemException | NoSuchElementException e) {
             log.error(e.getMessage(), e);
@@ -309,14 +325,21 @@ public class ConsoleUI {
                 showStock();
                 break;
             case "hi":
+                System.out.println("-------------------------");
                 history.showAllPurchasesCLI();
+                System.out.println("-------------------------");
                 break;
             case "hi10":
+                System.out.println("-------------------------");
                 history.showLastTenPurchasesCLI();
+                System.out.println("-------------------------");
                 break;
             case "hib":
-                if(checkDates(c))
-                    history.showPurchaseHistoryBetweenDatesCLI(c[1],c[2]);
+                if(checkDates(c)) {
+                    System.out.println("-------------------------");
+                    history.showPurchaseHistoryBetweenDatesCLI(c[1], c[2]);
+                    System.out.println("-------------------------");
+                }
                 break;
             case "t":
                 showTeamInfo();
@@ -325,14 +348,19 @@ public class ConsoleUI {
                 showCart();
                 break;
             case "p":
+                System.out.println("-------------------------");
                 cart.submitCurrentPurchaseCLI();
+                System.out.println("-------------------------");
                 break;
             case "r":
+                System.out.println("-------------------------");
                 cart.cancelCurrentPurchase();
+                System.out.println("-------------------------");
                 break;
             case "cr":
-                if (checkCommands(c))
+                if (checkCommands(c)) {
                     removeItemFromCart(c);
+                }
                 break;
             case "cp":
                 if (checkCommands(c))
