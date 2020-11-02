@@ -1,11 +1,14 @@
 package ee.ut.math.tvt.salessystem.logic;
 
 import ee.ut.math.tvt.salessystem.dao.SalesSystemDAO;
+import ee.ut.math.tvt.salessystem.dataobjects.Purchase;
 import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
 import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
+import ee.ut.math.tvt.salessystem.dataobjects.Transaction;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -15,6 +18,7 @@ public class ShoppingCart {
     private static final Logger log = LogManager.getLogger(ShoppingCart.class);
     private final SalesSystemDAO dao;
     private final List<SoldItem> items = new ArrayList<>();
+    private final BigDecimal allAmount = new BigDecimal("0.0");
 
     public ShoppingCart(SalesSystemDAO dao) {
         this.dao = dao;
@@ -72,8 +76,9 @@ public class ShoppingCart {
         System.out.println("Are you sure that you want to submit current purchase? (Yes/No)");
         Scanner choice = new Scanner(System.in);
         String input = choice.nextLine().toLowerCase();
+        List<Purchase> purchases = new ArrayList<>();
         if (input.equals("yes")) {
-            dao.beginTransaction();
+            Transaction transaction = dao.beginTransaction();
             try {
                 List<StockItem> stockItems = dao.findStockItems();
                 for (SoldItem item : items) {
@@ -86,6 +91,7 @@ public class ShoppingCart {
                     }
                     StockItem stockItem = dao.findStockItem(idx);
                     int soldAmount = item.getQuantity();
+                    allAmount.add(BigDecimal.valueOf(soldAmount));
                     int amount = stockItem.getQuantity();
                     int newAmount = amount - soldAmount;
                     if (newAmount < 0) {
@@ -96,8 +102,12 @@ public class ShoppingCart {
                     } else {
                         stockItem.setQuantity(newAmount);
                         log.info(soldAmount + " units of the product (id: " + idx + ") was removed from the warehouse");
+                        Purchase purchase = new Purchase(idx, name, stockItem.getPrice(), soldAmount);
+                        purchases.add(purchase);
                     }
                 }
+                transaction.setPurchases(purchases);
+                transaction.setTotalQuantity(allAmount);
                 dao.commitTransaction();
                 items.clear();
             } catch (Exception e) {

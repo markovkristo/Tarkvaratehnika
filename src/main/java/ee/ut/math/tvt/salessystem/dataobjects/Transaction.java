@@ -56,7 +56,7 @@ public class Transaction {
                 "date " + localDate +
                 ", time " + localTime +
                 ", quantity " + totalQuantity +
-                ", purchases " + purchases +
+                ", purchases: " + purchases +
                 '}';
     }
 }

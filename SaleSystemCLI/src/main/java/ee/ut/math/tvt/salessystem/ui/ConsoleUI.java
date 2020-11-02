@@ -337,7 +337,6 @@ public class ConsoleUI {
         System.out.println("-------------------------");
         System.out.println("Usage:");
         System.out.println("h\t\t\t\t\t\tShow this help");
-        System.out.println("hi\t\t\t\t\t\tShow purchase history");
         System.out.println("w\t\t\t\t\t\tShow warehouse contents");
         System.out.println("wan,IDX,NR,P,Desc,Na\tAdd NR of new items with index IDX, price P, description Desc and name Na to the warehouse");
         System.out.println("wa,IDX,NR \t\t\t\tAdd NR of of already existing stock items with index IDX to the warehouse");
@@ -347,7 +346,10 @@ public class ConsoleUI {
         System.out.println("a,IDX,NR \t\t\t\tAdd NR of stock item with index IDX to the cart");
         System.out.println("p\t\t\t\t\t\tPurchase the shopping cart");
         System.out.println("r\t\t\t\t\t\tReset the shopping cart");
-        System.out.println("cr,IDX,NR\t\t\t\t\t\tRemove NR of products with index IDX from the cart");
+        System.out.println("cr,IDX,NR\t\t\t\tRemove NR of products with index IDX from the cart");
+        System.out.println("hi\t\t\t\t\t\tShow purchase history");
+        System.out.println("hi10\t\t\t\t\tShow last 10 purchases");
+        System.out.println("hi\t\t\t\t\tShow purchase history");
         System.out.println("t\t\t\t\t\t\tSee team information");
         System.out.println("q\t\t\t\t\t\tQuit application");
         System.out.println("-------------------------");
@@ -384,6 +386,13 @@ public class ConsoleUI {
             case "hi":
                 history.showAllPurchases();
                 break;
+
+            case "hi10":
+                history.showLastTenPurchases();
+                break;
+            case "hiD":
+            history.showAllPurchases();
+            break;
             case "t":
                 showTeamInfo();
                 break;
