@@ -143,6 +143,8 @@ public class ShoppingCart {
                         } else if (newAmount == 0) {
                             stockItems.remove(stockItem);
                             log.info("All of the product (id: " + idx + ") has been removed from the warehouse.");
+                            Purchase purchase = new Purchase(idx, name, stockItem.getPrice(), soldAmount);
+                            purchases.add(purchase);
                         } else {
                             stockItem.setQuantity(newAmount);
                             log.info(soldAmount + " units of the product (id: " + idx + ") was removed from the warehouse.");
