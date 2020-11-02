@@ -46,7 +46,7 @@ public class History {
         List<Transaction> transactions = dao.findTransactions();
         for (Transaction ts : transactions) {
             LocalDate date = ts.getLocalDate();
-            if (date.compareTo(LocalDate.parse(startDate)) > 0 && date.compareTo(LocalDate.parse(endDate)) < 0)
+            if (date.compareTo(LocalDate.parse(startDate)) >= 0 && date.compareTo(LocalDate.parse(endDate)) <= 0)
                 System.out.print(ts.toString() + " ");
         }
     }

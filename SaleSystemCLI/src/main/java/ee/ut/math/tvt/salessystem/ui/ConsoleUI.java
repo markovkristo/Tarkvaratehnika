@@ -15,6 +15,11 @@ import org.apache.logging.log4j.Logger;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -103,6 +108,27 @@ public class ConsoleUI {
             return false;
         } else
             return true;
+    }
+
+    private boolean checkDates(String[] c) {
+        if(c.length == 3) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dddd");
+            dateFormat.setLenient(false);
+            try {
+                dateFormat.parse(c[1].trim());
+                dateFormat.parse(c[2].trim());
+            } catch (ParseException pe) {
+                System.out.println("The string is not a date. " + pe.getMessage());
+                return false;
+            }
+        }else if(c.length < 3) {
+            System.out.println("You didn't enter enough parameters. You have to enter start date and end date.");
+            return false;
+        }else if(c.length > 3){
+            System.out.println("You entered too many parameters. You have to enter start date and end date.");
+            return false;
+        }
+        return true;
     }
 
     private void showStock() {
@@ -349,7 +375,7 @@ public class ConsoleUI {
         System.out.println("cr,IDX,NR\t\t\t\tRemove NR of products with index IDX from the cart");
         System.out.println("hi\t\t\t\t\t\tShow purchase history");
         System.out.println("hi10\t\t\t\t\tShow last 10 purchases");
-        System.out.println("hi\t\t\t\t\tShow purchase history");
+        System.out.println("hib,SD,ED\t\t\t\t\t\tShow purchase history between start date SD and end date ED (yyyy-MM-dd).");
         System.out.println("t\t\t\t\t\t\tSee team information");
         System.out.println("q\t\t\t\t\t\tQuit application");
         System.out.println("-------------------------");
@@ -376,10 +402,9 @@ public class ConsoleUI {
             case "h":
                 printUsage();
                 break;
-            case "q": {
+            case "q":
                 log.info("Salesystem CLI shutdown.");
                 System.exit(0);
-            }
             case "w":
                 showStock();
                 break;
@@ -390,9 +415,10 @@ public class ConsoleUI {
             case "hi10":
                 history.showLastTenPurchases();
                 break;
-            case "hiD":
-            history.showAllPurchases();
-            break;
+            case "hib":
+                if(checkDates(c))
+                    history.showPurchaseHistoryBetweenDates(c[1],c[2]);
+                break;
             case "t":
                 showTeamInfo();
                 break;
@@ -438,4 +464,6 @@ public class ConsoleUI {
                 break;
         }
     }
+
+
 }
