@@ -65,14 +65,13 @@ public class InMemorySalesSystemDAO implements SalesSystemDAO {
     @Override
     public Transaction beginTransaction() {
         List<Purchase> purchases = new ArrayList<>();
-        transaction = new Transaction(java.time.LocalDate.now(), java.time.LocalTime.now(), new BigDecimal("0.0"),purchases);
+        transaction = new Transaction(java.time.LocalDate.now(), java.time.LocalTime.now(), 0L ,purchases);
         return transaction;
     }
 
     @Override
     public void rollbackTransaction() {
         transactionList.clear();
-        transactionList.remove(transaction);
     }
 
     @Override

@@ -85,7 +85,6 @@ public class SalesSystemUI extends Application {
         URL resource = getClass().getResource(fxml);
         if (resource == null)
             throw new IllegalArgumentException(fxml + " not found");
-
         FXMLLoader fxmlLoader = new FXMLLoader(resource);
         fxmlLoader.setController(controller);
         return fxmlLoader.load();

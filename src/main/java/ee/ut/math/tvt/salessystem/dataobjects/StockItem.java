@@ -60,6 +60,10 @@ public class StockItem {
         this.quantity = quantity;
     }
 
+    public void lowerQuantity(int quantity) {
+        this.quantity -= quantity;
+    }
+
     @Override
     public String toString() {
         return String.format("StockItem{id=%d, name='%s', quantity=%d, price=%f, description='%s'}", id, name, quantity, price, description);

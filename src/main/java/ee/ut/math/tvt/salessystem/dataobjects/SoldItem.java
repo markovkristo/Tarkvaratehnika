@@ -12,10 +12,8 @@ public class SoldItem {
     private Integer quantity;
     private double price;
 
-    public SoldItem() {
-    }
-
     public SoldItem(StockItem stockItem, int quantity) {
+        this.id = stockItem.getId();
         this.stockItem = stockItem;
         this.name = stockItem.getName();
         this.price = stockItem.getPrice();
@@ -52,6 +50,10 @@ public class SoldItem {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public void lowerQuantity(Integer quantity) {
+        this.quantity -= quantity;
     }
 
     public void addMoreQuantity(Integer quantity) {

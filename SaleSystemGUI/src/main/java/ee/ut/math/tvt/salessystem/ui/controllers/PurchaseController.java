@@ -10,9 +10,12 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -48,6 +51,8 @@ public class PurchaseController implements Initializable {
     @FXML
     private Button addItemButton;
     @FXML
+    private Button removeItemButton;
+    @FXML
     private TableView<SoldItem> purchaseTableView;
 
     public PurchaseController(SalesSystemDAO dao, ShoppingCart shoppingCart) {
@@ -61,7 +66,6 @@ public class PurchaseController implements Initializable {
         submitPurchase.setDisable(true);
         purchaseTableView.setItems(FXCollections.observableList(shoppingCart.getAll()));
         disableProductField(true);
-
         this.barCodeField.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue) {
@@ -70,6 +74,8 @@ public class PurchaseController implements Initializable {
                 }
             }
         });
+
+
     }
 
     /** Event handler for the <code>new purchase</code> event. */
@@ -105,8 +111,7 @@ public class PurchaseController implements Initializable {
     protected void submitPurchaseButtonClicked() {
         try {
             log.debug("Contents of the current basket:\n" + shoppingCart.getAll());
-            shoppingCart.submitCurrentPurchaseGUI();
-            disableInputs();
+            displayConfirmation();
             purchaseTableView.refresh();
         } catch (SalesSystemException e) {
             log.error(e.getMessage(), e);
@@ -158,7 +163,10 @@ public class PurchaseController implements Initializable {
      */
     @FXML
     public void addItemEventHandler() {
-        // add chosen item to the shopping cart.
+        if (!isInputDataValidForAdding()) {
+            log.error("Found invalid input data.");
+            return;
+        }
         StockItem stockItem = getStockItemByBarcode();
         if (stockItem != null) {
             int quantity;
@@ -172,10 +180,26 @@ public class PurchaseController implements Initializable {
         }
     }
 
+    @FXML
+    public void removeItemEventHandler() {
+        if (!isInputDataValidForRemoval()) {
+            log.error("Found invalid input data.");
+            return;
+        }
+        try {
+            shoppingCart
+                    .removeItemGUI(Long.parseLong(barCodeField.getText()), Integer.parseInt(quantityField.getText()));
+        } catch (SalesSystemException e) {
+            displayInfo(e.getMessage());
+        }
+        purchaseTableView.refresh();
+    }
+
     /**
      * Sets whether or not the product component is enabled.
      */
     private void disableProductField(boolean disable) {
+        this.removeItemButton.setDisable(disable);
         this.addItemButton.setDisable(disable);
         this.barCodeField.setDisable(disable);
         this.quantityField.setDisable(disable);
@@ -191,5 +215,68 @@ public class PurchaseController implements Initializable {
         quantityField.setText("1");
         nameField.setText("");
         priceField.setText("");
+    }
+
+    private boolean isInputDataValidForRemoval() {
+        try {
+            Long.parseLong(barCodeField.getText());
+            Integer.parseInt(quantityField.getText());
+        } catch(NumberFormatException e) {
+            displayInfo("You have entered invalid or missing data for one of the cells. \n" +
+                    "Amount and barcode must be set.");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isInputDataValidForAdding() {
+        try {
+            Long.parseLong(barCodeField.getText());
+            Double.parseDouble(priceField.getText());
+            Integer.parseInt(quantityField.getText());
+        } catch(NumberFormatException e) {
+            displayInfo("You have entered invalid or missing data for one of the cells. \n" +
+                    "Amount, price, barcode and name must be set.");
+            return false;
+        }
+        return true;
+    }
+
+    private void displayInfo(String message) {
+        Stage popupwindow = new Stage();
+        popupwindow.initModality(Modality.APPLICATION_MODAL);
+        popupwindow.setTitle("Purchasing notification");
+        Label label1 = new Label(message);
+        label1.autosize();
+        Button button1 = new Button("Proceed");
+        button1.setOnAction(e -> popupwindow.close());
+        VBox layout = new VBox(10);
+        layout.getChildren().addAll(label1, button1);
+        layout.setAlignment(Pos.CENTER);
+        Scene scene1 = new Scene(layout, 400, 250);
+        popupwindow.setScene(scene1);
+        popupwindow.showAndWait();
+    }
+
+    private void displayConfirmation() {
+        Stage popupwindow = new Stage();
+        popupwindow.initModality(Modality.APPLICATION_MODAL);
+        popupwindow.setTitle("Purchasing notification");
+        Label label1 = new Label("Are you sure you want to confirm this purchase?\n\t   Please double-check cart contents");
+        label1.autosize();
+        Button button1 = new Button("Yes");
+        button1.setOnAction(e -> {
+            shoppingCart.submitCurrentPurchaseGUI();
+            popupwindow.close();
+            disableInputs();
+        });
+        Button button2 = new Button("No");
+        button2.setOnAction(e -> popupwindow.close());
+        VBox layout = new VBox(10);
+        layout.getChildren().addAll(label1, button1, button2);
+        layout.setAlignment(Pos.CENTER);
+        Scene scene1 = new Scene(layout, 400, 250);
+        popupwindow.setScene(scene1);
+        popupwindow.showAndWait();
     }
 }

@@ -101,22 +101,6 @@ public class StockController implements Initializable {
         log.info("Product added to warehouse.");
     }
 
-    private void display(String message) {
-        Stage popupwindow = new Stage();
-        popupwindow.initModality(Modality.APPLICATION_MODAL);
-        popupwindow.setTitle("Notification");
-        Label label1 = new Label(message);
-        label1.autosize();
-        Button button1 = new Button("Proceed");
-        button1.setOnAction(e -> popupwindow.close());
-        VBox layout = new VBox(10);
-        layout.getChildren().addAll(label1, button1);
-        layout.setAlignment(Pos.CENTER);
-        Scene scene1 = new Scene(layout, 400, 250);
-        popupwindow.setScene(scene1);
-        popupwindow.showAndWait();
-    }
-
     private boolean isInputDataValidForRemoval() {
         try {
             Long.parseLong(barcode.getText());
@@ -149,5 +133,21 @@ public class StockController implements Initializable {
                 "",
                 Double.parseDouble(price.getText()),
                 Integer.parseInt(amount.getText()));
+    }
+
+    private void display(String message) {
+        Stage popupwindow = new Stage();
+        popupwindow.initModality(Modality.APPLICATION_MODAL);
+        popupwindow.setTitle("Warehouse notification");
+        Label label1 = new Label(message);
+        label1.autosize();
+        Button button1 = new Button("Proceed");
+        button1.setOnAction(e -> popupwindow.close());
+        VBox layout = new VBox(10);
+        layout.getChildren().addAll(label1, button1);
+        layout.setAlignment(Pos.CENTER);
+        Scene scene1 = new Scene(layout, 400, 250);
+        popupwindow.setScene(scene1);
+        popupwindow.showAndWait();
     }
 }

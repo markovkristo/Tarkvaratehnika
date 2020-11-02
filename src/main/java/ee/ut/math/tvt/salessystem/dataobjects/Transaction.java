@@ -8,10 +8,10 @@ import java.util.List;
 public class Transaction {
     private LocalDate localDate;
     private LocalTime localTime;
-    private BigDecimal totalQuantity;
+    private Long totalQuantity;
     private List<Purchase> purchases;
 
-    public Transaction(LocalDate localDate, LocalTime localTime, BigDecimal totalQuantity, List<Purchase> purchases) {
+    public Transaction(LocalDate localDate, LocalTime localTime, Long totalQuantity, List<Purchase> purchases) {
         this.localDate = localDate;
         this.localTime = localTime;
         this.totalQuantity = totalQuantity;
@@ -34,11 +34,11 @@ public class Transaction {
         this.localTime = localTime;
     }
 
-    public BigDecimal getTotalQuantity() {
+    public Long getTotalQuantity() {
         return totalQuantity;
     }
 
-    public void setTotalQuantity(BigDecimal totalQuantity) {
+    public void setTotalQuantity(Long totalQuantity) {
         this.totalQuantity = totalQuantity;
     }
 
