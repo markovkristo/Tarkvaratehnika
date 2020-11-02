@@ -14,7 +14,7 @@ public class History {
         this.dao = dao;
     }
 
-    public void showLastTenPurchases() {
+    public void showLastTenPurchasesCLI() {
         System.out.println("Last 10 purchases are: ");
         List<Transaction> transactions = dao.findTransactions();
         int size = transactions.size();
@@ -33,7 +33,7 @@ public class History {
         }
     }
 
-    public void showAllPurchases() {
+    public void showAllPurchasesCLI() {
         System.out.println("All purchases are: ");
         List<Transaction> transactions = dao.findTransactions();
         for (Transaction ts : transactions) {
@@ -41,7 +41,7 @@ public class History {
         }
     }
 
-    public void showPurchaseHistoryBetweenDates(String startDate, String endDate) {
+    public void showPurchaseHistoryBetweenDatesCLI(String startDate, String endDate) {
         System.out.println("All purchases which were made between " + startDate + " and " + endDate + ", were: ");
         List<Transaction> transactions = dao.findTransactions();
         for (Transaction ts : transactions) {

@@ -17,12 +17,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 /**
  * A simple CLI (limited functionality).
@@ -375,7 +371,7 @@ public class ConsoleUI {
         System.out.println("cr,IDX,NR\t\t\t\tRemove NR of products with index IDX from the cart");
         System.out.println("hi\t\t\t\t\t\tShow purchase history");
         System.out.println("hi10\t\t\t\t\tShow last 10 purchases");
-        System.out.println("hib,SD,ED\t\t\t\t\t\tShow purchase history between start date SD and end date ED (yyyy-MM-dd).");
+        System.out.println("hib,SD,ED\t\t\t\tShow purchase history between start date SD and end date ED (yyyy-MM-dd).");
         System.out.println("t\t\t\t\t\t\tSee team information");
         System.out.println("q\t\t\t\t\t\tQuit application");
         System.out.println("-------------------------");
@@ -409,15 +405,14 @@ public class ConsoleUI {
                 showStock();
                 break;
             case "hi":
-                history.showAllPurchases();
+                history.showAllPurchasesCLI();
                 break;
-
             case "hi10":
-                history.showLastTenPurchases();
+                history.showLastTenPurchasesCLI();
                 break;
             case "hib":
                 if(checkDates(c))
-                    history.showPurchaseHistoryBetweenDates(c[1],c[2]);
+                    history.showPurchaseHistoryBetweenDatesCLI(c[1],c[2]);
                 break;
             case "t":
                 showTeamInfo();
@@ -428,7 +423,6 @@ public class ConsoleUI {
             case "p":
                 cart.submitCurrentPurchase();
                 break;
-
             case "r":
                 cart.cancelCurrentPurchase();
                 break;
@@ -458,12 +452,9 @@ public class ConsoleUI {
                 if (checkCommands(c))
                     removeItemFromWarehouse(c);
                 break;
-
             default:
                 System.out.println("unknown command");
                 break;
         }
     }
-
-
 }
