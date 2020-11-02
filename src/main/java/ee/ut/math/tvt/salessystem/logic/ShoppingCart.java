@@ -18,7 +18,7 @@ public class ShoppingCart {
     private static final Logger log = LogManager.getLogger(ShoppingCart.class);
     private final SalesSystemDAO dao;
     private final List<SoldItem> items = new ArrayList<>();
-    private final BigDecimal allAmount = new BigDecimal("0.0");
+    //private final BigDecimal allAmount = new BigDecimal("0.0");
 
     public ShoppingCart(SalesSystemDAO dao) {
         this.dao = dao;
@@ -78,6 +78,7 @@ public class ShoppingCart {
         List<Purchase> purchases = new ArrayList<>();
         if (input.equals("yes")) {
             Transaction transaction = dao.beginTransaction();
+            int allAmount = 0;
             try {
                 List<StockItem> stockItems = dao.findStockItems();
                 for (SoldItem item : items) {
@@ -90,7 +91,7 @@ public class ShoppingCart {
                     }
                     StockItem stockItem = dao.findStockItem(idx);
                     int soldAmount = item.getQuantity();
-                    allAmount.add(BigDecimal.valueOf(soldAmount));
+                    allAmount += soldAmount;
                     int amount = stockItem.getQuantity();
                     int newAmount = amount - soldAmount;
                     if (newAmount < 0) {
@@ -106,7 +107,7 @@ public class ShoppingCart {
                     }
                 }
                 transaction.setPurchases(purchases);
-                transaction.setTotalQuantity(allAmount);
+                transaction.setTotalQuantity(BigDecimal.valueOf(allAmount));
                 dao.commitTransaction();
                 items.clear();
             } catch (Exception e) {
