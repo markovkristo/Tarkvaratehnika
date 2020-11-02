@@ -107,7 +107,7 @@ public class ConsoleUI {
     }
 
     private boolean checkDates(String[] c) {
-        if(c.length == 3) {
+        if (c.length == 3) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dddd");
             dateFormat.setLenient(false);
             try {
@@ -117,17 +117,18 @@ public class ConsoleUI {
                 System.out.println("The string is not a date. " + pe.getMessage());
                 return false;
             }
-        }else if(c.length < 3) {
+        } else if (c.length < 3) {
             System.out.println("You didn't enter enough parameters. You have to enter start date and end date.");
             return false;
-        }else if(c.length > 3){
+        } else if (c.length > 3) {
             System.out.println("You entered too many parameters. You have to enter start date and end date.");
             return false;
         }
         return true;
     }
-    private boolean ifItemExists(StockItem item){
-        if(item != null)
+
+    private boolean ifItemExists(StockItem item) {
+        if (item != null)
             return true;
         else
             throw new SalesSystemException("There aren't any items with this ID.");
@@ -169,12 +170,11 @@ public class ConsoleUI {
             long idx = Long.parseLong(c[1]);
             int amount = Integer.parseInt(c[2]);
             StockItem item = dao.findStockItem(idx);
-            if(ifItemExists(item))
+            if (ifItemExists(item))
                 if (amount <= item.getQuantity()) {
                     cart.addItem(new SoldItem(item, Math.min(amount, item.getQuantity())));
                     log.info("Added " + amount + " " + item.getName() + " to the cart ");
-                }
-                else
+                } else
                     throw new SalesSystemException("Added items quantity exceeds warehouse quantity. ");
         } catch (SalesSystemException | NoSuchElementException e) {
             log.error(e.getMessage(), e);
@@ -189,11 +189,10 @@ public class ConsoleUI {
             int amount = Integer.parseInt(c[2]);
             StockItem item = dao.findStockItem(idx);
             List<SoldItem> soldItems = cart.getAll();
-            if(ifItemExists(item)) {
+            if (ifItemExists(item)) {
                 if (soldItems.stream().noneMatch(i -> i.getId() == idx)) {
                     throw new SalesSystemException("There aren't any items with ID of " + idx + " in the cart.");
-                }
-                else {
+                } else {
                     SoldItem soldItem = new SoldItem(item, amount);
                     cart.removeItem(soldItem, amount);
                 }
@@ -332,7 +331,7 @@ public class ConsoleUI {
                 System.out.println("-------------------------");
                 break;
             case "hib":
-                if(checkDates(c)) {
+                if (checkDates(c)) {
                     System.out.println("-------------------------");
                     history.showPurchaseHistoryBetweenDatesCLI(c[1], c[2]);
                     System.out.println("-------------------------");

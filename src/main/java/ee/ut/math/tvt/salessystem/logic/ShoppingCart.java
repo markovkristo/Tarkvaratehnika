@@ -37,11 +37,11 @@ public class ShoppingCart {
         }
         if (itemIsInCart(item)) {
             items
-                .stream()
-                .filter(i -> i.getName().equals(item.getName()))
-                .findFirst()
-                .get()
-                .addMoreQuantity(item.getQuantity());
+                    .stream()
+                    .filter(i -> i.getName().equals(item.getName()))
+                    .findFirst()
+                    .get()
+                    .addMoreQuantity(item.getQuantity());
         } else {
             items.add(item);
         }
@@ -66,7 +66,7 @@ public class ShoppingCart {
 
     public void removeItem(SoldItem item, int amount) {
         if (items.isEmpty())
-           throw new SalesSystemException("Shopping cart is empty. ");
+            throw new SalesSystemException("Shopping cart is empty. ");
         else {
             for (int i = 0; i < items.size(); i++) {
                 if (item.getName().equals(items.get(i).getName())) {
@@ -121,7 +121,7 @@ public class ShoppingCart {
             System.out.println("Are you sure that you want to submit current purchase? (Yes/No)");
             Scanner choice = new Scanner(System.in);
             String input = choice.nextLine().toLowerCase();
-            if(input.equals("yes")) {
+            if (input.equals("yes")) {
                 if (!(items.isEmpty())) {
                     List<StockItem> stockItems = dao.findStockItems();
                     for (SoldItem item : items) {
@@ -158,8 +158,7 @@ public class ShoppingCart {
                     dao.commitTransaction();
                     log.info("Purchase is completed. ");
                     items.clear();
-                }
-                else{
+                } else {
                     System.out.println("Cart is empty. ");
                 }
             }

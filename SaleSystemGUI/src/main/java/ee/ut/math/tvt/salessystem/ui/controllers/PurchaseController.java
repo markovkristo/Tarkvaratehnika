@@ -78,7 +78,9 @@ public class PurchaseController implements Initializable {
 
     }
 
-    /** Event handler for the <code>new purchase</code> event. */
+    /**
+     * Event handler for the <code>new purchase</code> event.
+     */
     @FXML
     protected void newPurchaseButtonClicked() {
         log.info("New sale process started");
@@ -221,7 +223,7 @@ public class PurchaseController implements Initializable {
         try {
             Long.parseLong(barCodeField.getText());
             Integer.parseInt(quantityField.getText());
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             displayInfo("You have entered invalid or missing data for one of the cells. \n" +
                     "Amount and barcode must be set.");
             return false;
@@ -234,7 +236,7 @@ public class PurchaseController implements Initializable {
             Long.parseLong(barCodeField.getText());
             Double.parseDouble(priceField.getText());
             Integer.parseInt(quantityField.getText());
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             displayInfo("You have entered invalid or missing data for one of the cells. \n" +
                     "Amount, price, barcode and name must be set.");
             return false;
