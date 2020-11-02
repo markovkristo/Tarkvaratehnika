@@ -251,7 +251,6 @@ public class ConsoleUI {
             StockItem item = dao.findStockItem(idx);
             List<StockItem> stockItems = dao.findStockItems();
             warehouse.removeItemFromWarehouse(stockItems, idx, removableAmount);
-            //System.out.println("Removed " + removableAmount + " " + item.getName() + " from warehouse. All of the product has been removed from the warehouse. ");
             log.info("Removed " + removableAmount + " " + item.getName() + " from warehouse. All of the product has been removed from the warehouse. ");
         } catch (SalesSystemException | NoSuchElementException e) {
             log.error(e.getMessage(), e);

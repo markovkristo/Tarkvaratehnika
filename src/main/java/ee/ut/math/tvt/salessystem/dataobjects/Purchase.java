@@ -7,17 +7,21 @@ public class Purchase {
     private String productName;
     private double productPrice;
     private int quantity;
+    private BigDecimal sum;
 
     public Purchase(long productId, String productName, double productPrice, int quantity) {
         this.productId = productId;
         this.productName = productName;
         this.productPrice = productPrice;
         this.quantity = quantity;
+        this.sum = BigDecimal.valueOf(productPrice).multiply(BigDecimal.valueOf(quantity));
     }
 
     public long getProductId() {
         return productId;
     }
+
+    public BigDecimal getSum() { return sum; }
 
     public void setProductId(long productId) {
         this.productId = productId;
@@ -54,6 +58,7 @@ public class Purchase {
                 ", productName='" + productName + '\'' +
                 ", productPrice=" + productPrice +
                 ", quantity=" + quantity +
+                ", sum=" + sum +
                 '}';
     }
 }

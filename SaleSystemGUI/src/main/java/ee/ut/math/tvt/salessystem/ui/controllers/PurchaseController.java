@@ -64,6 +64,7 @@ public class PurchaseController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         cancelPurchase.setDisable(true);
         submitPurchase.setDisable(true);
+        priceField.setDisable(true);
         purchaseTableView.setItems(FXCollections.observableList(shoppingCart.getAll()));
         disableProductField(true);
         this.barCodeField.focusedProperty().addListener(new ChangeListener<Boolean>() {
@@ -74,8 +75,6 @@ public class PurchaseController implements Initializable {
                 }
             }
         });
-
-
     }
 
     /** Event handler for the <code>new purchase</code> event. */
@@ -175,7 +174,11 @@ public class PurchaseController implements Initializable {
             } catch (NumberFormatException e) {
                 quantity = 1;
             }
-            shoppingCart.addItem(new SoldItem(stockItem, quantity));
+            try {
+                shoppingCart.addItem(new SoldItem(stockItem, quantity));
+            } catch (SalesSystemException e) {
+                displayInfo(e.getMessage());
+            }
             purchaseTableView.refresh();
         }
     }
@@ -204,7 +207,6 @@ public class PurchaseController implements Initializable {
         this.barCodeField.setDisable(disable);
         this.quantityField.setDisable(disable);
         this.nameField.setDisable(disable);
-        this.priceField.setDisable(disable);
     }
 
     /**
@@ -261,7 +263,7 @@ public class PurchaseController implements Initializable {
     private void displayConfirmation() {
         Stage popupwindow = new Stage();
         popupwindow.initModality(Modality.APPLICATION_MODAL);
-        popupwindow.setTitle("Purchasing notification");
+        popupwindow.setTitle("Confirmation");
         Label label1 = new Label("Are you sure you want to confirm this purchase?\n\t   Please double-check cart contents");
         label1.autosize();
         Button button1 = new Button("Yes");

@@ -1,11 +1,11 @@
 package ee.ut.math.tvt.salessystem.dataobjects;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
 public class Transaction {
+
     private LocalDate localDate;
     private LocalTime localTime;
     private Long totalQuantity;

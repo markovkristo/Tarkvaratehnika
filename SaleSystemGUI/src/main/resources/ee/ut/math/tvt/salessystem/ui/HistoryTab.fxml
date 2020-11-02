@@ -6,7 +6,6 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -36,21 +35,21 @@
         <TitledPane alignment="BASELINE_CENTER" animated="false" collapsible="false" text="Purchase history" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <BorderPane>
                 <center>
-                    <TableView fx:id="historyTableView" BorderPane.alignment="CENTER">
+                    <TableView fx:id="historyTableView" onMouseClicked="#purchases" BorderPane.alignment="CENTER">
                         <columns>
                             <TableColumn text="Date">
                                 <cellValueFactory>
-                                    <PropertyValueFactory property="date" />
+                                    <PropertyValueFactory property="localDate" />
                                 </cellValueFactory>
                             </TableColumn>
                             <TableColumn text="Time">
                                 <cellValueFactory>
-                                    <PropertyValueFactory property="time" />
+                                    <PropertyValueFactory property="localTime" />
                                 </cellValueFactory>
                             </TableColumn>
                             <TableColumn text="Total">
                                 <cellValueFactory>
-                                    <PropertyValueFactory property="total" />
+                                    <PropertyValueFactory property="totalQuantity" />
                                 </cellValueFactory>
                             </TableColumn>
                         </columns>
@@ -68,17 +67,17 @@
                         <columns>
                             <TableColumn text="Id">
                                 <cellValueFactory>
-                                    <PropertyValueFactory property="id" />
+                                    <PropertyValueFactory property="productId" />
                                 </cellValueFactory>
                             </TableColumn>
                             <TableColumn text="Name">
                                 <cellValueFactory>
-                                    <PropertyValueFactory property="name" />
+                                    <PropertyValueFactory property="productName" />
                                 </cellValueFactory>
                             </TableColumn>
                             <TableColumn text="Price">
                                 <cellValueFactory>
-                                    <PropertyValueFactory property="price" />
+                                    <PropertyValueFactory property="productPrice" />
                                 </cellValueFactory>
                             </TableColumn>
                             <TableColumn text="Quantity">
@@ -88,7 +87,7 @@
                             </TableColumn>
                             <TableColumn text="Sum">
                                 <cellValueFactory>
-                                    <PropertyValueFactory property="Sum" />
+                                    <PropertyValueFactory property="sum" />
                                 </cellValueFactory>
                             </TableColumn>
                         </columns>

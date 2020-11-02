@@ -28,8 +28,9 @@ public class ShoppingCart {
      * Add new SoldItem to table.
      */
     public void addItem(SoldItem item) {
-        if (!isItemInStock(item)) {
-            throw new SalesSystemException("There is no such item in stock");
+        if (!quantityOfItemCanBeAdded(item)) {
+            throw new SalesSystemException("Desired quantity of " + item.getQuantity() + " exceeds the maximum quantity " +
+            "of " + dao.findStockItem(item.getId()).getQuantity());
         }
         if (dao.findStockItem(item.getId()).getQuantity() < item.getQuantity()) {
             throw new SalesSystemException("Can't add product " + item.getName() + " with amount of " + item.getQuantity() +
@@ -50,7 +51,7 @@ public class ShoppingCart {
 
     public void removeItemGUI(long id, int quantity) {
         if (items.stream().noneMatch(i -> i.getId() == id)) {
-            throw new SalesSystemException("There aren't any items with ID of " + id + "in the cart");
+            throw new SalesSystemException("There aren't any items with ID of " + id + " in the cart");
         }
         SoldItem item = items.stream().filter(i -> i.getId() == id).findFirst().get();
         if (item.getQuantity() < quantity) {
@@ -105,6 +106,7 @@ public class ShoppingCart {
                 dao.findStockItems().remove(stockItem);
             }
         }
+        transaction.setTotalQuantity(items.stream().mapToLong(SoldItem::getQuantity).sum());
         transaction.setPurchases(purchases);
         dao.commitTransaction();
         items.clear();
@@ -169,7 +171,7 @@ public class ShoppingCart {
         return items.stream().anyMatch(e -> e.getName().equals(item.getName()));
     }
 
-    private boolean isItemInStock(SoldItem item) {
+    private boolean quantityOfItemCanBeAdded(SoldItem item) {
         return item.getQuantity() <= item.getStockItem().getQuantity();
     }
 }
