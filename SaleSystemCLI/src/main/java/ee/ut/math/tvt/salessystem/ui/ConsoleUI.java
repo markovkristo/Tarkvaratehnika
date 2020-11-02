@@ -208,33 +208,6 @@ public class ConsoleUI {
         System.out.println("-------------------------");
     }
 
-    /*private void addExistingItemToWarehouse2(String[] c) {
-        System.out.println("-------------------------");
-        if(c.length == 3) {
-            try {
-                long idx = Long.parseLong(c[1]);
-                int quantity = Integer.parseInt(c[2]);
-                StockItem item = dao.findStockItem(idx);
-                if (item != null) {
-                    item.setQuantity(item.getQuantity() + quantity);
-                    System.out.println("Added " + quantity + " new " + item.getName() + " to warehouse. New total: " + item.getQuantity());
-                    log.info("Added " + quantity + " new " + item.getName() + " to warehouse. New total: " + item.getQuantity());
-                } else {
-                    System.out.println("No stock item with id " + idx + ".");
-                }
-            } catch (SalesSystemException | NoSuchElementException e) {
-                log.error(e.getMessage(), e);
-            }
-        }
-        else if (c.length < 3) {
-            System.out.println("You didn't enter enough parameters. You have to enter item index and item quantity.");
-        }
-        else {
-            System.out.println("You entered too many parameters. You have to enter item index and item quantity.");
-        }
-        System.out.println("-------------------------");
-    }
-     */
     private void addExistingItemToWarehouse(String[] c) {
         System.out.println("-------------------------");
         try {
@@ -250,33 +223,6 @@ public class ConsoleUI {
         }
         System.out.println("-------------------------");
     }
-    /*private void addNewItemToWarehouse2(String[] c) {
-        System.out.println("-------------------------");
-            try {
-                long idx = Long.parseLong(c[1]);
-                int quantity = Integer.parseInt(c[2]);
-                double price = Double.parseDouble(c[3]);
-                String desc = c[4];
-                String name = c[5];
-                List<StockItem> stockItems = dao.findStockItems();
-                StockItem item = dao.findStockItem(idx);
-                if (item == null) {
-                    StockItem newItem = new StockItem(idx, name, desc, price, quantity);
-                    stockItems.add(newItem);
-                    log.debug("Added new item ");
-                    System.out.println("Added new item to " + newItem.getDescription() + " called " + newItem.getName() + " with id " + newItem.getId() + ", quantity: " + newItem.getQuantity() + " and price " + newItem.getPrice());
-                    log.info("Added new item to " + newItem.getDescription() + " called " + newItem.getName() + " with id " + newItem.getId() + ", quantity: " + newItem.getQuantity() + " and price " + newItem.getPrice());
-                }
-                else {
-                    System.out.println("Item with id " + idx + " already exists in warehouse. If you want to add an already existing item then use command 'wa'");
-                }
-            } catch (SalesSystemException | NoSuchElementException e) {
-                log.error(e.getMessage(), e);
-            }
-        System.out.println("-------------------------");
-    }
-
-     */
 
     private void addNewItemToWarehouse(String[] c) {
         System.out.println("-------------------------");
@@ -297,48 +243,6 @@ public class ConsoleUI {
         System.out.println("-------------------------");
     }
 
-    /* private void removeItemFromWarehouse2(String[] c) {
-         System.out.println("-------------------------");
-         if(c.length == 3) {
-             try {
-                 long idx = Long.parseLong(c[1]);
-                 int removableAmount = Integer.parseInt(c[2]);
-                 StockItem item = dao.findStockItem(idx);
-                 List<StockItem> stockItems = dao.findStockItems();
-                 if (item != null) {
-                     System.out.println("Are you sure that you want to remove this item from the warehouse? (Yes/No)");
-                     Scanner choice = new Scanner(System.in);
-                     String input = choice.nextLine().toLowerCase();
-                     if (input.equals("yes")) {
-                         int amount = item.getQuantity();
-                         int newAmount = amount - removableAmount;
-                         if (newAmount == 0) {
-                             stockItems.remove(item);
-                             System.out.println("Removed " + removableAmount + " " + item.getName() + " from warehouse. All of the product has been removed from the warehouse. ");
-                             log.info("Removed " + removableAmount + " " + item.getName() + " from warehouse. All of the product has been removed from the warehouse. ");
-                         }
-                         else if (newAmount < 0)
-                             System.out.println("There aren't that many items in the warehouse. Exceeded the maximum quantity by " + (removableAmount - amount) + ".");
-                         else {
-                             item.setQuantity(newAmount);
-
-                         }
-                     } else{
-                         System.out.println("Didn't remove the item. ");
-                     }
-                 }else {
-                     System.out.println("No stock item with id " + idx + ".");
-                 }
-             } catch (SalesSystemException | NoSuchElementException e) {
-                 log.error(e.getMessage(), e);
-             }
-         } else if(c.length < 3){
-             System.out.println("You didn't enter enough parameters. You have to enter item index and item quantity.");
-         } else {
-             System.out.println("You entered too many parameters. You have to enter item index and item quantity.");
-         }
-         System.out.println("-------------------------");
-     }*/
     private void removeItemFromWarehouse(String[] c) {
         System.out.println("-------------------------");
         try {
@@ -421,7 +325,7 @@ public class ConsoleUI {
                 showCart();
                 break;
             case "p":
-                cart.submitCurrentPurchase();
+                cart.submitCurrentPurchaseCLI();
                 break;
             case "r":
                 cart.cancelCurrentPurchase();

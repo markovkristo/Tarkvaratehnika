@@ -73,7 +73,7 @@ public class StockController implements Initializable {
                     Long.parseLong(barcode.getText()),
                     Integer.parseInt(amount.getText())
             );
-            log.debug("Item with id " + barcode.getText() + " and amount " + amount.getText() + "was removed");
+            log.debug("Item with id " + barcode.getText() + " and amount " + amount.getText() + " was removed");
             refreshStockItems();
         } catch (SalesSystemException e) {
             log.error("An exception thrown because of data entered, see info in pop-up.");
