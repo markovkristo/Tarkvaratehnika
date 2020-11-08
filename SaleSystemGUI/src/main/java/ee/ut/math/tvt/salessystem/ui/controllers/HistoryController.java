@@ -66,7 +66,7 @@ public class HistoryController implements Initializable {
     public void showBetweenDates() {
         if (!dataIsPresent()) {
             displayInfo("One or both dates are empty. Please fill them.");
-            log.error("One or both dates are empty. Please fill them.");
+            log.debug("One or both dates are empty. Please fill them.");
             return;
         }
         LocalDate startDateInput = startDate.getValue();

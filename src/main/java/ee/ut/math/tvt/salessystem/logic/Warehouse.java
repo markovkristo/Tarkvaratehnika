@@ -8,7 +8,8 @@ import java.util.List;
 
 public class Warehouse {
 
-    public void addItemToWarehouse(StockItem item, StockItem addedItem, List<StockItem> stockItems) {
+    public void addItemToWarehouse(StockItem addedItem, List<StockItem> stockItems) {
+        StockItem item = stockItems.stream().filter(i -> i.getId().equals(addedItem.getId())).findAny().orElse(null);
         if (!chosenDataIsValidForAdding(
                 addedItem.getId(),
                 addedItem.getName(),

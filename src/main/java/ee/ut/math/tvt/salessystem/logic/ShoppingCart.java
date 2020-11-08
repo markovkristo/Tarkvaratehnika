@@ -28,35 +28,45 @@ public class ShoppingCart {
      * Add new SoldItem to table.
      */
     public void addItem(SoldItem item) {
-        if (!quantityOfItemCanBeAdded(item)) {
+        if (quantityIsNegativeOrZero(item.getQuantity())) {
+            throw new SalesSystemException("Product's quantity can't be zero or negative.");
+        }
+        if (!quantityOfItemCanBeAdded(item) && !itemIsInCart(item)) {
             throw new SalesSystemException("Desired quantity of " + item.getQuantity() + " exceeds the maximum quantity " +
             "of " + dao.findStockItem(item.getId()).getQuantity());
         }
-        if (dao.findStockItem(item.getId()).getQuantity() < item.getQuantity()) {
-            throw new SalesSystemException("Can't add product " + item.getName() + " with amount of " + item.getQuantity() +
-                    " since there are only " + dao.findStockItem(item.getId()).getQuantity() + " units of this product.");
-        }
         if (itemIsInCart(item)) {
-            items
-                    .stream()
-                    .filter(i -> i.getName().equals(item.getName()))
-                    .findFirst()
-                    .get()
-                    .addMoreQuantity(item.getQuantity());
+            if (moreOfTheItemCanBeAdded(item)) {
+                items
+                        .stream()
+                        .filter(i -> i.getName().equals(item.getName()))
+                        .findFirst()
+                        .get()
+                        .addMoreQuantity(item.getQuantity());
+            } else {
+                int remainingQuantity = dao.findStockItem(item.getId()).getQuantity()
+                        - items.stream().filter(i -> i.getId().equals(item.getId())).findFirst().get().getQuantity();
+                throw new SalesSystemException("Can't add " + item.getQuantity() + " of " + item.getName() + " to the cart.\nThis " +
+                        "exceeds the remaining quantity of " + remainingQuantity + ".");
+            }
         } else {
             items.add(item);
         }
-        log.debug("Added " + item.getName() + " quantity of ");
+        log.debug("Added " + item.getName() + " quantity of " + item.getQuantity());
     }
 
     public void removeItemGUI(long id, int quantity) {
+        if (quantityIsNegativeOrZero(quantity)) {
+            throw new SalesSystemException("Removable quantity can't be zero or negative.");
+        }
         if (items.stream().noneMatch(i -> i.getId() == id)) {
-            throw new SalesSystemException("There aren't any items with ID of " + id + " in the cart");
+            throw new SalesSystemException("There aren't any items with ID of " + id + " in the cart.");
         }
         SoldItem item = items.stream().filter(i -> i.getId() == id).findFirst().get();
         if (item.getQuantity() < quantity) {
-            items.remove(dao.findSoldItem(id));
-            throw new SalesSystemException("There aren't that many units of " + dao.findSoldItem(id) + " in the cart. " +
+            String name = item.getName();
+            items.removeIf(i -> i.getId() == id);
+            throw new SalesSystemException("There aren't that many units of " + name + " in the cart. " +
                     "All of the product was removed from the cart.");
         }
         items.stream().filter(i -> i.getId() == id).findFirst().get().lowerQuantity(quantity);
@@ -173,7 +183,17 @@ public class ShoppingCart {
         return items.stream().anyMatch(e -> e.getName().equals(item.getName()));
     }
 
+    private boolean moreOfTheItemCanBeAdded(SoldItem item) {
+        int cartQuantity = items.stream().filter(i -> i.getId().equals(item.getId())).findFirst().get().getQuantity();
+        int stockQuantity = dao.findStockItem(item.getId()).getQuantity();
+        return item.getQuantity() <= stockQuantity - cartQuantity;
+    }
+
     private boolean quantityOfItemCanBeAdded(SoldItem item) {
         return item.getQuantity() <= item.getStockItem().getQuantity();
+    }
+
+    private boolean quantityIsNegativeOrZero(int quantity) {
+        return quantity <= 0;
     }
 }

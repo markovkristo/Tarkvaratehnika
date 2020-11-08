@@ -26,9 +26,8 @@ public class WarehouseFunctionalityTests {
     public void testAddingItemBeginsAndCommitsTransaction(){
         InMemorySalesSystemDAO mockDao = Mockito.spy(new InMemorySalesSystemDAO());
         InOrder orderVerifier = Mockito.inOrder(mockDao);
-        StockItem item = mockDao.findStockItem(1L);
         List<StockItem> stockItems = mockDao.findStockItems();
-        warehouse.addItemToWarehouse(item, addedItem, stockItems);
+        warehouse.addItemToWarehouse(addedItem, stockItems);
         orderVerifier.verify(mockDao).beginTransaction();
         orderVerifier.verify(mockDao).commitTransaction();
         verify(mockDao, times(1)).beginTransaction();
@@ -38,10 +37,11 @@ public class WarehouseFunctionalityTests {
     @Test
     public void testAddingNewItem() {
         long itemId = 5L;
+        Assert.assertNull(dao.findStockItem(itemId));
         StockItem addedItem = new StockItem(itemId, "Burger", "Juicy", 5.2, 10);
         List<StockItem> stockItems = dao.findStockItems();
         int currentSize = stockItems.size();
-        warehouse.addItemToWarehouse(dao.findStockItem(itemId), addedItem, stockItems);
+        warehouse.addItemToWarehouse(addedItem, stockItems);
         List<StockItem> stockItemsAfterAddingNewItem = dao.findStockItems();
         Assert.assertEquals(1, stockItemsAfterAddingNewItem.size() - currentSize);
         Assert.assertEquals("Burger", dao.findStockItem(itemId).getName());
@@ -58,7 +58,7 @@ public class WarehouseFunctionalityTests {
         int currentSize = stockItems.size();
         int currentQuantity = item.getQuantity();
         double currentPrice = item.getPrice();
-        warehouse.addItemToWarehouse(item, addedItem, stockItems);
+        warehouse.addItemToWarehouse(addedItem, stockItems);
         List<StockItem> stockItemsAfterAddingExistingItem = mockDao.findStockItems();
         Assert.assertEquals(currentSize, stockItemsAfterAddingExistingItem.size());
         Assert.assertTrue(item.getPrice() != currentPrice);
@@ -66,12 +66,17 @@ public class WarehouseFunctionalityTests {
         verify(mockDao, times(0)).saveStockItem(addedItem);
     }
 
-    @Test (expected = SalesSystemException.class)
+    @Test
     public void testAddingItemWithNegativeQuantity() {
         long itemId = 5L;
         StockItem addedItem = new StockItem(itemId, "Burger", "Juicy", 5.2, -2);
         List<StockItem> stockItems = dao.findStockItems();
-        warehouse.addItemToWarehouse(dao.findStockItem(itemId), addedItem, stockItems);
+        try {
+            warehouse.addItemToWarehouse(addedItem, stockItems);
+            Assert.fail();
+        } catch (SalesSystemException e) {
+            Assert.assertEquals("Must choose a realistic quantity. Currently you chose: " + addedItem.getQuantity(), e.getMessage());
+        }
     }
 
     @Test (expected = SalesSystemException.class)
@@ -79,7 +84,7 @@ public class WarehouseFunctionalityTests {
         long itemId = 5L;
         StockItem addedItem = new StockItem(itemId, "Burger", "Juicy", -5.2, 10);
         List<StockItem> stockItems = dao.findStockItems();
-        warehouse.addItemToWarehouse(dao.findStockItem(itemId), addedItem, stockItems);
+        warehouse.addItemToWarehouse(addedItem, stockItems);
     }
 
     @Test (expected = SalesSystemException.class)
@@ -87,7 +92,7 @@ public class WarehouseFunctionalityTests {
         long itemId = 5L;
         StockItem addedItem = new StockItem(itemId, "", "Juicy", 5.2, 10);
         List<StockItem> stockItems = dao.findStockItems();
-        warehouse.addItemToWarehouse(dao.findStockItem(itemId), addedItem, stockItems);
+        warehouse.addItemToWarehouse(addedItem, stockItems);
     }
 
     @Test (expected = SalesSystemException.class)
@@ -95,6 +100,6 @@ public class WarehouseFunctionalityTests {
         long itemId = -5L;
         StockItem addedItem = new StockItem(itemId, "Burger", "Juicy", -5.2, 10);
         List<StockItem> stockItems = dao.findStockItems();
-        warehouse.addItemToWarehouse(dao.findStockItem(itemId), addedItem, stockItems);
+        warehouse.addItemToWarehouse(addedItem, stockItems);
     }
 }
