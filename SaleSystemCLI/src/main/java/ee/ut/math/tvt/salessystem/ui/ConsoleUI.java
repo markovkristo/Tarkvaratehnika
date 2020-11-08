@@ -270,6 +270,49 @@ public class ConsoleUI {
         System.out.println("-------------------------");
     }
 
+    private void printWarehouseUsage(){
+        System.out.println("-------------------------");
+        System.out.println("w\t\t\t\t\t\tShow warehouse contents");
+        System.out.println("wan,IDX,NR,P,Desc,Na\tAdd NR of new items with index IDX, price P, description Desc and name Na to the warehouse");
+        System.out.println("wa,IDX,NR \t\t\t\tAdd NR of of already existing stock items with index IDX to the warehouse");
+        System.out.println("wr,IDX,NR \t\t\t\tRemove NR of stock item with index IDX from the warehouse");
+        System.out.println("cp,IDX,P \t\t\t\tChange price P  of stock item with index IDX");
+        System.out.println("q\t\t\t\t\t\tQuit application");
+        System.out.println("-------------------------");
+    }
+
+    private void printPOSUsage() {
+        System.out.println("-------------------------");
+        System.out.println("c\t\t\t\t\t\tShow cart contents");
+        System.out.println("a,IDX,NR \t\t\t\tAdd NR of stock item with index IDX to the cart");
+        System.out.println("p\t\t\t\t\t\tPurchase the shopping cart");
+        System.out.println("r\t\t\t\t\t\tReset the shopping cart");
+        System.out.println("cr,IDX,NR\t\t\t\tRemove NR of products with index IDX from the cart");
+        System.out.println("q\t\t\t\t\t\tQuit application");
+        System.out.println("-------------------------");
+    }
+
+    private void printHistoryUsage() {
+        System.out.println("-------------------------");
+        System.out.println("hi\t\t\t\t\t\tShow purchase history");
+        System.out.println("hi10\t\t\t\t\tShow last 10 purchases");
+        System.out.println("hib,SD,ED\t\t\t\tShow purchase history between start date SD and end date ED (yyyy-MM-dd).");
+        System.out.println("q\t\t\t\t\t\tQuit application");
+        System.out.println("-------------------------");
+    }
+
+    private void printUsage2(){
+        System.out.println("-------------------------");
+        System.out.println("Usage:");
+        System.out.println("h\t\t\t\t\t\tShow this help");
+        System.out.println("w\t\t\t\t\t\tShow warehouse actions");
+        System.out.println("c\t\t\t\t\t\tShow cart actions");
+        System.out.println("hi\t\t\t\t\t\tShow history actions");
+        System.out.println("t\t\t\t\t\t\tSee team information");
+        System.out.println("back\t\t\t\t\t\tShow main menu");
+        System.out.println("q\t\t\t\t\t\tQuit application");
+        System.out.println("-------------------------");
+    }
     private void printUsage() {
         System.out.println("-------------------------");
         System.out.println("Usage:");
@@ -301,7 +344,37 @@ public class ConsoleUI {
         System.out.println("-------------------------");
     }
 
-    private void processCommand(String command) {
+    private void processCommand2(String command){
+        String[] c = command.split(",");
+        for (int i = 0; i < c.length; i++) {
+            if (i == 0) {
+                c[i] = c[i].trim().toLowerCase();
+            } else
+                c[i] = c[i].trim();
+        }
+        switch (c[0]){
+            case "h":
+                printUsage2();
+                break;
+            case "q":
+                log.info("Salesystem CLI shutdown.");
+                System.exit(0);
+            case "w":
+                printWarehouseUsage();
+                break;
+            case "c":
+                printPOSUsage();
+                break;
+            case "hi":
+                printHistoryUsage();
+                break;
+            default:
+                System.out.println("unknown command");
+                break;
+        }
+    }
+
+   private void processCommand(String command) {
         String[] c = command.split(",");
         for (int i = 0; i < c.length; i++) {
             if (i == 0) {
