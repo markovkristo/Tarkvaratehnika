@@ -228,7 +228,7 @@ public class ConsoleUI {
             StockItem item = dao.findStockItem(idx);
             StockItem newItem = new StockItem(idx, item.getName(), item.getDescription(), item.getPrice(), amount);
             List<StockItem> stockItems = dao.findStockItems();
-            warehouse.addItemToWarehouse(item, newItem, stockItems);
+            warehouse.addItemToWarehouse(newItem, stockItems);
             log.info("Added " + amount + " new " + item.getName() + " to warehouse. New total: " + item.getQuantity());
         } catch (SalesSystemException | NoSuchElementException e) {
             log.error(e.getMessage(), e);
@@ -247,7 +247,7 @@ public class ConsoleUI {
             List<StockItem> stockItems = dao.findStockItems();
             StockItem item = dao.findStockItem(idx);
             StockItem newItem = new StockItem(idx, name, desc, price, quantity);
-            warehouse.addItemToWarehouse(item, newItem, stockItems);
+            warehouse.addItemToWarehouse(newItem, stockItems);
             log.info("Added new item to " + newItem.getDescription() + " called " + newItem.getName() + " with id " + newItem.getId() + ", quantity: " + newItem.getQuantity() + " and price " + newItem.getPrice());
         } catch (SalesSystemException | NoSuchElementException e) {
             log.error(e.getMessage(), e);

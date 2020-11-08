@@ -195,6 +195,7 @@ public class PurchaseController implements Initializable {
             shoppingCart
                     .removeItemGUI(Long.parseLong(barCodeField.getText()), Integer.parseInt(quantityField.getText()));
         } catch (SalesSystemException e) {
+            purchaseTableView.refresh();
             displayInfo(e.getMessage());
         }
         purchaseTableView.refresh();

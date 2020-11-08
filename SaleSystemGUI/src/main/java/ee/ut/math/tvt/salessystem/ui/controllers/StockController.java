@@ -91,7 +91,7 @@ public class StockController implements Initializable {
         StockItem addedItem = getAddedItemFromTextfields();
         List<StockItem> stockItems = dao.findStockItems();
         try {
-            warehouse.addItemToWarehouse(dao.findStockItem(addedItem.getId()), addedItem, stockItems);
+            warehouse.addItemToWarehouse(getAddedItemFromTextfields(), stockItems);
             log.debug("Item " + addedItem.toString() + " was added");
             refreshStockItems();
         } catch (SalesSystemException | NumberFormatException e) {
