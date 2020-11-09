@@ -19,7 +19,7 @@ dependencies {
 task hsql(type:JavaExec){
     main = "org.hsqldb.Server"
     classpath = sourceSets.main.runtimeClasspath
-    args = ["-database.0", "ee/ut/math/tvt/salessystem/data", "-dbname.0", "pos"]
+    args = ["-database.0", "data/pos", "-dbname.0", "pos"]
 }
 
 java {
