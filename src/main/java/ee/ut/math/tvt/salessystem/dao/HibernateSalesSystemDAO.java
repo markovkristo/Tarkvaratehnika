@@ -7,14 +7,20 @@ import ee.ut.math.tvt.salessystem.dataobjects.Transaction;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HibernateSalesSystemDAO implements SalesSystemDAO {
+    private List<StockItem> stockItemList;
+    private List<SoldItem> soldItemList;
+    private List<Transaction> transactionList = new ArrayList<>();
+    private Transaction transaction;
+
     private final EntityManagerFactory emf;
     private final EntityManager em;
 
     public HibernateSalesSystemDAO() {
-        emf = Persistence.createEntityManagerFactory("demo");
+        emf = Persistence.createEntityManagerFactory("pos");
         em = emf.createEntityManager();
     }
 
@@ -23,17 +29,9 @@ public class HibernateSalesSystemDAO implements SalesSystemDAO {
         emf.close();
     }
 
-    public List<SoldItem> getSoldItems() {
-        return em.createQuery("FROM SoldItem", SoldItem.class).getResultList();
-    }
-
-    public List<StockItem> getStockItems() {
-        return em.createQuery("FROM StockItem", StockItem.class).getResultList();
-    }
-
     @Override
     public List<StockItem> findStockItems() {
-        return null;
+        return em.createQuery("FROM StockItem", StockItem.class).getResultList();
     }
 
     @Override

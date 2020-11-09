@@ -7,7 +7,7 @@ import javax.persistence.*;
  * Stock item.
  */
 @Entity
-@Table(name = "stockitem")
+@Table(name = "stock_item")
 public class StockItem {
 
     @Id
@@ -18,14 +18,12 @@ public class StockItem {
     private String name;
 
     @Column(name = "price")
-    @Transient
     private double price;
 
     @Column(name = "description")
     private String description;
 
     @Column(name = "quantity")
-    @Transient
     private int quantity;
     
 
