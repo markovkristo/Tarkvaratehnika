@@ -24,11 +24,11 @@ public class HibernateSalesSystemDAO implements SalesSystemDAO {
     }
 
     public List<SoldItem> getSoldItems() {
-        return em.createQuery("from SoldItem", SoldItem.class).getResultList();
+        return em.createQuery("FROM SoldItem", SoldItem.class).getResultList();
     }
 
     public List<StockItem> getStockItems() {
-        return em.createQuery("from StockItem", StockItem.class).getResultList();
+        return em.createQuery("FROM StockItem", StockItem.class).getResultList();
     }
 
     @Override
@@ -64,6 +64,7 @@ public class HibernateSalesSystemDAO implements SalesSystemDAO {
     @Override
     public Transaction beginTransaction() {
         em.getTransaction().begin();
+        return null;
     }
 
     @Override
