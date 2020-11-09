@@ -20,12 +20,12 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+
 /**
  * A simple CLI (limited functionality).
  */
 public class ConsoleUI {
     private static final Logger log = LogManager.getLogger(ConsoleUI.class);
-
     private final SalesSystemDAO dao;
     private final ShoppingCart cart;
     private final TeamInfoSupplier teamInfoSupplier;
@@ -309,7 +309,7 @@ public class ConsoleUI {
         System.out.println("c\t\t\t\t\t\tShow cart actions");
         System.out.println("hi\t\t\t\t\t\tShow history actions");
         System.out.println("t\t\t\t\t\t\tSee team information");
-        System.out.println("back\t\t\t\t\t\tShow main menu");
+        System.out.println("b\t\t\t\t\t\tShow main menu");
         System.out.println("q\t\t\t\t\t\tQuit application");
         System.out.println("-------------------------");
     }
@@ -451,6 +451,9 @@ public class ConsoleUI {
             case "wr":
                 if (checkCommands(c))
                     removeItemFromWarehouse(c);
+                break;
+            case"b":
+                printUsage2();
                 break;
             default:
                 System.out.println("unknown command");
