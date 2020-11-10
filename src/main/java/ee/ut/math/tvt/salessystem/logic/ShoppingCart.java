@@ -106,7 +106,6 @@ public class ShoppingCart {
     }
 
     public void submitCurrentPurchaseGUI() {
-        Transaction transaction = dao.beginTransaction();
         List<Purchase> purchases = new ArrayList<>();
         for (SoldItem item : items) {
             purchases.add(new Purchase(item.getId(), item.getName(), item.getPrice(), item.getQuantity()));
@@ -116,8 +115,8 @@ public class ShoppingCart {
                 dao.findStockItems().remove(stockItem);
             }
         }
-        transaction.setTotalQuantity(items.stream().mapToLong(SoldItem::getQuantity).sum());
-        transaction.setPurchases(purchases);
+        //transaction.setTotalQuantity(items.stream().mapToLong(SoldItem::getQuantity).sum());
+        //transaction.setPurchases(purchases);
         dao.commitTransaction();
         items.clear();
     }
@@ -128,7 +127,7 @@ public class ShoppingCart {
         // but when you start using hibernate in lab5, then it will become relevant.
         // what is a transaction? https://stackoverflow.com/q/974596
         try {
-            Transaction transaction = dao.beginTransaction();
+            //Transaction transaction = dao.beginTransaction();
             List<Purchase> purchases = new ArrayList<>();
             System.out.println("Are you sure that you want to submit current purchase? (Yes/No)");
             Scanner choice = new Scanner(System.in);
@@ -165,8 +164,8 @@ public class ShoppingCart {
 
                         }
                     }
-                    transaction.setPurchases(purchases);
-                    transaction.setTotalQuantity(items.stream().mapToLong(SoldItem::getQuantity).sum());
+                   // transaction.setPurchases(purchases);
+                   // transaction.setTotalQuantity(items.stream().mapToLong(SoldItem::getQuantity).sum());
                     dao.commitTransaction();
                     log.info("Purchase is completed. ");
                     items.clear();

@@ -25,8 +25,6 @@ public class StockItem {
 
     @Column(name = "quantity")
     private int quantity;
-    
-
 
     public StockItem(Long id, String name, String desc, double price, int quantity) {
         this.id = id;

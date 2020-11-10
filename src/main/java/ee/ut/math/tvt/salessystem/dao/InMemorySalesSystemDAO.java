@@ -16,7 +16,7 @@ public class InMemorySalesSystemDAO implements SalesSystemDAO {
 
     private List<StockItem> stockItemList;
     private List<SoldItem> soldItemList;
-    private List<Transaction> transactionList = new ArrayList<>();
+    private List<Transaction> transactionList;
     private Transaction transaction;
 
     public InMemorySalesSystemDAO() {
@@ -63,10 +63,10 @@ public class InMemorySalesSystemDAO implements SalesSystemDAO {
     }
 
     @Override
-    public Transaction beginTransaction() {
-        List<Purchase> purchases = new ArrayList<>();
-        transaction = new Transaction(java.time.LocalDate.now(), java.time.LocalTime.now(), 0L ,purchases);
-        return transaction;
+    public void beginTransaction() {
+        //List<Purchase> purchases = new ArrayList<>();
+        //transaction = new Transaction(java.time.LocalDate.now(), java.time.LocalTime.now(), 0L ,purchases);
+        //return transaction;
     }
 
     @Override
