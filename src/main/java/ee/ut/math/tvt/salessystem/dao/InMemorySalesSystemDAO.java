@@ -1,15 +1,10 @@
 package ee.ut.math.tvt.salessystem.dao;
 
-import ee.ut.math.tvt.salessystem.dataobjects.Purchase;
 import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
 import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
 import ee.ut.math.tvt.salessystem.dataobjects.Transaction;
-import ee.ut.math.tvt.salessystem.logic.ShoppingCart;
-
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class InMemorySalesSystemDAO implements SalesSystemDAO {
@@ -54,12 +49,24 @@ public class InMemorySalesSystemDAO implements SalesSystemDAO {
 
     @Override
     public void saveSoldItem(SoldItem item) {
-        soldItemList.add(item);
+
     }
 
     @Override
-    public void saveStockItem(StockItem stockItem) {
-        stockItemList.add(stockItem);
+    public void saveNewStockItem(StockItem item) {
+        stockItemList.add(item);
+        stockItemList.sort(Comparator.comparing(StockItem::getId));
+    }
+
+    @Override
+    public void saveExistingStockItem(StockItem item, int quantity, double price) {
+        item.setPrice(price);
+        item.setQuantity(item.getQuantity() + quantity);
+    }
+
+    @Override
+    public void removeStockItem(StockItem stockItem, int quantity) {
+
     }
 
     @Override

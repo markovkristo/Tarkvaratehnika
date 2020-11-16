@@ -1,38 +1,36 @@
 package ee.ut.math.tvt.salessystem.logic;
 
 import ee.ut.math.tvt.salessystem.SalesSystemException;
+import ee.ut.math.tvt.salessystem.dao.SalesSystemDAO;
 import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
 
-import java.util.Comparator;
 import java.util.List;
 
 public class Warehouse {
 
-    public void addItemToWarehouse(StockItem addedItem, List<StockItem> stockItems) {
+    public void addItemToWarehouse(StockItem addedItem, SalesSystemDAO dao) {
+        List<StockItem> stockItems = dao.findStockItems();
         StockItem item = stockItems.stream().filter(i -> i.getId().equals(addedItem.getId())).findAny().orElse(null);
-        if (!chosenDataIsValidForAdding(
-                addedItem.getId(),
-                addedItem.getName(),
-                addedItem.getQuantity(),
-                addedItem.getPrice())
-        ) {
+        if (!chosenDataIsValidForAdding(addedItem.getId(), addedItem.getName(), addedItem.getQuantity(), addedItem.getPrice())) {
             return;
         }
         if (!chosenQuantityIsValid(addedItem.getQuantity())) {
             throw new SalesSystemException("Must choose a realistic quantity. Currently you chose: "
                     + addedItem.getQuantity());
         }
-        if (itemExistsInWarehouseGUI(item) && itemHasSameName(item, addedItem.getName())) {
-            addExistingItemToWarehouseGUI(item, addedItem.getQuantity(), addedItem.getPrice());
-        } else if (itemExistsInWarehouseGUI(item) && !itemHasSameName(item, addedItem.getName())) {
+        if (item != null && item.getName().equals(addedItem.getName())) {
+            dao.saveExistingStockItem(item, addedItem.getQuantity(), addedItem.getPrice());
+        } else if (item != null && !item.getName().equals(addedItem.getName())) {
             throw new SalesSystemException("Item with id: " + item.getId() +" is already in use ("+item.getName()+"). Please select a different" +
                     " id");
         } else {
-            addNewItemToWarehouseGUI(addedItem, stockItems);
+            addedItem.setName(addedItem.getName().trim());
+            dao.saveNewStockItem(addedItem);
         }
     }
 
-    public void removeItemFromWarehouse(List<StockItem> stockItems, long id, int removableQuantity) {
+    public void removeItemFromWarehouse(long id, int removableQuantity, SalesSystemDAO dao) {
+        List<StockItem> stockItems = dao.findStockItems();
         if (!chosenDataIsValidForRemoval(id, removableQuantity)) {
             return;
         }
@@ -40,49 +38,16 @@ public class Warehouse {
             throw new SalesSystemException("There is no product with id of " + id);
         }
         StockItem item = stockItems.stream().filter(e -> e.getId() == id).findFirst().get();
-        if (removableQuantityIsValid(removableQuantity, item.getQuantity())) {
-            removeItemQuantity(stockItems, item, removableQuantity);
+        if (removableQuantity <= item.getQuantity()) {
+            dao.removeStockItem(item, removableQuantity);
         } else {
             throw new SalesSystemException("Removable quantity ("+removableQuantity+") can not exceed maximum quantity" +
                     " ("+item.getQuantity()+")\nof product " + item.getName());
         }
     }
 
-    private boolean itemExistsInWarehouseGUI(StockItem item) {
-        return item != null;
-    }
-
-    private boolean itemHasSameName(StockItem item, String name) {
-        return item.getName().equals(name);
-    }
-
-    private void addNewItemToWarehouseGUI(StockItem addedItem, List<StockItem> stockItems) {
-        addedItem.setName(addedItem.getName().trim());
-        stockItems.add(addedItem);
-        stockItems.sort(Comparator.comparing(StockItem::getId));
-    }
-
-    private void addExistingItemToWarehouseGUI(StockItem item, int quantity, double price) {
-        if (item.getPrice() != price) {
-            item.setPrice(price);
-        }
-        item.setQuantity(item.getQuantity() + quantity);
-    }
-
-    private boolean removableQuantityIsValid(int removableQuantity, int realQuantity) {
-        return removableQuantity <= realQuantity;
-    }
-
     private boolean productWithGivenIdExists(long id, List<StockItem> stockItems) {
         return stockItems.stream().anyMatch(e -> e.getId() == id);
-    }
-
-    private void removeItemQuantity(List<StockItem> stockItems, StockItem item, int quantity) {
-        if (item.getQuantity() - quantity == 0) {
-            stockItems.remove(item);
-        } else {
-            item.setQuantity(item.getQuantity() - quantity);
-        }
     }
 
     private boolean chosenQuantityIsValid(int quantity) {

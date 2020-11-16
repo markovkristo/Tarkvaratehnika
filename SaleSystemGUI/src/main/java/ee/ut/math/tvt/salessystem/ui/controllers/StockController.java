@@ -66,12 +66,11 @@ public class StockController implements Initializable {
             log.error("Found invalid input data.");
             return;
         }
-        List <StockItem> stockItems = dao.findStockItems();
         try {
             warehouse.removeItemFromWarehouse(
-                    stockItems,
                     Long.parseLong(barcode.getText()),
-                    Integer.parseInt(amount.getText())
+                    Integer.parseInt(amount.getText()),
+                    dao
             );
             log.debug("Item with id " + barcode.getText() + " and amount " + amount.getText() + " was removed");
             refreshStockItems();
@@ -89,9 +88,8 @@ public class StockController implements Initializable {
             return;
         }
         StockItem addedItem = getAddedItemFromTextfields();
-        List<StockItem> stockItems = dao.findStockItems();
         try {
-            warehouse.addItemToWarehouse(getAddedItemFromTextfields(), stockItems);
+            warehouse.addItemToWarehouse(getAddedItemFromTextfields(), dao);
             log.debug("Item " + addedItem.toString() + " was added");
             refreshStockItems();
         } catch (SalesSystemException | NumberFormatException e) {

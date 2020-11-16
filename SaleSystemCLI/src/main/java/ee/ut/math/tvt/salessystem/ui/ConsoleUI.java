@@ -1,6 +1,7 @@
 package ee.ut.math.tvt.salessystem.ui;
 
 import ee.ut.math.tvt.salessystem.SalesSystemException;
+import ee.ut.math.tvt.salessystem.dao.HibernateSalesSystemDAO;
 import ee.ut.math.tvt.salessystem.dao.InMemorySalesSystemDAO;
 import ee.ut.math.tvt.salessystem.dao.SalesSystemDAO;
 import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
@@ -41,7 +42,7 @@ public class ConsoleUI {
     }
 
     public static void main(String[] args) throws Exception {
-        SalesSystemDAO dao = new InMemorySalesSystemDAO();
+        SalesSystemDAO dao = new HibernateSalesSystemDAO();
         ConsoleUI console = new ConsoleUI(dao);
         console.run();
     }
@@ -227,8 +228,7 @@ public class ConsoleUI {
             int amount = Integer.parseInt(c[2]);
             StockItem item = dao.findStockItem(idx);
             StockItem newItem = new StockItem(idx, item.getName(), item.getDescription(), item.getPrice(), amount);
-            List<StockItem> stockItems = dao.findStockItems();
-            warehouse.addItemToWarehouse(newItem, stockItems);
+            warehouse.addItemToWarehouse(newItem, dao);
             log.info("Added " + amount + " new " + item.getName() + " to warehouse. New total: " + item.getQuantity());
         } catch (SalesSystemException | NoSuchElementException e) {
             log.error(e.getMessage(), e);
@@ -244,10 +244,8 @@ public class ConsoleUI {
             double price = Double.parseDouble(c[3]);
             String desc = c[4];
             String name = c[5];
-            List<StockItem> stockItems = dao.findStockItems();
-            StockItem item = dao.findStockItem(idx);
             StockItem newItem = new StockItem(idx, name, desc, price, quantity);
-            warehouse.addItemToWarehouse(newItem, stockItems);
+            warehouse.addItemToWarehouse(newItem, dao);
             log.info("Added new item to " + newItem.getDescription() + " called " + newItem.getName() + " with id " + newItem.getId() + ", quantity: " + newItem.getQuantity() + " and price " + newItem.getPrice());
         } catch (SalesSystemException | NoSuchElementException e) {
             log.error(e.getMessage(), e);
@@ -261,8 +259,7 @@ public class ConsoleUI {
             long idx = Long.parseLong(c[1]);
             int removableAmount = Integer.parseInt(c[2]);
             StockItem item = dao.findStockItem(idx);
-            List<StockItem> stockItems = dao.findStockItems();
-            warehouse.removeItemFromWarehouse(stockItems, idx, removableAmount);
+            warehouse.removeItemFromWarehouse(idx, removableAmount, dao);
             log.info("Removed " + removableAmount + " " + item.getName() + " from warehouse. All of the product has been removed from the warehouse. ");
         } catch (SalesSystemException | NoSuchElementException e) {
             log.error(e.getMessage(), e);

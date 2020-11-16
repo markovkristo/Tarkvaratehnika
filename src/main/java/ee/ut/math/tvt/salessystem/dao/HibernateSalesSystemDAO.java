@@ -52,8 +52,18 @@ public class HibernateSalesSystemDAO implements SalesSystemDAO {
     }
 
     @Override
-    public void saveStockItem(StockItem stockItem) {
+    public void saveNewStockItem(StockItem stockItem) {
         em.persist(stockItem);
+    }
+
+    @Override
+    public void saveExistingStockItem(StockItem stockItem, int quantity, double price) {
+
+    }
+
+    @Override
+    public void removeStockItem(StockItem stockItem, int quantity) {
+
     }
 
     @Override
