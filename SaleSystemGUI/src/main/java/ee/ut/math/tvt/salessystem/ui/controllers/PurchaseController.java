@@ -271,7 +271,7 @@ public class PurchaseController implements Initializable {
         label1.autosize();
         Button button1 = new Button("Yes");
         button1.setOnAction(e -> {
-            shoppingCart.submitCurrentPurchaseGUI();
+            shoppingCart.submitCurrentPurchase();
             popupwindow.close();
             disableInputs();
         });

@@ -26,12 +26,22 @@ public class SoldItem {
     @Column(name = "price")
     private double price;
 
+    @Column(name = "purchaseId")
+    private Long purchaseId;
+
     public SoldItem(StockItem stockItem, int quantity) {
-        this.id = stockItem.getIndex();
         this.stockItem = stockItem;
         this.name = stockItem.getName();
         this.price = stockItem.getPrice();
         this.quantity = quantity;
+    }
+
+    public void setPurchaseId(Long purchaseId) {
+        this.purchaseId = purchaseId;
+    }
+
+    public Long getPurchaseId() {
+        return purchaseId;
     }
 
     public Long getId() {

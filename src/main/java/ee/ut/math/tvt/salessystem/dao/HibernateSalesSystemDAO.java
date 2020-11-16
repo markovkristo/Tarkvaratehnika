@@ -2,7 +2,7 @@ package ee.ut.math.tvt.salessystem.dao;
 
 import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
 import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
-import ee.ut.math.tvt.salessystem.dataobjects.Transaction;
+import ee.ut.math.tvt.salessystem.dataobjects.Sale;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -33,7 +33,7 @@ public class HibernateSalesSystemDAO implements SalesSystemDAO {
     }
 
     @Override
-    public List<Transaction> findTransactions() {
+    public List<Sale> findTransactions() {
         return null;
     }
 
@@ -82,6 +82,11 @@ public class HibernateSalesSystemDAO implements SalesSystemDAO {
     @Override
     public void saveSoldItem(SoldItem item) {
         em.persist(item);
+    }
+
+    @Override
+    public void saveSale(Sale sale) {
+
     }
 
     @Override

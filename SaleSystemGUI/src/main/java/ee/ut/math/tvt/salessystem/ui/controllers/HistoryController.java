@@ -2,7 +2,7 @@ package ee.ut.math.tvt.salessystem.ui.controllers;
 
 import ee.ut.math.tvt.salessystem.dao.SalesSystemDAO;
 import ee.ut.math.tvt.salessystem.dataobjects.Purchase;
-import ee.ut.math.tvt.salessystem.dataobjects.Transaction;
+import ee.ut.math.tvt.salessystem.dataobjects.Sale;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -37,7 +37,7 @@ public class HistoryController implements Initializable {
     @FXML
     private DatePicker endDate;
     @FXML
-    private TableView<Transaction> historyTableView;
+    private TableView<Sale> historyTableView;
     @FXML
     private TableView<Purchase> historyTransactionView;
     private SalesSystemDAO dao;
@@ -53,12 +53,12 @@ public class HistoryController implements Initializable {
 
     @FXML
     public void showAll() {
-        List<Transaction> transactions = dao.findTransactions();
-        if (transactions.isEmpty()) {
+        List<Sale> sales = dao.findTransactions();
+        if (sales.isEmpty()) {
             displayInfo("There are have not been any transactions.");
             return;
         }
-        historyTableView.setItems(FXCollections.observableList(transactions));
+        historyTableView.setItems(FXCollections.observableList(sales));
         log.info("All history is shown.");
     }
 
@@ -71,10 +71,10 @@ public class HistoryController implements Initializable {
         }
         LocalDate startDateInput = startDate.getValue();
         LocalDate endDateInput = endDate.getValue();
-        List<Transaction> transactions = dao.findTransactions();
-        List<Transaction> transactionsBetweenDates = new ArrayList<>();
-        for (Transaction ts : transactions) {
-            LocalDate date = ts.getLocalDate();
+        List<Sale> sales = dao.findTransactions();
+        List<Sale> transactionsBetweenDates = new ArrayList<>();
+        for (Sale ts : sales) {
+            LocalDate date = ts.getDateOfTransaction();
             if (date.compareTo(startDateInput) >= 0 && date.compareTo(endDateInput) <= 0)
                 transactionsBetweenDates.add(ts);
         }
@@ -88,24 +88,24 @@ public class HistoryController implements Initializable {
 
     @FXML
     public void showLastTen() {
-        List<Transaction> transactions = dao.findTransactions();
-        if (transactions.isEmpty()) {
+        List<Sale> sales = dao.findTransactions();
+        if (sales.isEmpty()) {
             displayInfo("There have not been any transactions.");
             return;
         }
-        List<Transaction> tenTransactions = new ArrayList<>();
-        for (int i = transactions.size()-1; i >= 0 ; i--) {
-            tenTransactions.add(transactions.get(i));
+        List<Sale> tenSales = new ArrayList<>();
+        for (int i = sales.size()-1; i >= 0 ; i--) {
+            tenSales.add(sales.get(i));
         }
-        historyTableView.setItems(FXCollections.observableList(tenTransactions));
+        historyTableView.setItems(FXCollections.observableList(tenSales));
         log.info("History of last 10 transactions is shown.");
     }
 
     @FXML
     public void purchases(MouseEvent click) {
-        Transaction transaction = historyTableView.getSelectionModel().getSelectedItem();
-        System.out.println(transaction.getPurchases());
-        historyTransactionView.setItems(FXCollections.observableList(transaction.getPurchases()));
+        Sale sale = historyTableView.getSelectionModel().getSelectedItem();
+        System.out.println(sale.getPurchases());
+        historyTransactionView.setItems(FXCollections.observableList(sale.getPurchases()));
     }
 
     private boolean dataIsPresent() {

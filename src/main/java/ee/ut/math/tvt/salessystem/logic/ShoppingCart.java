@@ -5,6 +5,7 @@ import ee.ut.math.tvt.salessystem.dao.SalesSystemDAO;
 import ee.ut.math.tvt.salessystem.dataobjects.Purchase;
 import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
 import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
+import ee.ut.math.tvt.salessystem.dataobjects.Sale;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,6 +18,7 @@ public class ShoppingCart {
     private static final Logger log = LogManager.getLogger(ShoppingCart.class);
     private final SalesSystemDAO dao;
     private final List<SoldItem> items = new ArrayList<>();
+    private Warehouse warehouse;
 
     public ShoppingCart(SalesSystemDAO dao) {
         this.dao = dao;
@@ -103,77 +105,16 @@ public class ShoppingCart {
         items.clear();
     }
 
-    public void submitCurrentPurchaseGUI() {
+    public void submitCurrentPurchase() {
         List<Purchase> purchases = new ArrayList<>();
         for (SoldItem item : items) {
             purchases.add(new Purchase(item.getId(), item.getName(), item.getPrice(), item.getQuantity()));
-            dao.findStockItem(item.getId()).lowerQuantity(item.getQuantity());
-            if (dao.findStockItem(item.getId()).getQuantity() == 0) {
-                StockItem stockItem = dao.findStockItem(item.getId());
-                dao.findStockItems().remove(stockItem);
-            }
+            warehouse.removeItemFromWarehouse(item.getId(), item.getQuantity(), dao);
+            dao.saveSoldItem(item);
         }
-        //transaction.setTotalQuantity(items.stream().mapToLong(SoldItem::getQuantity).sum());
-        //transaction.setPurchases(purchases);
-        dao.commitTransaction();
+        Sale sale = new Sale(items.stream().mapToLong(SoldItem::getQuantity).sum(), purchases);
+        dao.saveSale(sale);
         items.clear();
-    }
-
-    public void submitCurrentPurchaseCLI() {
-        // TODO decrease quantities of the warehouse stock
-        // note the use of transactions. InMemorySalesSystemDAO ignores transactions
-        // but when you start using hibernate in lab5, then it will become relevant.
-        // what is a transaction? https://stackoverflow.com/q/974596
-        try {
-            //Transaction transaction = dao.beginTransaction();
-            List<Purchase> purchases = new ArrayList<>();
-            System.out.println("Are you sure that you want to submit current purchase? (Yes/No)");
-            Scanner choice = new Scanner(System.in);
-            String input = choice.nextLine().toLowerCase();
-            if (input.equals("yes")) {
-                if (!(items.isEmpty())) {
-                    List<StockItem> stockItems = dao.findStockItems();
-                    for (SoldItem item : items) {
-                        dao.saveSoldItem(item);
-                        String name = item.getName();
-                        long idx = 0;
-                        for (StockItem value : stockItems) {
-                            if (name.equals(value.getName()))
-                                idx = value.getIndex();
-                        }
-                        StockItem stockItem = dao.findStockItem(idx);
-                        int soldAmount = item.getQuantity();
-                        int amount = stockItem.getQuantity();
-                        int newAmount = amount - soldAmount;
-                        if (newAmount < 0) {
-                            log.info("Removable amount can't exceed item quantity.");
-                            dao.rollbackTransaction();
-                            throw new SalesSystemException("Removable amount excceeds item quantity.");
-                        } else if (newAmount == 0) {
-                            stockItems.remove(stockItem);
-                            log.info("All of the product (id: " + idx + ") has been removed from the warehouse.");
-                            Purchase purchase = new Purchase(idx, name, stockItem.getPrice(), soldAmount);
-                            purchases.add(purchase);
-                        } else {
-                            stockItem.setQuantity(newAmount);
-                            log.info(soldAmount + " units of the product (id: " + idx + ") was removed from the warehouse.");
-                            Purchase purchase = new Purchase(idx, name, stockItem.getPrice(), soldAmount);
-                            purchases.add(purchase);
-
-                        }
-                    }
-                   // transaction.setPurchases(purchases);
-                   // transaction.setTotalQuantity(items.stream().mapToLong(SoldItem::getQuantity).sum());
-                    dao.commitTransaction();
-                    log.info("Purchase is completed. ");
-                    items.clear();
-                } else {
-                    System.out.println("Cart is empty. ");
-                }
-            }
-        } catch (Exception e) {
-            dao.rollbackTransaction();
-        }
     }
 
     private boolean itemIsInCart(SoldItem item) {

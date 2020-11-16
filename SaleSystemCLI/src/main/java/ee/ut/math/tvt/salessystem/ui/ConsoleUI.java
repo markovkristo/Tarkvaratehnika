@@ -19,6 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 
 /**
@@ -413,7 +414,12 @@ public class ConsoleUI {
                 break;
             case "p":
                 System.out.println("-------------------------");
-                cart.submitCurrentPurchaseCLI();
+                System.out.println("Are you sure that you want to submit current purchase? (Yes/No)");
+                Scanner choice = new Scanner(System.in);
+                String input = choice.nextLine().toLowerCase();
+                if (input.equals("yes")) {
+                    cart.submitCurrentPurchase();
+                }
                 System.out.println("-------------------------");
                 break;
             case "r":

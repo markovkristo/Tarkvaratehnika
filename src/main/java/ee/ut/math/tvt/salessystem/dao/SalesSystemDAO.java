@@ -2,7 +2,7 @@ package ee.ut.math.tvt.salessystem.dao;
 
 import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
 import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
-import ee.ut.math.tvt.salessystem.dataobjects.Transaction;
+import ee.ut.math.tvt.salessystem.dataobjects.Sale;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ import java.util.List;
 public interface SalesSystemDAO {
 
     List<StockItem> findStockItems();
-    List<Transaction> findTransactions();
+    List<Sale> findTransactions();
     StockItem findStockItem(long id);
 
     SoldItem findSoldItem(long id);
@@ -43,6 +43,8 @@ public interface SalesSystemDAO {
     void removeAmountOfStockItem(StockItem stockItem);
 
     void saveSoldItem(SoldItem item);
+
+    void saveSale(Sale sale);
 
     void beginTransaction();
 

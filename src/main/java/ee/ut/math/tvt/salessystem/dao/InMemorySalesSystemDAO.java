@@ -2,7 +2,7 @@ package ee.ut.math.tvt.salessystem.dao;
 
 import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
 import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
-import ee.ut.math.tvt.salessystem.dataobjects.Transaction;
+import ee.ut.math.tvt.salessystem.dataobjects.Sale;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -11,8 +11,8 @@ public class InMemorySalesSystemDAO implements SalesSystemDAO {
 
     private List<StockItem> stockItemList;
     private List<SoldItem> soldItemList;
-    private List<Transaction> transactionList;
-    private Transaction transaction;
+    private List<Sale> sales;
+    private Sale sale;
 
     public InMemorySalesSystemDAO() {
         List<StockItem> items = new ArrayList<StockItem>();
@@ -29,7 +29,7 @@ public class InMemorySalesSystemDAO implements SalesSystemDAO {
         return stockItemList;
     }
 
-    public List<Transaction> findTransactions(){ return transactionList;}
+    public List<Sale> findTransactions(){ return sales;}
     @Override
     public StockItem findStockItem(long id) {
         for (StockItem item : stockItemList) {
@@ -49,6 +49,11 @@ public class InMemorySalesSystemDAO implements SalesSystemDAO {
 
     @Override
     public void saveSoldItem(SoldItem item) {
+
+    }
+
+    @Override
+    public void saveSale(Sale sale) {
 
     }
 
@@ -82,12 +87,12 @@ public class InMemorySalesSystemDAO implements SalesSystemDAO {
 
     @Override
     public void rollbackTransaction() {
-        transactionList.remove(transaction);
+        sales.remove(sale);
         beginTransaction();
     }
 
     @Override
     public void commitTransaction() {
-        transactionList.add(transaction);
+        sales.add(sale);
     }
 }

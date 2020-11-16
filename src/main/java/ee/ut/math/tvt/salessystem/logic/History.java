@@ -1,8 +1,7 @@
 package ee.ut.math.tvt.salessystem.logic;
 
 import ee.ut.math.tvt.salessystem.dao.SalesSystemDAO;
-import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
-import ee.ut.math.tvt.salessystem.dataobjects.Transaction;
+import ee.ut.math.tvt.salessystem.dataobjects.Sale;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -16,16 +15,16 @@ public class History {
 
     public void showLastTenPurchasesCLI() {
         System.out.println("Last 10 purchases are: ");
-        List<Transaction> transactions = dao.findTransactions();
-        int size = transactions.size();
-        if (transactions.size() >= 10) {
+        List<Sale> sales = dao.findTransactions();
+        int size = sales.size();
+        if (sales.size() >= 10) {
             for (int i = 0; i < 10; i++) {
-                Transaction ts = transactions.get(size - 1 - i);
+                Sale ts = sales.get(size - 1 - i);
                 System.out.println(ts.toString() + " ");
             }
-        } else if(transactions.size() > 0){
-            for (int i = 0; i < transactions.size(); i++) {
-                Transaction ts = transactions.get(size - 1 - i);
+        } else if(sales.size() > 0){
+            for (int i = 0; i < sales.size(); i++) {
+                Sale ts = sales.get(size - 1 - i);
                 System.out.println(ts.toString() + " ");
             }
         }else {
@@ -35,17 +34,17 @@ public class History {
 
     public void showAllPurchasesCLI() {
         System.out.println("All purchases are: ");
-        List<Transaction> transactions = dao.findTransactions();
-        for (Transaction ts : transactions) {
+        List<Sale> sales = dao.findTransactions();
+        for (Sale ts : sales) {
             System.out.println(ts.toString() + " ");
         }
     }
 
     public void showPurchaseHistoryBetweenDatesCLI(String startDate, String endDate) {
         System.out.println("All purchases which were made between " + startDate + " and " + endDate + ", were: ");
-        List<Transaction> transactions = dao.findTransactions();
-        for (Transaction ts : transactions) {
-            LocalDate date = ts.getLocalDate();
+        List<Sale> sales = dao.findTransactions();
+        for (Sale ts : sales) {
+            LocalDate date = ts.getDateOfTransaction();
             if (date.compareTo(LocalDate.parse(startDate)) >= 0 && date.compareTo(LocalDate.parse(endDate)) <= 0)
                 System.out.print(ts.toString() + " ");
         }
