@@ -64,7 +64,12 @@ public class InMemorySalesSystemDAO implements SalesSystemDAO {
     }
 
     @Override
-    public void removeStockItem(StockItem stockItem, int quantity) {
+    public void removeStockItemEntirely(StockItem stockItem) {
+
+    }
+
+    @Override
+    public void removeAmountOfStockItem(StockItem stockItem) {
 
     }
 

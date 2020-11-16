@@ -45,7 +45,7 @@
             <columns>
               <TableColumn text="Id">
                 <cellValueFactory>
-                  <PropertyValueFactory property="id" />
+                  <PropertyValueFactory property="index" />
                 </cellValueFactory>
               </TableColumn>
               <TableColumn text="Name">

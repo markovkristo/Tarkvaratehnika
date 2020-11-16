@@ -66,8 +66,17 @@ public class HibernateSalesSystemDAO implements SalesSystemDAO {
     }
 
     @Override
-    public void removeStockItem(StockItem stockItem, int quantity) {
+    public void removeStockItemEntirely(StockItem stockItem) {
+        beginTransaction();
+        em.remove(stockItem);
+        commitTransaction();
+    }
 
+    @Override
+    public void removeAmountOfStockItem(StockItem stockItem) {
+        beginTransaction();
+        em.merge(stockItem);
+        commitTransaction();
     }
 
     @Override

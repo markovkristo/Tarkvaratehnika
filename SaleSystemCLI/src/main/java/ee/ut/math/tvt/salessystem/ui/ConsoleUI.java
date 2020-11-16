@@ -259,7 +259,7 @@ public class ConsoleUI {
             int removableAmount = Integer.parseInt(c[2]);
             StockItem item = dao.findStockItem(idx);
             warehouse.removeItemFromWarehouse(idx, removableAmount, dao);
-            log.info("Removed " + removableAmount + " " + item.getName() + " from warehouse. All of the product has been removed from the warehouse. ");
+            log.info("Removed " + removableAmount + " " + item.getName() + " from warehouse. ");
         } catch (SalesSystemException | NoSuchElementException e) {
             log.error(e.getMessage(), e);
         }

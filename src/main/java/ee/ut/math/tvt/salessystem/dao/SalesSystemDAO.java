@@ -38,7 +38,9 @@ public interface SalesSystemDAO {
 
     void saveExistingStockItem(StockItem stockItem);
 
-    void removeStockItem(StockItem stockItem, int quantity);
+    void removeStockItemEntirely(StockItem stockItem);
+
+    void removeAmountOfStockItem(StockItem stockItem);
 
     void saveSoldItem(SoldItem item);
 

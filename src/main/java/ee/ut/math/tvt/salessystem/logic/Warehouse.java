@@ -41,8 +41,11 @@ public class Warehouse {
             throw new SalesSystemException("There is no product with id of " + id);
         }
         StockItem item = stockItems.stream().filter(e -> e.getIndex() == id).findFirst().get();
-        if (removableQuantity <= item.getQuantity()) {
-            dao.removeStockItem(item, removableQuantity);
+        if (removableQuantity < item.getQuantity()) {
+            item.lowerQuantity(removableQuantity);
+            dao.removeAmountOfStockItem(item);
+        } else if (removableQuantity == item.getQuantity()) {
+            dao.removeStockItemEntirely(item);
         } else {
             throw new SalesSystemException("Removable quantity ("+removableQuantity+") can not exceed maximum quantity" +
                     " ("+item.getQuantity()+")\nof product " + item.getName());
