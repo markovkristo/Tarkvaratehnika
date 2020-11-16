@@ -39,15 +39,15 @@ public class HibernateSalesSystemDAO implements SalesSystemDAO {
 
     @Override
     public StockItem findStockItem(long id) {
-        StockItem stockItem = em.find(StockItem.class, id);
-        em.detach(stockItem);
-        return stockItem;
+        return findStockItems().stream().filter(i -> i.getIndex().equals(id)).findFirst().orElse(null);
     }
 
     @Override
     public SoldItem findSoldItem(long id) {
+        beginTransaction();
         SoldItem soldItem = em.find(SoldItem.class, id);
         em.detach(soldItem);
+        commitTransaction();
         return soldItem;
     }
 
