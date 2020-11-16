@@ -1,0 +1,774 @@
+21:37:37.962 [main] DEBUG org.jboss.logging - Logging Provider: org.jboss.logging.Log4j2LoggerProvider
+21:37:37.993 [main] DEBUG org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl - Incoming config yielded no classloaders; adding standard SE ones
+21:37:38.056 [main] DEBUG org.hibernate.jpa.HibernatePersistenceProvider - Located and parsed 1 persistence units; checking each
+21:37:38.056 [main] DEBUG org.hibernate.jpa.HibernatePersistenceProvider - Checking persistence-unit [name=pos, explicit-provider=null] against incoming persistence unit name [pos]
+21:37:38.056 [main] DEBUG org.hibernate.jpa.boot.spi.ProviderChecker - No PersistenceProvider explicitly requested, assuming Hibernate
+21:37:38.071 [main] DEBUG org.hibernate.jpa.internal.util.LogHelper - PersistenceUnitInfo [
+	name: pos
+	persistence provider classname: null
+	classloader: null
+	excludeUnlistedClasses: false
+	JTA datasource: null
+	Non JTA datasource: null
+	Transaction type: RESOURCE_LOCAL
+	PU root URL: file:/C:/Users/marko/OneDrive/Dokumendid/lab2-kristotaunopatrik/build/libs/lab2-kristotaunopatrik-1.0.jar
+	Shared Cache Mode: null
+	Validation Mode: null
+	Jar files URLs []
+	Managed classes names [
+		ee.ut.math.tvt.salessystem.dataobjects.SoldItem
+		ee.ut.math.tvt.salessystem.dataobjects.StockItem]
+	Mapping files names []
+	Properties [
+		javax.persistence.jdbc.driver: org.hsqldb.jdbcDriver
+		javax.persistence.jdbc.url: jdbc:hsqldb:hsql://localhost/pos
+		hibernate.show_sql: true
+		javax.persistence.schema-generation.database.action: drop-and-create]
+21:37:38.071 [main] DEBUG org.hibernate.integrator.internal.IntegratorServiceImpl - Adding Integrator [org.hibernate.cfg.beanvalidation.BeanValidationIntegrator].
+21:37:38.071 [main] DEBUG org.hibernate.integrator.internal.IntegratorServiceImpl - Adding Integrator [org.hibernate.secure.spi.JaccIntegrator].
+21:37:38.087 [main] DEBUG org.hibernate.integrator.internal.IntegratorServiceImpl - Adding Integrator [org.hibernate.cache.internal.CollectionCacheInvalidator].
+21:37:38.087 [main] DEBUG org.hibernate.integrator.internal.IntegratorServiceImpl - Adding Integrator [org.hibernate.jpa.event.spi.JpaIntegrator].
+21:37:38.165 [main] INFO  org.hibernate.Version - HHH000412: Hibernate Core {5.2.1.Final}
+21:37:38.165 [main] INFO  org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+21:37:38.165 [main] INFO  org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
+21:37:38.181 [main] DEBUG org.hibernate.service.spi.ServiceBinding - Overriding existing service binding [org.hibernate.secure.spi.JaccService]
+21:37:38.212 [main] DEBUG org.hibernate.cache.internal.RegionFactoryInitiator - Cache region factory : org.hibernate.cache.internal.NoCachingRegionFactory
+21:37:38.212 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+21:37:38.290 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration boolean -> org.hibernate.type.BooleanType@4bd1f8dd
+21:37:38.290 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration boolean -> org.hibernate.type.BooleanType@4bd1f8dd
+21:37:38.290 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Boolean -> org.hibernate.type.BooleanType@4bd1f8dd
+21:37:38.290 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration numeric_boolean -> org.hibernate.type.NumericBooleanType@5d1659ea
+21:37:38.290 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration true_false -> org.hibernate.type.TrueFalseType@2f6e28bc
+21:37:38.290 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration yes_no -> org.hibernate.type.YesNoType@463b4ac8
+21:37:38.290 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration byte -> org.hibernate.type.ByteType@7ec3394b
+21:37:38.290 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration byte -> org.hibernate.type.ByteType@7ec3394b
+21:37:38.290 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Byte -> org.hibernate.type.ByteType@7ec3394b
+21:37:38.290 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration character -> org.hibernate.type.CharacterType@4351c8c3
+21:37:38.306 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration char -> org.hibernate.type.CharacterType@4351c8c3
+21:37:38.306 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Character -> org.hibernate.type.CharacterType@4351c8c3
+21:37:38.306 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration short -> org.hibernate.type.ShortType@55342f40
+21:37:38.306 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration short -> org.hibernate.type.ShortType@55342f40
+21:37:38.306 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Short -> org.hibernate.type.ShortType@55342f40
+21:37:38.306 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration integer -> org.hibernate.type.IntegerType@6b44435b
+21:37:38.306 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration int -> org.hibernate.type.IntegerType@6b44435b
+21:37:38.306 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Integer -> org.hibernate.type.IntegerType@6b44435b
+21:37:38.306 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration long -> org.hibernate.type.LongType@5bd82fed
+21:37:38.306 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration long -> org.hibernate.type.LongType@5bd82fed
+21:37:38.306 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Long -> org.hibernate.type.LongType@5bd82fed
+21:37:38.306 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration float -> org.hibernate.type.FloatType@20f12539
+21:37:38.306 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration float -> org.hibernate.type.FloatType@20f12539
+21:37:38.306 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Float -> org.hibernate.type.FloatType@20f12539
+21:37:38.306 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration double -> org.hibernate.type.DoubleType@3e10dc6
+21:37:38.306 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration double -> org.hibernate.type.DoubleType@3e10dc6
+21:37:38.306 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Double -> org.hibernate.type.DoubleType@3e10dc6
+21:37:38.306 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration big_decimal -> org.hibernate.type.BigDecimalType@3e7634b9
+21:37:38.306 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.math.BigDecimal -> org.hibernate.type.BigDecimalType@3e7634b9
+21:37:38.306 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration big_integer -> org.hibernate.type.BigIntegerType@1a7288a3
+21:37:38.306 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.math.BigInteger -> org.hibernate.type.BigIntegerType@1a7288a3
+21:37:38.306 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration string -> org.hibernate.type.StringType@aa549e5
+21:37:38.306 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.String -> org.hibernate.type.StringType@aa549e5
+21:37:38.306 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration nstring -> org.hibernate.type.StringNVarcharType@7b8233cd
+21:37:38.321 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration ncharacter -> org.hibernate.type.CharacterNCharType@25b2cfcb
+21:37:38.321 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration url -> org.hibernate.type.UrlType@60a2630a
+21:37:38.321 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.net.URL -> org.hibernate.type.UrlType@60a2630a
+21:37:38.321 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration Duration -> org.hibernate.type.DurationType@6eeade6c
+21:37:38.321 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.time.Duration -> org.hibernate.type.DurationType@6eeade6c
+21:37:38.321 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration Instant -> org.hibernate.type.InstantType@792bbc74
+21:37:38.321 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.time.Instant -> org.hibernate.type.InstantType@792bbc74
+21:37:38.337 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration LocalDateTime -> org.hibernate.type.LocalDateTimeType@758c83d8
+21:37:38.337 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.time.LocalDateTime -> org.hibernate.type.LocalDateTimeType@758c83d8
+21:37:38.337 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration LocalDate -> org.hibernate.type.LocalDateType@4ee37ca3
+21:37:38.337 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.time.LocalDate -> org.hibernate.type.LocalDateType@4ee37ca3
+21:37:38.337 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration LocalTime -> org.hibernate.type.LocalTimeType@75e91545
+21:37:38.337 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.time.LocalTime -> org.hibernate.type.LocalTimeType@75e91545
+21:37:38.337 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration OffsetDateTime -> org.hibernate.type.OffsetDateTimeType@4b672daa
+21:37:38.337 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.time.OffsetDateTime -> org.hibernate.type.OffsetDateTimeType@4b672daa
+21:37:38.337 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration OffsetTime -> org.hibernate.type.OffsetTimeType@1c7fd41f
+21:37:38.337 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.time.OffsetTime -> org.hibernate.type.OffsetTimeType@1c7fd41f
+21:37:38.337 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration ZonedDateTime -> org.hibernate.type.ZonedDateTimeType@4fbda97b
+21:37:38.337 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.time.ZonedDateTime -> org.hibernate.type.ZonedDateTimeType@4fbda97b
+21:37:38.337 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration date -> org.hibernate.type.DateType@1080b026
+21:37:38.337 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.Date -> org.hibernate.type.DateType@1080b026
+21:37:38.337 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration time -> org.hibernate.type.TimeType@5c87bfe2
+21:37:38.337 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.Time -> org.hibernate.type.TimeType@5c87bfe2
+21:37:38.337 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration timestamp -> org.hibernate.type.TimestampType@6f2cb653
+21:37:38.337 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.Timestamp -> org.hibernate.type.TimestampType@6f2cb653
+21:37:38.337 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.Date -> org.hibernate.type.TimestampType@6f2cb653
+21:37:38.337 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration dbtimestamp -> org.hibernate.type.DbTimestampType@61884cb1
+21:37:38.337 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration calendar -> org.hibernate.type.CalendarType@4bef0fe3
+21:37:38.337 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.Calendar -> org.hibernate.type.CalendarType@4bef0fe3
+21:37:38.337 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.GregorianCalendar -> org.hibernate.type.CalendarType@4bef0fe3
+21:37:38.352 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration calendar_date -> org.hibernate.type.CalendarDateType@55b5f5d2
+21:37:38.352 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration locale -> org.hibernate.type.LocaleType@2b95e48b
+21:37:38.352 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.Locale -> org.hibernate.type.LocaleType@2b95e48b
+21:37:38.352 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration currency -> org.hibernate.type.CurrencyType@5316e95f
+21:37:38.352 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.Currency -> org.hibernate.type.CurrencyType@5316e95f
+21:37:38.352 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration timezone -> org.hibernate.type.TimeZoneType@1e63ec0b
+21:37:38.352 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.TimeZone -> org.hibernate.type.TimeZoneType@1e63ec0b
+21:37:38.352 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration class -> org.hibernate.type.ClassType@64dafeed
+21:37:38.352 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Class -> org.hibernate.type.ClassType@64dafeed
+21:37:38.352 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration uuid-binary -> org.hibernate.type.UUIDBinaryType@11eadcba
+21:37:38.352 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.UUID -> org.hibernate.type.UUIDBinaryType@11eadcba
+21:37:38.352 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration uuid-char -> org.hibernate.type.UUIDCharType@207ea13
+21:37:38.352 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration binary -> org.hibernate.type.BinaryType@f79a760
+21:37:38.352 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration byte[] -> org.hibernate.type.BinaryType@f79a760
+21:37:38.352 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration [B -> org.hibernate.type.BinaryType@f79a760
+21:37:38.352 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration wrapper-binary -> org.hibernate.type.WrapperBinaryType@652a7737
+21:37:38.352 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration Byte[] -> org.hibernate.type.WrapperBinaryType@652a7737
+21:37:38.352 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration [Ljava.lang.Byte; -> org.hibernate.type.WrapperBinaryType@652a7737
+21:37:38.352 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration row_version -> org.hibernate.type.RowVersionType@4e28bdd1
+21:37:38.352 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration image -> org.hibernate.type.ImageType@a8c1f44
+21:37:38.352 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration characters -> org.hibernate.type.CharArrayType@78a287ed
+21:37:38.352 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration char[] -> org.hibernate.type.CharArrayType@78a287ed
+21:37:38.352 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration [C -> org.hibernate.type.CharArrayType@78a287ed
+21:37:38.352 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration wrapper-characters -> org.hibernate.type.CharacterArrayType@2b43529a
+21:37:38.352 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration [Ljava.lang.Character; -> org.hibernate.type.CharacterArrayType@2b43529a
+21:37:38.352 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration Character[] -> org.hibernate.type.CharacterArrayType@2b43529a
+21:37:38.352 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration text -> org.hibernate.type.TextType@2783717b
+21:37:38.352 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration ntext -> org.hibernate.type.NTextType@15eebbff
+21:37:38.368 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration blob -> org.hibernate.type.BlobType@78fb9a67
+21:37:38.368 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.Blob -> org.hibernate.type.BlobType@78fb9a67
+21:37:38.368 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration materialized_blob -> org.hibernate.type.MaterializedBlobType@2f9a01c1
+21:37:38.368 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration clob -> org.hibernate.type.ClobType@2e54db99
+21:37:38.368 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.Clob -> org.hibernate.type.ClobType@2e54db99
+21:37:38.368 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration nclob -> org.hibernate.type.NClobType@292d1c71
+21:37:38.368 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.NClob -> org.hibernate.type.NClobType@292d1c71
+21:37:38.368 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration materialized_clob -> org.hibernate.type.MaterializedClobType@5ddabb18
+21:37:38.368 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration materialized_nclob -> org.hibernate.type.MaterializedNClobType@58e6d4b8
+21:37:38.368 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration serializable -> org.hibernate.type.SerializableType@77602954
+21:37:38.368 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration object -> org.hibernate.type.ObjectType@4e517165
+21:37:38.368 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Object -> org.hibernate.type.ObjectType@4e517165
+21:37:38.368 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_date -> org.hibernate.type.AdaptedImmutableType@1d7f7be7
+21:37:38.368 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_time -> org.hibernate.type.AdaptedImmutableType@42f3156d
+21:37:38.368 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_timestamp -> org.hibernate.type.AdaptedImmutableType@1ddae9b5
+21:37:38.384 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_dbtimestamp -> org.hibernate.type.AdaptedImmutableType@427b5f92
+21:37:38.384 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_calendar -> org.hibernate.type.AdaptedImmutableType@24bdb479
+21:37:38.384 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_calendar_date -> org.hibernate.type.AdaptedImmutableType@7e3f95fe
+21:37:38.384 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_binary -> org.hibernate.type.AdaptedImmutableType@34625ccd
+21:37:38.384 [main] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_serializable -> org.hibernate.type.AdaptedImmutableType@2c7d121c
+21:37:38.384 [main] WARN  org.hibernate.orm.connections - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+21:37:38.399 [main] INFO  org.hibernate.orm.connections - HHH10001005: using driver [org.hsqldb.jdbcDriver] at URL [jdbc:hsqldb:hsql://localhost/pos]
+21:37:38.399 [main] INFO  org.hibernate.orm.connections - HHH10001001: Connection properties: {}
+21:37:38.399 [main] INFO  org.hibernate.orm.connections - HHH10001003: Autocommit mode: false
+21:37:38.399 [main] DEBUG org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl - Initializing Connection pool with 1 Connections
+21:37:38.399 [main] INFO  org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20 (min=1)
+21:37:38.618 [main] DEBUG org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator - Database ->
+       name : HSQL Database Engine
+    version : 2.3.4
+      major : 2
+      minor : 3
+21:37:38.618 [main] DEBUG org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator - Driver ->
+       name : HSQL Database Engine Driver
+    version : 2.3.4
+      major : 2
+      minor : 3
+21:37:38.618 [main] DEBUG org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator - JDBC version : 4.0
+21:37:38.634 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.HSQLDialect
+21:37:38.665 [main] DEBUG org.hibernate.engine.jdbc.env.spi.IdentifierHelperBuilder - JDBC driver metadata reported database stores quoted identifiers in neither upper, lower nor mixed case
+21:37:39.055 [main] DEBUG org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Registering IdentifierGenerator strategy [uuid2] -> [org.hibernate.id.UUIDGenerator]
+21:37:39.055 [main] DEBUG org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Registering IdentifierGenerator strategy [guid] -> [org.hibernate.id.GUIDGenerator]
+21:37:39.055 [main] DEBUG org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Registering IdentifierGenerator strategy [uuid] -> [org.hibernate.id.UUIDHexGenerator]
+21:37:39.055 [main] DEBUG org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Registering IdentifierGenerator strategy [uuid.hex] -> [org.hibernate.id.UUIDHexGenerator]
+21:37:39.055 [main] DEBUG org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Registering IdentifierGenerator strategy [assigned] -> [org.hibernate.id.Assigned]
+21:37:39.055 [main] DEBUG org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Registering IdentifierGenerator strategy [identity] -> [org.hibernate.id.IdentityGenerator]
+21:37:39.055 [main] DEBUG org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Registering IdentifierGenerator strategy [select] -> [org.hibernate.id.SelectGenerator]
+21:37:39.071 [main] DEBUG org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Registering IdentifierGenerator strategy [sequence] -> [org.hibernate.id.enhanced.SequenceStyleGenerator]
+21:37:39.071 [main] DEBUG org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Registering IdentifierGenerator strategy [seqhilo] -> [org.hibernate.id.SequenceHiLoGenerator]
+21:37:39.071 [main] DEBUG org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Registering IdentifierGenerator strategy [increment] -> [org.hibernate.id.IncrementGenerator]
+21:37:39.071 [main] DEBUG org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Registering IdentifierGenerator strategy [foreign] -> [org.hibernate.id.ForeignGenerator]
+21:37:39.071 [main] DEBUG org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Registering IdentifierGenerator strategy [sequence-identity] -> [org.hibernate.id.SequenceIdentityGenerator]
+21:37:39.071 [main] DEBUG org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Registering IdentifierGenerator strategy [enhanced-sequence] -> [org.hibernate.id.enhanced.SequenceStyleGenerator]
+21:37:39.071 [main] DEBUG org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory - Registering IdentifierGenerator strategy [enhanced-table] -> [org.hibernate.id.enhanced.TableGenerator]
+21:37:39.087 [main] DEBUG org.hibernate.boot.model.relational.Namespace - Created database namespace [logicalName=Name{catalog=null, schema=null}, physicalName=Name{catalog=null, schema=null}]
+21:37:39.125 [main] DEBUG org.hibernate.cfg.AnnotationBinder - Binding entity from annotated class: ee.ut.math.tvt.salessystem.dataobjects.StockItem
+21:37:39.152 [main] DEBUG org.hibernate.cfg.Ejb3Column - Binding column: Ejb3DiscriminatorColumn{logicalColumnName'DTYPE', discriminatorTypeName='string'}
+21:37:39.158 [main] DEBUG org.hibernate.cfg.annotations.EntityBinder - Import with entity name StockItem
+21:37:39.163 [main] DEBUG org.hibernate.cfg.annotations.EntityBinder - Bind entity ee.ut.math.tvt.salessystem.dataobjects.StockItem on table stock_item
+21:37:39.186 [main] DEBUG org.hibernate.cfg.Ejb3Column - Binding column: Ejb3Column{table=org.hibernate.mapping.Table(stock_item), mappingColumn=dbId, insertable=true, updatable=true, unique=false}
+21:37:39.189 [main] DEBUG org.hibernate.cfg.annotations.PropertyBinder - MetadataSourceProcessor property dbId with lazy=false
+21:37:39.190 [main] DEBUG org.hibernate.cfg.AbstractPropertyHolder - Attempting to locate auto-apply AttributeConverter for property [ee.ut.math.tvt.salessystem.dataobjects.StockItem:dbId]
+21:37:39.192 [main] DEBUG org.hibernate.cfg.annotations.SimpleValueBinder - building SimpleValue for dbId
+21:37:39.194 [main] DEBUG org.hibernate.cfg.annotations.PropertyBinder - Building property dbId
+21:37:39.196 [main] DEBUG org.hibernate.cfg.Ejb3Column - Binding column: Ejb3Column{table=org.hibernate.mapping.Table(stock_item), mappingColumn=description, insertable=true, updatable=true, unique=false}
+21:37:39.197 [main] DEBUG org.hibernate.cfg.annotations.PropertyBinder - MetadataSourceProcessor property description with lazy=false
+21:37:39.197 [main] DEBUG org.hibernate.cfg.AbstractPropertyHolder - Attempting to locate auto-apply AttributeConverter for property [ee.ut.math.tvt.salessystem.dataobjects.StockItem:description]
+21:37:39.197 [main] DEBUG org.hibernate.cfg.annotations.SimpleValueBinder - building SimpleValue for description
+21:37:39.197 [main] DEBUG org.hibernate.cfg.annotations.PropertyBinder - Building property description
+21:37:39.197 [main] DEBUG org.hibernate.cfg.Ejb3Column - Binding column: Ejb3Column{table=org.hibernate.mapping.Table(stock_item), mappingColumn=index, insertable=true, updatable=true, unique=false}
+21:37:39.197 [main] DEBUG org.hibernate.cfg.annotations.PropertyBinder - MetadataSourceProcessor property index with lazy=false
+21:37:39.198 [main] DEBUG org.hibernate.cfg.AbstractPropertyHolder - Attempting to locate auto-apply AttributeConverter for property [ee.ut.math.tvt.salessystem.dataobjects.StockItem:index]
+21:37:39.198 [main] DEBUG org.hibernate.cfg.annotations.SimpleValueBinder - building SimpleValue for index
+21:37:39.198 [main] DEBUG org.hibernate.cfg.annotations.PropertyBinder - Building property index
+21:37:39.198 [main] DEBUG org.hibernate.cfg.Ejb3Column - Binding column: Ejb3Column{table=org.hibernate.mapping.Table(stock_item), mappingColumn=name, insertable=true, updatable=true, unique=false}
+21:37:39.198 [main] DEBUG org.hibernate.cfg.annotations.PropertyBinder - MetadataSourceProcessor property name with lazy=false
+21:37:39.198 [main] DEBUG org.hibernate.cfg.AbstractPropertyHolder - Attempting to locate auto-apply AttributeConverter for property [ee.ut.math.tvt.salessystem.dataobjects.StockItem:name]
+21:37:39.198 [main] DEBUG org.hibernate.cfg.annotations.SimpleValueBinder - building SimpleValue for name
+21:37:39.198 [main] DEBUG org.hibernate.cfg.annotations.PropertyBinder - Building property name
+21:37:39.199 [main] DEBUG org.hibernate.cfg.Ejb3Column - Binding column: Ejb3Column{table=org.hibernate.mapping.Table(stock_item), mappingColumn=price, insertable=true, updatable=true, unique=false}
+21:37:39.199 [main] DEBUG org.hibernate.cfg.annotations.PropertyBinder - MetadataSourceProcessor property price with lazy=false
+21:37:39.199 [main] DEBUG org.hibernate.cfg.AbstractPropertyHolder - Attempting to locate auto-apply AttributeConverter for property [ee.ut.math.tvt.salessystem.dataobjects.StockItem:price]
+21:37:39.199 [main] DEBUG org.hibernate.cfg.annotations.SimpleValueBinder - building SimpleValue for price
+21:37:39.199 [main] DEBUG org.hibernate.cfg.annotations.PropertyBinder - Building property price
+21:37:39.199 [main] DEBUG org.hibernate.cfg.Ejb3Column - Binding column: Ejb3Column{table=org.hibernate.mapping.Table(stock_item), mappingColumn=quantity, insertable=true, updatable=true, unique=false}
+21:37:39.199 [main] DEBUG org.hibernate.cfg.annotations.PropertyBinder - MetadataSourceProcessor property quantity with lazy=false
+21:37:39.200 [main] DEBUG org.hibernate.cfg.AbstractPropertyHolder - Attempting to locate auto-apply AttributeConverter for property [ee.ut.math.tvt.salessystem.dataobjects.StockItem:quantity]
+21:37:39.200 [main] DEBUG org.hibernate.cfg.annotations.SimpleValueBinder - building SimpleValue for quantity
+21:37:39.200 [main] DEBUG org.hibernate.cfg.annotations.PropertyBinder - Building property quantity
+21:37:39.201 [main] DEBUG org.hibernate.cfg.AnnotationBinder - Binding entity from annotated class: ee.ut.math.tvt.salessystem.dataobjects.SoldItem
+21:37:39.201 [main] DEBUG org.hibernate.cfg.Ejb3Column - Binding column: Ejb3DiscriminatorColumn{logicalColumnName'DTYPE', discriminatorTypeName='string'}
+21:37:39.201 [main] DEBUG org.hibernate.cfg.annotations.EntityBinder - Import with entity name SoldItem
+21:37:39.201 [main] DEBUG org.hibernate.cfg.annotations.EntityBinder - Bind entity ee.ut.math.tvt.salessystem.dataobjects.SoldItem on table sold_item
+21:37:39.203 [main] DEBUG org.hibernate.cfg.Ejb3Column - Binding column: Ejb3Column{table=org.hibernate.mapping.Table(sold_item), mappingColumn=id, insertable=true, updatable=true, unique=false}
+21:37:39.203 [main] DEBUG org.hibernate.cfg.annotations.PropertyBinder - MetadataSourceProcessor property id with lazy=false
+21:37:39.203 [main] DEBUG org.hibernate.cfg.AbstractPropertyHolder - Attempting to locate auto-apply AttributeConverter for property [ee.ut.math.tvt.salessystem.dataobjects.SoldItem:id]
+21:37:39.203 [main] DEBUG org.hibernate.cfg.annotations.SimpleValueBinder - building SimpleValue for id
+21:37:39.203 [main] DEBUG org.hibernate.cfg.annotations.PropertyBinder - Building property id
+21:37:39.203 [main] DEBUG org.hibernate.cfg.Ejb3Column - Binding column: Ejb3Column{table=org.hibernate.mapping.Table(sold_item), mappingColumn=name, insertable=true, updatable=true, unique=false}
+21:37:39.204 [main] DEBUG org.hibernate.cfg.annotations.PropertyBinder - MetadataSourceProcessor property name with lazy=false
+21:37:39.204 [main] DEBUG org.hibernate.cfg.AbstractPropertyHolder - Attempting to locate auto-apply AttributeConverter for property [ee.ut.math.tvt.salessystem.dataobjects.SoldItem:name]
+21:37:39.204 [main] DEBUG org.hibernate.cfg.annotations.SimpleValueBinder - building SimpleValue for name
+21:37:39.204 [main] DEBUG org.hibernate.cfg.annotations.PropertyBinder - Building property name
+21:37:39.204 [main] DEBUG org.hibernate.cfg.Ejb3Column - Binding column: Ejb3Column{table=org.hibernate.mapping.Table(sold_item), mappingColumn=price, insertable=true, updatable=true, unique=false}
+21:37:39.204 [main] DEBUG org.hibernate.cfg.annotations.PropertyBinder - MetadataSourceProcessor property price with lazy=false
+21:37:39.204 [main] DEBUG org.hibernate.cfg.AbstractPropertyHolder - Attempting to locate auto-apply AttributeConverter for property [ee.ut.math.tvt.salessystem.dataobjects.SoldItem:price]
+21:37:39.204 [main] DEBUG org.hibernate.cfg.annotations.SimpleValueBinder - building SimpleValue for price
+21:37:39.204 [main] DEBUG org.hibernate.cfg.annotations.PropertyBinder - Building property price
+21:37:39.204 [main] DEBUG org.hibernate.cfg.Ejb3Column - Binding column: Ejb3Column{table=org.hibernate.mapping.Table(sold_item), mappingColumn=quantity, insertable=true, updatable=true, unique=false}
+21:37:39.204 [main] DEBUG org.hibernate.cfg.annotations.PropertyBinder - MetadataSourceProcessor property quantity with lazy=false
+21:37:39.205 [main] DEBUG org.hibernate.cfg.AbstractPropertyHolder - Attempting to locate auto-apply AttributeConverter for property [ee.ut.math.tvt.salessystem.dataobjects.SoldItem:quantity]
+21:37:39.205 [main] DEBUG org.hibernate.cfg.annotations.SimpleValueBinder - building SimpleValue for quantity
+21:37:39.205 [main] DEBUG org.hibernate.cfg.annotations.PropertyBinder - Building property quantity
+21:37:39.205 [main] DEBUG org.hibernate.cfg.annotations.SimpleValueBinder - Starting fillSimpleValue for dbId
+21:37:39.206 [main] DEBUG org.hibernate.cfg.annotations.SimpleValueBinder - Starting fillSimpleValue for description
+21:37:39.206 [main] DEBUG org.hibernate.cfg.annotations.SimpleValueBinder - Starting fillSimpleValue for index
+21:37:39.206 [main] DEBUG org.hibernate.cfg.annotations.SimpleValueBinder - Starting fillSimpleValue for name
+21:37:39.206 [main] DEBUG org.hibernate.cfg.annotations.SimpleValueBinder - Starting fillSimpleValue for price
+21:37:39.206 [main] DEBUG org.hibernate.cfg.annotations.SimpleValueBinder - Starting fillSimpleValue for quantity
+21:37:39.206 [main] DEBUG org.hibernate.cfg.annotations.SimpleValueBinder - Starting fillSimpleValue for id
+21:37:39.206 [main] DEBUG org.hibernate.cfg.annotations.SimpleValueBinder - Starting fillSimpleValue for name
+21:37:39.206 [main] DEBUG org.hibernate.cfg.annotations.SimpleValueBinder - Starting fillSimpleValue for price
+21:37:39.206 [main] DEBUG org.hibernate.cfg.annotations.SimpleValueBinder - Starting fillSimpleValue for quantity
+21:37:39.207 [main] DEBUG org.hibernate.mapping.PrimaryKey - Forcing column [dbid] to be non-null as it is part of the primary key for table [stock_item]
+21:37:39.207 [main] DEBUG org.hibernate.mapping.PrimaryKey - Forcing column [id] to be non-null as it is part of the primary key for table [sold_item]
+21:37:39.243 [main] DEBUG org.hibernate.internal.SessionFactoryImpl - Building session factory
+21:37:39.244 [main] DEBUG org.hibernate.cfg.Settings - SessionFactory name : null
+21:37:39.244 [main] DEBUG org.hibernate.cfg.Settings - Automatic flush during beforeCompletion(): enabled
+21:37:39.245 [main] DEBUG org.hibernate.cfg.Settings - Automatic session close at end of transaction: disabled
+21:37:39.245 [main] DEBUG org.hibernate.cfg.Settings - Statistics: disabled
+21:37:39.245 [main] DEBUG org.hibernate.cfg.Settings - Deleted entity synthetic identifier rollback: disabled
+21:37:39.245 [main] DEBUG org.hibernate.cfg.Settings - Default entity-mode: pojo
+21:37:39.245 [main] DEBUG org.hibernate.cfg.Settings - Check Nullability in Core (should be disabled when Bean Validation is on): enabled
+21:37:39.245 [main] DEBUG org.hibernate.cfg.Settings - Allow initialization of lazy state outside session : disabled
+21:37:39.245 [main] DEBUG org.hibernate.cfg.Settings - Using BatchFetchStyle : LEGACY
+21:37:39.245 [main] DEBUG org.hibernate.cfg.Settings - Default batch fetch size: -1
+21:37:39.245 [main] DEBUG org.hibernate.cfg.Settings - Maximum outer join fetch depth: null
+21:37:39.245 [main] DEBUG org.hibernate.cfg.Settings - Default null ordering: NONE
+21:37:39.245 [main] DEBUG org.hibernate.cfg.Settings - Order SQL updates by primary key: disabled
+21:37:39.245 [main] DEBUG org.hibernate.cfg.Settings - Order SQL inserts for batching: disabled
+21:37:39.245 [main] DEBUG org.hibernate.cfg.Settings - multi-tenancy strategy : NONE
+21:37:39.245 [main] DEBUG org.hibernate.cfg.Settings - JTA Track by Thread: enabled
+21:37:39.246 [main] DEBUG org.hibernate.cfg.Settings - Query language substitutions: {}
+21:37:39.246 [main] DEBUG org.hibernate.cfg.Settings - JPA query language strict compliance: disabled
+21:37:39.246 [main] DEBUG org.hibernate.cfg.Settings - Named query checking : enabled
+21:37:39.246 [main] DEBUG org.hibernate.cfg.Settings - Second-level cache: enabled
+21:37:39.246 [main] DEBUG org.hibernate.cfg.Settings - Second-level query cache: disabled
+21:37:39.246 [main] DEBUG org.hibernate.cfg.Settings - Second-level query cache factory: org.hibernate.cache.internal.StandardQueryCacheFactory@5ecba515
+21:37:39.246 [main] DEBUG org.hibernate.cfg.Settings - Second-level cache region prefix: null
+21:37:39.246 [main] DEBUG org.hibernate.cfg.Settings - Optimize second-level cache for minimal puts: disabled
+21:37:39.246 [main] DEBUG org.hibernate.cfg.Settings - Structured second-level cache entries: disabled
+21:37:39.246 [main] DEBUG org.hibernate.cfg.Settings - Second-level cache direct-reference entries: disabled
+21:37:39.246 [main] DEBUG org.hibernate.cfg.Settings - Automatic eviction of collection cache: disabled
+21:37:39.246 [main] DEBUG org.hibernate.cfg.Settings - JDBC batch size: 15
+21:37:39.246 [main] DEBUG org.hibernate.cfg.Settings - JDBC batch updates for versioned data: enabled
+21:37:39.246 [main] DEBUG org.hibernate.cfg.Settings - Scrollable result sets: enabled
+21:37:39.246 [main] DEBUG org.hibernate.cfg.Settings - Wrap result sets: disabled
+21:37:39.246 [main] DEBUG org.hibernate.cfg.Settings - JDBC3 getGeneratedKeys(): enabled
+21:37:39.247 [main] DEBUG org.hibernate.cfg.Settings - JDBC result set fetch size: null
+21:37:39.247 [main] DEBUG org.hibernate.cfg.Settings - Connection release mode: AFTER_TRANSACTION
+21:37:39.247 [main] DEBUG org.hibernate.cfg.Settings - Generate SQL with comments: disabled
+21:37:39.299 [main] DEBUG org.hibernate.internal.SessionFactoryImpl - Session factory constructed with filter configurations : {}
+21:37:39.300 [main] DEBUG org.hibernate.internal.SessionFactoryImpl - Instantiating session factory with properties: {sun.desktop=windows, awt.toolkit=sun.awt.windows.WToolkit, java.specification.version=11, sun.cpu.isalist=amd64, sun.jnu.encoding=Cp1252, java.class.path=C:\Users\marko\OneDrive\Dokumendid\lab2-kristotaunopatrik\SaleSystemCLI\build\classes\java\main;C:\Users\marko\OneDrive\Dokumendid\lab2-kristotaunopatrik\SaleSystemCLI\build\resources\main;C:\Users\marko\OneDrive\Dokumendid\lab2-kristotaunopatrik\build\libs\lab2-kristotaunopatrik-1.0.jar;C:\Users\marko\.gradle\caches\modules-2\files-2.1\org.apache.logging.log4j\log4j-core\2.6.2\a91369f655eb1639c6aece5c5eb5108db18306\log4j-core-2.6.2.jar;C:\Users\marko\.gradle\caches\modules-2\files-2.1\org.apache.logging.log4j\log4j-api\2.6.2\bd1b74a5d170686362091c7cf596bbc3adf5c09b\log4j-api-2.6.2.jar;C:\Users\marko\.gradle\caches\modules-2\files-2.1\org.hsqldb\hsqldb\2.3.4\5564c057c826418f8e32de5815a14aee91781b37\hsqldb-2.3.4.jar;C:\Users\marko\.gradle\caches\modules-2\files-2.1\org.hibernate\hibernate-entitymanager\5.2.1.Final\5c11f69632bf6cc1d4dfbe6b67f72b0c8073ad5f\hibernate-entitymanager-5.2.1.Final.jar;C:\Users\marko\.gradle\caches\modules-2\files-2.1\org.hibernate\hibernate-java8\5.2.1.Final\dcc6a36814ccd4a40ed0df575681dfb2d6848701\hibernate-java8-5.2.1.Final.jar;C:\Users\marko\.gradle\caches\modules-2\files-2.1\javax.xml.bind\jaxb-api\2.2.11\32274d4244967ff43e7a5d967743d94ed3d2aea7\jaxb-api-2.2.11.jar;C:\Users\marko\.gradle\caches\modules-2\files-2.1\org.hibernate\hibernate-core\5.2.1.Final\948e24fcce6847110ee5092ea11dbf879bdab704\hibernate-core-5.2.1.Final.jar;C:\Users\marko\.gradle\caches\modules-2\files-2.1\org.hibernate.common\hibernate-commons-annotations\5.0.1.Final\71e1cff3fcb20d3b3af4f3363c3ddb24d33c6879\hibernate-commons-annotations-5.0.1.Final.jar;C:\Users\marko\.gradle\caches\modules-2\files-2.1\org.jboss.logging\jboss-logging\3.3.0.Final\3616bb87707910296e2c195dc016287080bba5af\jboss-logging-3.3.0.Final.jar;C:\Users\marko\.gradle\caches\modules-2\files-2.1\dom4j\dom4j\1.6.1\5d3ccc056b6f056dbf0dddfdf43894b9065a8f94\dom4j-1.6.1.jar;C:\Users\marko\.gradle\caches\modules-2\files-2.1\org.hibernate.javax.persistence\hibernate-jpa-2.1-api\1.0.0.Final\5e731d961297e5a07290bfaf3db1fbc8bbbf405a\hibernate-jpa-2.1-api-1.0.0.Final.jar;C:\Users\marko\.gradle\caches\modules-2\files-2.1\org.javassist\javassist\3.20.0-GA\a9cbcdfb7e9f86fbc74d3afae65f2248bfbf82a0\javassist-3.20.0-GA.jar;C:\Users\marko\.gradle\caches\modules-2\files-2.1\org.apache.geronimo.specs\geronimo-jta_1.1_spec\1.1.1\aabab3165b8ea936b9360abbf448459c0d04a5a4\geronimo-jta_1.1_spec-1.1.1.jar;C:\Users\marko\.gradle\caches\modules-2\files-2.1\antlr\antlr\2.7.7\83cd2cd674a217ade95a4bb83a8a14f351f48bd0\antlr-2.7.7.jar;C:\Users\marko\.gradle\caches\modules-2\files-2.1\org.jboss\jandex\2.0.0.Final\3e899258936f94649c777193e1be846387ed54b3\jandex-2.0.0.Final.jar;C:\Users\marko\.gradle\caches\modules-2\files-2.1\com.fasterxml\classmate\1.3.0\183407ff982e9375f1a1c4a51ed0a9307c598fc7\classmate-1.3.0.jar;C:\Users\marko\.gradle\caches\modules-2\files-2.1\javax.enterprise\cdi-api\1.1-PFD\9ec46d69b097daec421e757ce49c07c76a025e18\cdi-api-1.1-PFD.jar;C:\Users\marko\.gradle\caches\modules-2\files-2.1\javax.el\el-api\2.2\42971279cc8ba864462580c7fc2199fd5715ee7f\el-api-2.2.jar;C:\Users\marko\.gradle\caches\modules-2\files-2.1\org.jboss.spec.javax.interceptor\jboss-interceptors-api_1.1_spec\1.0.0.Beta1\8cb388fd3b4912373da7a18e199bb55aa52aa5c1\jboss-interceptors-api_1.1_spec-1.0.0.Beta1.jar;C:\Users\marko\.gradle\caches\modules-2\files-2.1\javax.annotation\jsr250-api\1.0\5025422767732a1ab45d93abfea846513d742dcf\jsr250-api-1.0.jar;C:\Users\marko\.gradle\caches\modules-2\files-2.1\javax.inject\javax.inject\1\6975da39a7040257bd51d21a231b76c915872d38\javax.inject-1.jar, java.vm.vendor=Oracle Corporation, sun.arch.data.model=64, user.variant=, java.vendor.url=http://java.oracle.com/, user.timezone=Europe/Helsinki, javax.persistence.jdbc.url=jdbc:hsqldb:hsql://localhost/pos, os.name=Windows 10, java.vm.specification.version=11, user.country=EE, sun.java.launcher=SUN_STANDARD, sun.boot.library.path=C:\Program Files\Java\jdk-11.0.6\bin, sun.java.command=ee.ut.math.tvt.salessystem.ui.ConsoleUI, jdk.debug=release, sun.cpu.endian=little, user.home=C:\Users\marko, user.language=et, java.specification.vendor=Oracle Corporation, java.version.date=2020-01-14, java.home=C:\Program Files\Java\jdk-11.0.6, file.separator=\, java.vm.compressedOopsMode=32-bit, line.separator=
+, java.specification.name=Java Platform API Specification, java.vm.specification.vendor=Oracle Corporation, hibernate.transaction.coordinator_class=class org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorBuilderImpl, java.awt.graphicsenv=sun.awt.Win32GraphicsEnvironment, javax.persistence.jdbc.driver=org.hsqldb.jdbcDriver, user.script=, sun.management.compiler=HotSpot 64-Bit Tiered Compilers, java.runtime.version=11.0.6+8-LTS, user.name=Kristo, path.separator=;, os.version=10.0, java.runtime.name=Java(TM) SE Runtime Environment, hibernate.connection.url=jdbc:hsqldb:hsql://localhost/pos, file.encoding=windows-1252, hibernate.ejb.persistenceUnitName=pos, java.vm.name=Java HotSpot(TM) 64-Bit Server VM, hibernate.show_sql=true, java.vendor.version=18.9, hibernate.connection.driver_class=org.hsqldb.jdbcDriver, java.vendor.url.bug=http://bugreport.java.com/bugreport/, java.io.tmpdir=C:\Users\marko\AppData\Local\Temp\, java.version=11.0.6, user.dir=C:\Users\marko\OneDrive\Dokumendid\lab2-kristotaunopatrik\SaleSystemCLI, os.arch=amd64, java.vm.specification.name=Java Virtual Machine Specification, java.awt.printerjob=sun.awt.windows.WPrinterJob, javax.persistence.schema-generation.database.action=drop-and-create, sun.os.patch.level=, hibernate.boot.CfgXmlAccessService.key=org.hibernate.boot.cfgxml.spi.LoadedConfig@51dbd6e4, java.library.path=C:\Program Files\Java\jdk-11.0.6\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Java\jdk-11.0.6\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files (x86)\IDEMIA\AWP\Dlls;C:\Program Files\IDEMIA\AWP\Dlls;C:\Program Files\Git\cmd;C:\Program Files\SQL Anywhere 17\bin64;C:\Program Files\SQL Anywhere 17\bin32;C:\Program Files\nodejs\;C:\Users\marko\AppData\Local\Microsoft\WindowsApps;C:\Program Files\JetBrains\PyCharm 2019.2.2\bin;C:\Users\marko\AppData\Local\GitHubDesktop\bin;C:\Users\marko\AppData\Local\Microsoft\WindowsApps;C:\Users\marko\AppData\Roaming\npm;., java.vendor=Oracle Corporation, java.vm.info=mixed mode, java.vm.version=11.0.6+8-LTS, hibernate.bytecode.use_reflection_optimizer=false, sun.io.unicode.encoding=UnicodeLittle, java.class.version=55.0}
+21:37:39.308 [main] DEBUG org.hibernate.secure.spi.JaccIntegrator - Skipping JACC integration as it was not enabled
+21:37:39.311 [main] DEBUG org.hibernate.engine.spi.CascadeStyles - External cascade style regsitration [persist : STYLE_PERSIST_SKIPLAZY] overrode base registration [STYLE_PERSIST]
+21:37:39.323 [main] DEBUG org.hibernate.internal.SessionFactoryImpl - Instantiated session factory
+21:37:39.356 [main] DEBUG org.hibernate.boot.internal.ClassLoaderAccessImpl - Not known whether passed class name [ee.ut.math.tvt.salessystem.dataobjects.StockItem] is safe
+21:37:39.356 [main] DEBUG org.hibernate.boot.internal.ClassLoaderAccessImpl - No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ee.ut.math.tvt.salessystem.dataobjects.StockItem
+21:37:39.366 [main] DEBUG org.hibernate.boot.internal.ClassLoaderAccessImpl - Not known whether passed class name [ee.ut.math.tvt.salessystem.dataobjects.StockItem] is safe
+21:37:39.366 [main] DEBUG org.hibernate.boot.internal.ClassLoaderAccessImpl - No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ee.ut.math.tvt.salessystem.dataobjects.StockItem
+21:37:39.405 [main] DEBUG org.hibernate.boot.internal.ClassLoaderAccessImpl - Not known whether passed class name [ee.ut.math.tvt.salessystem.dataobjects.SoldItem] is safe
+21:37:39.405 [main] DEBUG org.hibernate.boot.internal.ClassLoaderAccessImpl - No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ee.ut.math.tvt.salessystem.dataobjects.SoldItem
+21:37:39.405 [main] DEBUG org.hibernate.boot.internal.ClassLoaderAccessImpl - Not known whether passed class name [ee.ut.math.tvt.salessystem.dataobjects.SoldItem] is safe
+21:37:39.405 [main] DEBUG org.hibernate.boot.internal.ClassLoaderAccessImpl - No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ee.ut.math.tvt.salessystem.dataobjects.SoldItem
+21:37:39.405 [main] INFO  org.hibernate.tuple.PojoInstantiator - HHH000182: No default (no-argument) constructor for class: ee.ut.math.tvt.salessystem.dataobjects.SoldItem (class must be instantiated by Interceptor)
+21:37:39.415 [main] DEBUG org.hibernate.persister.entity.AbstractEntityPersister - Static SQL for entity: ee.ut.math.tvt.salessystem.dataobjects.StockItem
+21:37:39.416 [main] DEBUG org.hibernate.persister.entity.AbstractEntityPersister -  Version select: select dbId from stock_item where dbId =?
+21:37:39.416 [main] DEBUG org.hibernate.persister.entity.AbstractEntityPersister -  Snapshot select: select stockitem_.dbId, stockitem_.description as descript2_1_, stockitem_.index as index3_1_, stockitem_.name as name4_1_, stockitem_.price as price5_1_, stockitem_.quantity as quantity6_1_ from stock_item stockitem_ where stockitem_.dbId=?
+21:37:39.416 [main] DEBUG org.hibernate.persister.entity.AbstractEntityPersister -  Insert 0: insert into stock_item (description, index, name, price, quantity, dbId) values (?, ?, ?, ?, ?, ?)
+21:37:39.416 [main] DEBUG org.hibernate.persister.entity.AbstractEntityPersister -  Update 0: update stock_item set description=?, index=?, name=?, price=?, quantity=? where dbId=?
+21:37:39.416 [main] DEBUG org.hibernate.persister.entity.AbstractEntityPersister -  Delete 0: delete from stock_item where dbId=?
+21:37:39.416 [main] DEBUG org.hibernate.persister.entity.AbstractEntityPersister -  Identity insert: insert into stock_item (dbId, description, index, name, price, quantity) values (default, ?, ?, ?, ?, ?)
+21:37:39.442 [main] DEBUG org.hibernate.loader.plan.build.internal.spaces.QuerySpacesImpl - Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@19058533]
+21:37:39.443 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : description
+21:37:39.443 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : index
+21:37:39.443 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : name
+21:37:39.443 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : price
+21:37:39.444 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : quantity
+21:37:39.444 [main] DEBUG org.hibernate.loader.plan.build.internal.FetchStyleLoadPlanBuildingAssociationVisitationStrategy - Building LoadPlan...
+21:37:39.458 [main] DEBUG org.hibernate.loader.plan.exec.internal.LoadQueryJoinAndFetchProcessor - processing queryspace <gen:0>
+21:37:39.461 [main] DEBUG org.hibernate.loader.plan.build.spi.LoadPlanTreePrinter - LoadPlan(entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+    - Returns
+       - EntityReturnImpl(entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem, querySpaceUid=<gen:0>, path=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+          - SQL table alias mapping - stockitem0_
+          - alias suffix - 0_
+          - suffixed key columns - {dbId1_1_0_}
+
+21:37:39.463 [main] DEBUG org.hibernate.loader.entity.plan.EntityLoader - Static select for entity ee.ut.math.tvt.salessystem.dataobjects.StockItem [NONE]: select stockitem0_.dbId as dbId1_1_0_, stockitem0_.description as descript2_1_0_, stockitem0_.index as index3_1_0_, stockitem0_.name as name4_1_0_, stockitem0_.price as price5_1_0_, stockitem0_.quantity as quantity6_1_0_ from stock_item stockitem0_ where stockitem0_.dbId=?
+21:37:39.463 [main] DEBUG org.hibernate.loader.plan.build.internal.spaces.QuerySpacesImpl - Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@367b22e5]
+21:37:39.464 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : description
+21:37:39.464 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : index
+21:37:39.464 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : name
+21:37:39.464 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : price
+21:37:39.464 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : quantity
+21:37:39.464 [main] DEBUG org.hibernate.loader.plan.build.internal.FetchStyleLoadPlanBuildingAssociationVisitationStrategy - Building LoadPlan...
+21:37:39.464 [main] DEBUG org.hibernate.loader.plan.exec.internal.LoadQueryJoinAndFetchProcessor - processing queryspace <gen:0>
+21:37:39.464 [main] DEBUG org.hibernate.loader.plan.build.spi.LoadPlanTreePrinter - LoadPlan(entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+    - Returns
+       - EntityReturnImpl(entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem, querySpaceUid=<gen:0>, path=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+          - SQL table alias mapping - stockitem0_
+          - alias suffix - 0_
+          - suffixed key columns - {dbId1_1_0_}
+
+21:37:39.465 [main] DEBUG org.hibernate.loader.entity.plan.EntityLoader - Static select for entity ee.ut.math.tvt.salessystem.dataobjects.StockItem [READ]: select stockitem0_.dbId as dbId1_1_0_, stockitem0_.description as descript2_1_0_, stockitem0_.index as index3_1_0_, stockitem0_.name as name4_1_0_, stockitem0_.price as price5_1_0_, stockitem0_.quantity as quantity6_1_0_ from stock_item stockitem0_ where stockitem0_.dbId=?
+21:37:39.465 [main] DEBUG org.hibernate.loader.plan.build.internal.spaces.QuerySpacesImpl - Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@10bd9df0]
+21:37:39.465 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : description
+21:37:39.465 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : index
+21:37:39.465 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : name
+21:37:39.465 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : price
+21:37:39.465 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : quantity
+21:37:39.465 [main] DEBUG org.hibernate.loader.plan.build.internal.FetchStyleLoadPlanBuildingAssociationVisitationStrategy - Building LoadPlan...
+21:37:39.465 [main] DEBUG org.hibernate.loader.plan.exec.internal.LoadQueryJoinAndFetchProcessor - processing queryspace <gen:0>
+21:37:39.466 [main] DEBUG org.hibernate.loader.plan.build.spi.LoadPlanTreePrinter - LoadPlan(entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+    - Returns
+       - EntityReturnImpl(entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem, querySpaceUid=<gen:0>, path=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+          - SQL table alias mapping - stockitem0_
+          - alias suffix - 0_
+          - suffixed key columns - {dbId1_1_0_}
+
+21:37:39.466 [main] DEBUG org.hibernate.loader.entity.plan.EntityLoader - Static select for entity ee.ut.math.tvt.salessystem.dataobjects.StockItem [UPGRADE]: select stockitem0_.dbId as dbId1_1_0_, stockitem0_.description as descript2_1_0_, stockitem0_.index as index3_1_0_, stockitem0_.name as name4_1_0_, stockitem0_.price as price5_1_0_, stockitem0_.quantity as quantity6_1_0_ from stock_item stockitem0_ where stockitem0_.dbId=? for update
+21:37:39.466 [main] DEBUG org.hibernate.loader.plan.build.internal.spaces.QuerySpacesImpl - Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@55e3d6c3]
+21:37:39.466 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : description
+21:37:39.466 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : index
+21:37:39.466 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : name
+21:37:39.466 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : price
+21:37:39.466 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : quantity
+21:37:39.466 [main] DEBUG org.hibernate.loader.plan.build.internal.FetchStyleLoadPlanBuildingAssociationVisitationStrategy - Building LoadPlan...
+21:37:39.466 [main] DEBUG org.hibernate.loader.plan.exec.internal.LoadQueryJoinAndFetchProcessor - processing queryspace <gen:0>
+21:37:39.467 [main] DEBUG org.hibernate.loader.plan.build.spi.LoadPlanTreePrinter - LoadPlan(entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+    - Returns
+       - EntityReturnImpl(entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem, querySpaceUid=<gen:0>, path=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+          - SQL table alias mapping - stockitem0_
+          - alias suffix - 0_
+          - suffixed key columns - {dbId1_1_0_}
+
+21:37:39.467 [main] DEBUG org.hibernate.loader.entity.plan.EntityLoader - Static select for entity ee.ut.math.tvt.salessystem.dataobjects.StockItem [UPGRADE_NOWAIT]: select stockitem0_.dbId as dbId1_1_0_, stockitem0_.description as descript2_1_0_, stockitem0_.index as index3_1_0_, stockitem0_.name as name4_1_0_, stockitem0_.price as price5_1_0_, stockitem0_.quantity as quantity6_1_0_ from stock_item stockitem0_ where stockitem0_.dbId=? for update
+21:37:39.467 [main] DEBUG org.hibernate.loader.plan.build.internal.spaces.QuerySpacesImpl - Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@4c48fe92]
+21:37:39.467 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : description
+21:37:39.467 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : index
+21:37:39.467 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : name
+21:37:39.467 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : price
+21:37:39.467 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : quantity
+21:37:39.467 [main] DEBUG org.hibernate.loader.plan.build.internal.FetchStyleLoadPlanBuildingAssociationVisitationStrategy - Building LoadPlan...
+21:37:39.468 [main] DEBUG org.hibernate.loader.plan.exec.internal.LoadQueryJoinAndFetchProcessor - processing queryspace <gen:0>
+21:37:39.468 [main] DEBUG org.hibernate.loader.plan.build.spi.LoadPlanTreePrinter - LoadPlan(entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+    - Returns
+       - EntityReturnImpl(entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem, querySpaceUid=<gen:0>, path=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+          - SQL table alias mapping - stockitem0_
+          - alias suffix - 0_
+          - suffixed key columns - {dbId1_1_0_}
+
+21:37:39.468 [main] DEBUG org.hibernate.loader.entity.plan.EntityLoader - Static select for entity ee.ut.math.tvt.salessystem.dataobjects.StockItem [UPGRADE_SKIPLOCKED]: select stockitem0_.dbId as dbId1_1_0_, stockitem0_.description as descript2_1_0_, stockitem0_.index as index3_1_0_, stockitem0_.name as name4_1_0_, stockitem0_.price as price5_1_0_, stockitem0_.quantity as quantity6_1_0_ from stock_item stockitem0_ where stockitem0_.dbId=? for update
+21:37:39.468 [main] DEBUG org.hibernate.loader.plan.build.internal.spaces.QuerySpacesImpl - Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@38320e34]
+21:37:39.468 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : description
+21:37:39.468 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : index
+21:37:39.468 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : name
+21:37:39.468 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : price
+21:37:39.469 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : quantity
+21:37:39.469 [main] DEBUG org.hibernate.loader.plan.build.internal.FetchStyleLoadPlanBuildingAssociationVisitationStrategy - Building LoadPlan...
+21:37:39.469 [main] DEBUG org.hibernate.loader.plan.exec.internal.LoadQueryJoinAndFetchProcessor - processing queryspace <gen:0>
+21:37:39.469 [main] DEBUG org.hibernate.loader.plan.build.spi.LoadPlanTreePrinter - LoadPlan(entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+    - Returns
+       - EntityReturnImpl(entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem, querySpaceUid=<gen:0>, path=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+          - SQL table alias mapping - stockitem0_
+          - alias suffix - 0_
+          - suffixed key columns - {dbId1_1_0_}
+
+21:37:39.469 [main] DEBUG org.hibernate.loader.entity.plan.EntityLoader - Static select for entity ee.ut.math.tvt.salessystem.dataobjects.StockItem [FORCE]: select stockitem0_.dbId as dbId1_1_0_, stockitem0_.description as descript2_1_0_, stockitem0_.index as index3_1_0_, stockitem0_.name as name4_1_0_, stockitem0_.price as price5_1_0_, stockitem0_.quantity as quantity6_1_0_ from stock_item stockitem0_ where stockitem0_.dbId=? for update
+21:37:39.469 [main] DEBUG org.hibernate.loader.plan.build.internal.spaces.QuerySpacesImpl - Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@36ddaebf]
+21:37:39.469 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : description
+21:37:39.469 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : index
+21:37:39.469 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : name
+21:37:39.470 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : price
+21:37:39.470 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : quantity
+21:37:39.470 [main] DEBUG org.hibernate.loader.plan.build.internal.FetchStyleLoadPlanBuildingAssociationVisitationStrategy - Building LoadPlan...
+21:37:39.470 [main] DEBUG org.hibernate.loader.plan.exec.internal.LoadQueryJoinAndFetchProcessor - processing queryspace <gen:0>
+21:37:39.470 [main] DEBUG org.hibernate.loader.plan.build.spi.LoadPlanTreePrinter - LoadPlan(entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+    - Returns
+       - EntityReturnImpl(entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem, querySpaceUid=<gen:0>, path=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+          - SQL table alias mapping - stockitem0_
+          - alias suffix - 0_
+          - suffixed key columns - {dbId1_1_0_}
+
+21:37:39.470 [main] DEBUG org.hibernate.loader.entity.plan.EntityLoader - Static select for entity ee.ut.math.tvt.salessystem.dataobjects.StockItem [PESSIMISTIC_READ]: select stockitem0_.dbId as dbId1_1_0_, stockitem0_.description as descript2_1_0_, stockitem0_.index as index3_1_0_, stockitem0_.name as name4_1_0_, stockitem0_.price as price5_1_0_, stockitem0_.quantity as quantity6_1_0_ from stock_item stockitem0_ where stockitem0_.dbId=? for update
+21:37:39.471 [main] DEBUG org.hibernate.loader.plan.build.internal.spaces.QuerySpacesImpl - Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@9d7ccfe]
+21:37:39.471 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : description
+21:37:39.471 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : index
+21:37:39.471 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : name
+21:37:39.471 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : price
+21:37:39.471 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : quantity
+21:37:39.471 [main] DEBUG org.hibernate.loader.plan.build.internal.FetchStyleLoadPlanBuildingAssociationVisitationStrategy - Building LoadPlan...
+21:37:39.471 [main] DEBUG org.hibernate.loader.plan.exec.internal.LoadQueryJoinAndFetchProcessor - processing queryspace <gen:0>
+21:37:39.472 [main] DEBUG org.hibernate.loader.plan.build.spi.LoadPlanTreePrinter - LoadPlan(entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+    - Returns
+       - EntityReturnImpl(entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem, querySpaceUid=<gen:0>, path=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+          - SQL table alias mapping - stockitem0_
+          - alias suffix - 0_
+          - suffixed key columns - {dbId1_1_0_}
+
+21:37:39.472 [main] DEBUG org.hibernate.loader.entity.plan.EntityLoader - Static select for entity ee.ut.math.tvt.salessystem.dataobjects.StockItem [PESSIMISTIC_WRITE]: select stockitem0_.dbId as dbId1_1_0_, stockitem0_.description as descript2_1_0_, stockitem0_.index as index3_1_0_, stockitem0_.name as name4_1_0_, stockitem0_.price as price5_1_0_, stockitem0_.quantity as quantity6_1_0_ from stock_item stockitem0_ where stockitem0_.dbId=? for update
+21:37:39.472 [main] DEBUG org.hibernate.loader.plan.build.internal.spaces.QuerySpacesImpl - Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@3cff0139]
+21:37:39.472 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : description
+21:37:39.472 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : index
+21:37:39.472 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : name
+21:37:39.472 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : price
+21:37:39.473 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : quantity
+21:37:39.473 [main] DEBUG org.hibernate.loader.plan.build.internal.FetchStyleLoadPlanBuildingAssociationVisitationStrategy - Building LoadPlan...
+21:37:39.473 [main] DEBUG org.hibernate.loader.plan.exec.internal.LoadQueryJoinAndFetchProcessor - processing queryspace <gen:0>
+21:37:39.473 [main] DEBUG org.hibernate.loader.plan.build.spi.LoadPlanTreePrinter - LoadPlan(entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+    - Returns
+       - EntityReturnImpl(entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem, querySpaceUid=<gen:0>, path=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+          - SQL table alias mapping - stockitem0_
+          - alias suffix - 0_
+          - suffixed key columns - {dbId1_1_0_}
+
+21:37:39.473 [main] DEBUG org.hibernate.loader.entity.plan.EntityLoader - Static select for entity ee.ut.math.tvt.salessystem.dataobjects.StockItem [PESSIMISTIC_FORCE_INCREMENT]: select stockitem0_.dbId as dbId1_1_0_, stockitem0_.description as descript2_1_0_, stockitem0_.index as index3_1_0_, stockitem0_.name as name4_1_0_, stockitem0_.price as price5_1_0_, stockitem0_.quantity as quantity6_1_0_ from stock_item stockitem0_ where stockitem0_.dbId=? for update
+21:37:39.473 [main] DEBUG org.hibernate.loader.plan.build.internal.spaces.QuerySpacesImpl - Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@4b2e3e8f]
+21:37:39.474 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : description
+21:37:39.474 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : index
+21:37:39.474 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : name
+21:37:39.474 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : price
+21:37:39.474 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : quantity
+21:37:39.474 [main] DEBUG org.hibernate.loader.plan.build.internal.FetchStyleLoadPlanBuildingAssociationVisitationStrategy - Building LoadPlan...
+21:37:39.475 [main] DEBUG org.hibernate.loader.plan.exec.internal.LoadQueryJoinAndFetchProcessor - processing queryspace <gen:0>
+21:37:39.475 [main] DEBUG org.hibernate.loader.plan.build.spi.LoadPlanTreePrinter - LoadPlan(entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+    - Returns
+       - EntityReturnImpl(entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem, querySpaceUid=<gen:0>, path=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+          - SQL table alias mapping - stockitem0_
+          - alias suffix - 0_
+          - suffixed key columns - {dbId1_1_0_}
+
+21:37:39.475 [main] DEBUG org.hibernate.loader.entity.plan.EntityLoader - Static select for entity ee.ut.math.tvt.salessystem.dataobjects.StockItem [OPTIMISTIC]: select stockitem0_.dbId as dbId1_1_0_, stockitem0_.description as descript2_1_0_, stockitem0_.index as index3_1_0_, stockitem0_.name as name4_1_0_, stockitem0_.price as price5_1_0_, stockitem0_.quantity as quantity6_1_0_ from stock_item stockitem0_ where stockitem0_.dbId=?
+21:37:39.475 [main] DEBUG org.hibernate.loader.plan.build.internal.spaces.QuerySpacesImpl - Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@f096f37]
+21:37:39.475 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : description
+21:37:39.475 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : index
+21:37:39.475 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : name
+21:37:39.476 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : price
+21:37:39.476 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : quantity
+21:37:39.476 [main] DEBUG org.hibernate.loader.plan.build.internal.FetchStyleLoadPlanBuildingAssociationVisitationStrategy - Building LoadPlan...
+21:37:39.476 [main] DEBUG org.hibernate.loader.plan.exec.internal.LoadQueryJoinAndFetchProcessor - processing queryspace <gen:0>
+21:37:39.476 [main] DEBUG org.hibernate.loader.plan.build.spi.LoadPlanTreePrinter - LoadPlan(entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+    - Returns
+       - EntityReturnImpl(entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem, querySpaceUid=<gen:0>, path=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ee.ut.math.tvt.salessystem.dataobjects.StockItem)
+          - SQL table alias mapping - stockitem0_
+          - alias suffix - 0_
+          - suffixed key columns - {dbId1_1_0_}
+
+21:37:39.476 [main] DEBUG org.hibernate.loader.entity.plan.EntityLoader - Static select for entity ee.ut.math.tvt.salessystem.dataobjects.StockItem [OPTIMISTIC_FORCE_INCREMENT]: select stockitem0_.dbId as dbId1_1_0_, stockitem0_.description as descript2_1_0_, stockitem0_.index as index3_1_0_, stockitem0_.name as name4_1_0_, stockitem0_.price as price5_1_0_, stockitem0_.quantity as quantity6_1_0_ from stock_item stockitem0_ where stockitem0_.dbId=?
+21:37:39.495 [main] DEBUG org.hibernate.loader.Loader - Static select for action ACTION_MERGE on entity ee.ut.math.tvt.salessystem.dataobjects.StockItem: select stockitem0_.dbId as dbId1_1_0_, stockitem0_.description as descript2_1_0_, stockitem0_.index as index3_1_0_, stockitem0_.name as name4_1_0_, stockitem0_.price as price5_1_0_, stockitem0_.quantity as quantity6_1_0_ from stock_item stockitem0_ where stockitem0_.dbId=?
+21:37:39.495 [main] DEBUG org.hibernate.loader.Loader - Static select for action ACTION_REFRESH on entity ee.ut.math.tvt.salessystem.dataobjects.StockItem: select stockitem0_.dbId as dbId1_1_0_, stockitem0_.description as descript2_1_0_, stockitem0_.index as index3_1_0_, stockitem0_.name as name4_1_0_, stockitem0_.price as price5_1_0_, stockitem0_.quantity as quantity6_1_0_ from stock_item stockitem0_ where stockitem0_.dbId=?
+21:37:39.495 [main] DEBUG org.hibernate.persister.entity.AbstractEntityPersister - Static SQL for entity: ee.ut.math.tvt.salessystem.dataobjects.SoldItem
+21:37:39.496 [main] DEBUG org.hibernate.persister.entity.AbstractEntityPersister -  Version select: select id from sold_item where id =?
+21:37:39.496 [main] DEBUG org.hibernate.persister.entity.AbstractEntityPersister -  Snapshot select: select solditem_.id, solditem_.name as name2_0_, solditem_.price as price3_0_, solditem_.quantity as quantity4_0_ from sold_item solditem_ where solditem_.id=?
+21:37:39.496 [main] DEBUG org.hibernate.persister.entity.AbstractEntityPersister -  Insert 0: insert into sold_item (name, price, quantity, id) values (?, ?, ?, ?)
+21:37:39.496 [main] DEBUG org.hibernate.persister.entity.AbstractEntityPersister -  Update 0: update sold_item set name=?, price=?, quantity=? where id=?
+21:37:39.496 [main] DEBUG org.hibernate.persister.entity.AbstractEntityPersister -  Delete 0: delete from sold_item where id=?
+21:37:39.496 [main] DEBUG org.hibernate.persister.entity.AbstractEntityPersister -  Identity insert: insert into sold_item (id, name, price, quantity) values (default, ?, ?, ?)
+21:37:39.496 [main] DEBUG org.hibernate.loader.plan.build.internal.spaces.QuerySpacesImpl - Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@38b5f25]
+21:37:39.496 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : name
+21:37:39.496 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : price
+21:37:39.496 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : quantity
+21:37:39.496 [main] DEBUG org.hibernate.loader.plan.build.internal.FetchStyleLoadPlanBuildingAssociationVisitationStrategy - Building LoadPlan...
+21:37:39.496 [main] DEBUG org.hibernate.loader.plan.exec.internal.LoadQueryJoinAndFetchProcessor - processing queryspace <gen:0>
+21:37:39.497 [main] DEBUG org.hibernate.loader.plan.build.spi.LoadPlanTreePrinter - LoadPlan(entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+    - Returns
+       - EntityReturnImpl(entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem, querySpaceUid=<gen:0>, path=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+          - SQL table alias mapping - solditem0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_0_0_}
+
+21:37:39.497 [main] DEBUG org.hibernate.loader.entity.plan.EntityLoader - Static select for entity ee.ut.math.tvt.salessystem.dataobjects.SoldItem [NONE]: select solditem0_.id as id1_0_0_, solditem0_.name as name2_0_0_, solditem0_.price as price3_0_0_, solditem0_.quantity as quantity4_0_0_ from sold_item solditem0_ where solditem0_.id=?
+21:37:39.497 [main] DEBUG org.hibernate.loader.plan.build.internal.spaces.QuerySpacesImpl - Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@67594471]
+21:37:39.497 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : name
+21:37:39.497 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : price
+21:37:39.497 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : quantity
+21:37:39.497 [main] DEBUG org.hibernate.loader.plan.build.internal.FetchStyleLoadPlanBuildingAssociationVisitationStrategy - Building LoadPlan...
+21:37:39.498 [main] DEBUG org.hibernate.loader.plan.exec.internal.LoadQueryJoinAndFetchProcessor - processing queryspace <gen:0>
+21:37:39.498 [main] DEBUG org.hibernate.loader.plan.build.spi.LoadPlanTreePrinter - LoadPlan(entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+    - Returns
+       - EntityReturnImpl(entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem, querySpaceUid=<gen:0>, path=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+          - SQL table alias mapping - solditem0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_0_0_}
+
+21:37:39.498 [main] DEBUG org.hibernate.loader.entity.plan.EntityLoader - Static select for entity ee.ut.math.tvt.salessystem.dataobjects.SoldItem [READ]: select solditem0_.id as id1_0_0_, solditem0_.name as name2_0_0_, solditem0_.price as price3_0_0_, solditem0_.quantity as quantity4_0_0_ from sold_item solditem0_ where solditem0_.id=?
+21:37:39.498 [main] DEBUG org.hibernate.loader.plan.build.internal.spaces.QuerySpacesImpl - Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@2cc04358]
+21:37:39.499 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : name
+21:37:39.499 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : price
+21:37:39.499 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : quantity
+21:37:39.499 [main] DEBUG org.hibernate.loader.plan.build.internal.FetchStyleLoadPlanBuildingAssociationVisitationStrategy - Building LoadPlan...
+21:37:39.499 [main] DEBUG org.hibernate.loader.plan.exec.internal.LoadQueryJoinAndFetchProcessor - processing queryspace <gen:0>
+21:37:39.499 [main] DEBUG org.hibernate.loader.plan.build.spi.LoadPlanTreePrinter - LoadPlan(entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+    - Returns
+       - EntityReturnImpl(entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem, querySpaceUid=<gen:0>, path=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+          - SQL table alias mapping - solditem0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_0_0_}
+
+21:37:39.500 [main] DEBUG org.hibernate.loader.entity.plan.EntityLoader - Static select for entity ee.ut.math.tvt.salessystem.dataobjects.SoldItem [UPGRADE]: select solditem0_.id as id1_0_0_, solditem0_.name as name2_0_0_, solditem0_.price as price3_0_0_, solditem0_.quantity as quantity4_0_0_ from sold_item solditem0_ where solditem0_.id=? for update
+21:37:39.500 [main] DEBUG org.hibernate.loader.plan.build.internal.spaces.QuerySpacesImpl - Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@45e22def]
+21:37:39.500 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : name
+21:37:39.500 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : price
+21:37:39.500 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : quantity
+21:37:39.500 [main] DEBUG org.hibernate.loader.plan.build.internal.FetchStyleLoadPlanBuildingAssociationVisitationStrategy - Building LoadPlan...
+21:37:39.500 [main] DEBUG org.hibernate.loader.plan.exec.internal.LoadQueryJoinAndFetchProcessor - processing queryspace <gen:0>
+21:37:39.501 [main] DEBUG org.hibernate.loader.plan.build.spi.LoadPlanTreePrinter - LoadPlan(entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+    - Returns
+       - EntityReturnImpl(entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem, querySpaceUid=<gen:0>, path=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+          - SQL table alias mapping - solditem0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_0_0_}
+
+21:37:39.501 [main] DEBUG org.hibernate.loader.entity.plan.EntityLoader - Static select for entity ee.ut.math.tvt.salessystem.dataobjects.SoldItem [UPGRADE_NOWAIT]: select solditem0_.id as id1_0_0_, solditem0_.name as name2_0_0_, solditem0_.price as price3_0_0_, solditem0_.quantity as quantity4_0_0_ from sold_item solditem0_ where solditem0_.id=? for update
+21:37:39.501 [main] DEBUG org.hibernate.loader.plan.build.internal.spaces.QuerySpacesImpl - Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@4417af13]
+21:37:39.501 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : name
+21:37:39.501 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : price
+21:37:39.501 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : quantity
+21:37:39.502 [main] DEBUG org.hibernate.loader.plan.build.internal.FetchStyleLoadPlanBuildingAssociationVisitationStrategy - Building LoadPlan...
+21:37:39.502 [main] DEBUG org.hibernate.loader.plan.exec.internal.LoadQueryJoinAndFetchProcessor - processing queryspace <gen:0>
+21:37:39.502 [main] DEBUG org.hibernate.loader.plan.build.spi.LoadPlanTreePrinter - LoadPlan(entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+    - Returns
+       - EntityReturnImpl(entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem, querySpaceUid=<gen:0>, path=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+          - SQL table alias mapping - solditem0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_0_0_}
+
+21:37:39.502 [main] DEBUG org.hibernate.loader.entity.plan.EntityLoader - Static select for entity ee.ut.math.tvt.salessystem.dataobjects.SoldItem [UPGRADE_SKIPLOCKED]: select solditem0_.id as id1_0_0_, solditem0_.name as name2_0_0_, solditem0_.price as price3_0_0_, solditem0_.quantity as quantity4_0_0_ from sold_item solditem0_ where solditem0_.id=? for update
+21:37:39.502 [main] DEBUG org.hibernate.loader.plan.build.internal.spaces.QuerySpacesImpl - Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@548d5ed3]
+21:37:39.503 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : name
+21:37:39.503 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : price
+21:37:39.503 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : quantity
+21:37:39.503 [main] DEBUG org.hibernate.loader.plan.build.internal.FetchStyleLoadPlanBuildingAssociationVisitationStrategy - Building LoadPlan...
+21:37:39.503 [main] DEBUG org.hibernate.loader.plan.exec.internal.LoadQueryJoinAndFetchProcessor - processing queryspace <gen:0>
+21:37:39.503 [main] DEBUG org.hibernate.loader.plan.build.spi.LoadPlanTreePrinter - LoadPlan(entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+    - Returns
+       - EntityReturnImpl(entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem, querySpaceUid=<gen:0>, path=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+          - SQL table alias mapping - solditem0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_0_0_}
+
+21:37:39.503 [main] DEBUG org.hibernate.loader.entity.plan.EntityLoader - Static select for entity ee.ut.math.tvt.salessystem.dataobjects.SoldItem [FORCE]: select solditem0_.id as id1_0_0_, solditem0_.name as name2_0_0_, solditem0_.price as price3_0_0_, solditem0_.quantity as quantity4_0_0_ from sold_item solditem0_ where solditem0_.id=? for update
+21:37:39.504 [main] DEBUG org.hibernate.loader.plan.build.internal.spaces.QuerySpacesImpl - Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@58516c91]
+21:37:39.504 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : name
+21:37:39.504 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : price
+21:37:39.504 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : quantity
+21:37:39.504 [main] DEBUG org.hibernate.loader.plan.build.internal.FetchStyleLoadPlanBuildingAssociationVisitationStrategy - Building LoadPlan...
+21:37:39.504 [main] DEBUG org.hibernate.loader.plan.exec.internal.LoadQueryJoinAndFetchProcessor - processing queryspace <gen:0>
+21:37:39.505 [main] DEBUG org.hibernate.loader.plan.build.spi.LoadPlanTreePrinter - LoadPlan(entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+    - Returns
+       - EntityReturnImpl(entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem, querySpaceUid=<gen:0>, path=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+          - SQL table alias mapping - solditem0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_0_0_}
+
+21:37:39.505 [main] DEBUG org.hibernate.loader.entity.plan.EntityLoader - Static select for entity ee.ut.math.tvt.salessystem.dataobjects.SoldItem [PESSIMISTIC_READ]: select solditem0_.id as id1_0_0_, solditem0_.name as name2_0_0_, solditem0_.price as price3_0_0_, solditem0_.quantity as quantity4_0_0_ from sold_item solditem0_ where solditem0_.id=? for update
+21:37:39.505 [main] DEBUG org.hibernate.loader.plan.build.internal.spaces.QuerySpacesImpl - Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@42d73c61]
+21:37:39.505 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : name
+21:37:39.505 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : price
+21:37:39.505 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : quantity
+21:37:39.505 [main] DEBUG org.hibernate.loader.plan.build.internal.FetchStyleLoadPlanBuildingAssociationVisitationStrategy - Building LoadPlan...
+21:37:39.506 [main] DEBUG org.hibernate.loader.plan.exec.internal.LoadQueryJoinAndFetchProcessor - processing queryspace <gen:0>
+21:37:39.506 [main] DEBUG org.hibernate.loader.plan.build.spi.LoadPlanTreePrinter - LoadPlan(entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+    - Returns
+       - EntityReturnImpl(entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem, querySpaceUid=<gen:0>, path=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+          - SQL table alias mapping - solditem0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_0_0_}
+
+21:37:39.506 [main] DEBUG org.hibernate.loader.entity.plan.EntityLoader - Static select for entity ee.ut.math.tvt.salessystem.dataobjects.SoldItem [PESSIMISTIC_WRITE]: select solditem0_.id as id1_0_0_, solditem0_.name as name2_0_0_, solditem0_.price as price3_0_0_, solditem0_.quantity as quantity4_0_0_ from sold_item solditem0_ where solditem0_.id=? for update
+21:37:39.506 [main] DEBUG org.hibernate.loader.plan.build.internal.spaces.QuerySpacesImpl - Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@96a75da]
+21:37:39.506 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : name
+21:37:39.506 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : price
+21:37:39.507 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : quantity
+21:37:39.507 [main] DEBUG org.hibernate.loader.plan.build.internal.FetchStyleLoadPlanBuildingAssociationVisitationStrategy - Building LoadPlan...
+21:37:39.507 [main] DEBUG org.hibernate.loader.plan.exec.internal.LoadQueryJoinAndFetchProcessor - processing queryspace <gen:0>
+21:37:39.507 [main] DEBUG org.hibernate.loader.plan.build.spi.LoadPlanTreePrinter - LoadPlan(entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+    - Returns
+       - EntityReturnImpl(entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem, querySpaceUid=<gen:0>, path=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+          - SQL table alias mapping - solditem0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_0_0_}
+
+21:37:39.507 [main] DEBUG org.hibernate.loader.entity.plan.EntityLoader - Static select for entity ee.ut.math.tvt.salessystem.dataobjects.SoldItem [PESSIMISTIC_FORCE_INCREMENT]: select solditem0_.id as id1_0_0_, solditem0_.name as name2_0_0_, solditem0_.price as price3_0_0_, solditem0_.quantity as quantity4_0_0_ from sold_item solditem0_ where solditem0_.id=? for update
+21:37:39.507 [main] DEBUG org.hibernate.loader.plan.build.internal.spaces.QuerySpacesImpl - Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@1a28b346]
+21:37:39.508 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : name
+21:37:39.508 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : price
+21:37:39.508 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : quantity
+21:37:39.508 [main] DEBUG org.hibernate.loader.plan.build.internal.FetchStyleLoadPlanBuildingAssociationVisitationStrategy - Building LoadPlan...
+21:37:39.508 [main] DEBUG org.hibernate.loader.plan.exec.internal.LoadQueryJoinAndFetchProcessor - processing queryspace <gen:0>
+21:37:39.508 [main] DEBUG org.hibernate.loader.plan.build.spi.LoadPlanTreePrinter - LoadPlan(entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+    - Returns
+       - EntityReturnImpl(entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem, querySpaceUid=<gen:0>, path=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+          - SQL table alias mapping - solditem0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_0_0_}
+
+21:37:39.509 [main] DEBUG org.hibernate.loader.entity.plan.EntityLoader - Static select for entity ee.ut.math.tvt.salessystem.dataobjects.SoldItem [OPTIMISTIC]: select solditem0_.id as id1_0_0_, solditem0_.name as name2_0_0_, solditem0_.price as price3_0_0_, solditem0_.quantity as quantity4_0_0_ from sold_item solditem0_ where solditem0_.id=?
+21:37:39.509 [main] DEBUG org.hibernate.loader.plan.build.internal.spaces.QuerySpacesImpl - Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@7f7af971]
+21:37:39.509 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : name
+21:37:39.509 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : price
+21:37:39.509 [main] DEBUG org.hibernate.persister.walking.spi.MetamodelGraphWalker - Visiting attribute path : quantity
+21:37:39.509 [main] DEBUG org.hibernate.loader.plan.build.internal.FetchStyleLoadPlanBuildingAssociationVisitationStrategy - Building LoadPlan...
+21:37:39.509 [main] DEBUG org.hibernate.loader.plan.exec.internal.LoadQueryJoinAndFetchProcessor - processing queryspace <gen:0>
+21:37:39.510 [main] DEBUG org.hibernate.loader.plan.build.spi.LoadPlanTreePrinter - LoadPlan(entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+    - Returns
+       - EntityReturnImpl(entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem, querySpaceUid=<gen:0>, path=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ee.ut.math.tvt.salessystem.dataobjects.SoldItem)
+          - SQL table alias mapping - solditem0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_0_0_}
+
+21:37:39.510 [main] DEBUG org.hibernate.loader.entity.plan.EntityLoader - Static select for entity ee.ut.math.tvt.salessystem.dataobjects.SoldItem [OPTIMISTIC_FORCE_INCREMENT]: select solditem0_.id as id1_0_0_, solditem0_.name as name2_0_0_, solditem0_.price as price3_0_0_, solditem0_.quantity as quantity4_0_0_ from sold_item solditem0_ where solditem0_.id=?
+21:37:39.510 [main] DEBUG org.hibernate.loader.Loader - Static select for action ACTION_MERGE on entity ee.ut.math.tvt.salessystem.dataobjects.SoldItem: select solditem0_.id as id1_0_0_, solditem0_.name as name2_0_0_, solditem0_.price as price3_0_0_, solditem0_.quantity as quantity4_0_0_ from sold_item solditem0_ where solditem0_.id=?
+21:37:39.510 [main] DEBUG org.hibernate.loader.Loader - Static select for action ACTION_REFRESH on entity ee.ut.math.tvt.salessystem.dataobjects.SoldItem: select solditem0_.id as id1_0_0_, solditem0_.name as name2_0_0_, solditem0_.price as price3_0_0_, solditem0_.quantity as quantity4_0_0_ from sold_item solditem0_ where solditem0_.id=?
+21:37:39.562 [main] DEBUG org.hibernate.SQL - drop table sold_item if exists
+21:37:39.568 [main] DEBUG org.hibernate.SQL - drop table stock_item if exists
+21:37:39.573 [main] DEBUG org.hibernate.SQL - create table sold_item (id bigint generated by default as identity (start with 1), name varchar(255), price double, quantity integer, primary key (id))
+21:37:39.575 [main] DEBUG org.hibernate.SQL - create table stock_item (dbId bigint generated by default as identity (start with 1), description varchar(255), index bigint, name varchar(255), price double, quantity integer, primary key (dbId))
+21:37:39.578 [main] INFO  org.hibernate.tool.schema.internal.SchemaCreatorImpl - HHH000476: Executing import script 'org.hibernate.tool.schema.internal.exec.ScriptSourceInputNonExistentImpl@6794ac0b'
+21:37:39.579 [main] DEBUG org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - No JtaPlatform was specified, checking resolver
+21:37:39.579 [main] DEBUG org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformResolverInitiator - No JtaPlatformResolver was specified, using default [org.hibernate.engine.transaction.jta.platform.internal.StandardJtaPlatformResolver]
+21:37:39.583 [main] DEBUG org.hibernate.engine.transaction.jta.platform.internal.StandardJtaPlatformResolver - Could not resolve JtaPlatform, using default [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+21:37:39.585 [main] DEBUG org.hibernate.query.spi.NamedQueryRepository - Checking 0 named HQL queries
+21:37:39.585 [main] DEBUG org.hibernate.query.spi.NamedQueryRepository - Checking 0 named SQL queries
+21:37:39.587 [main] DEBUG org.hibernate.internal.SessionFactoryRegistry - Initializing SessionFactoryRegistry : org.hibernate.internal.SessionFactoryRegistry@341672e
+21:37:39.590 [main] DEBUG org.hibernate.internal.SessionFactoryRegistry - Registering SessionFactory: c508eee9-43e6-4f4c-8486-80da32c9d9e4 (<unnamed>)
+21:37:39.590 [main] DEBUG org.hibernate.internal.SessionFactoryRegistry - Not binding SessionFactory to JNDI, no JNDI name configured
+21:37:39.666 [main] DEBUG org.hibernate.stat.internal.StatisticsInitiator - Statistics initialized [enabled=false]
+21:37:39.677 [main] INFO  ee.ut.math.tvt.salessystem.ui.ConsoleUI - SalesSystem CLI started
+21:37:47.168 [main] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl - begin
+21:37:47.179 [main] DEBUG org.hibernate.hql.internal.QueryTranslatorFactoryInitiator - QueryTranslatorFactory : org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory@68880c21
+21:37:47.179 [main] INFO  org.hibernate.hql.internal.QueryTranslatorFactoryInitiator - HHH000397: Using ASTQueryTranslatorFactory
+21:37:47.204 [main] DEBUG org.hibernate.hql.internal.ast.QueryTranslatorImpl - parse() - HQL: FROM ee.ut.math.tvt.salessystem.dataobjects.StockItem
+21:37:47.212 [main] DEBUG org.hibernate.hql.internal.ast.QueryTranslatorImpl - --- HQL AST ---
+ \-[QUERY] Node: 'query'
+    \-[SELECT_FROM] Node: 'SELECT_FROM'
+       \-[FROM] Node: 'FROM'
+          \-[RANGE] Node: 'RANGE'
+             \-[DOT] Node: '.'
+                +-[DOT] Node: '.'
+                |  +-[DOT] Node: '.'
+                |  |  +-[DOT] Node: '.'
+                |  |  |  +-[DOT] Node: '.'
+                |  |  |  |  +-[DOT] Node: '.'
+                |  |  |  |  |  +-[IDENT] Node: 'ee'
+                |  |  |  |  |  \-[IDENT] Node: 'ut'
+                |  |  |  |  \-[IDENT] Node: 'math'
+                |  |  |  \-[IDENT] Node: 'tvt'
+                |  |  \-[IDENT] Node: 'salessystem'
+                |  \-[IDENT] Node: 'dataobjects'
+                \-[IDENT] Node: 'StockItem'
+
+21:37:47.212 [main] DEBUG org.hibernate.hql.internal.ast.ErrorCounter - throwQueryException() : no errors
+21:37:47.234 [main] DEBUG org.hibernate.hql.internal.antlr.HqlSqlBaseWalker - select << begin [level=1, statement=select]
+21:37:47.246 [main] DEBUG org.hibernate.hql.internal.ast.tree.FromElement - FromClause{level=1} : ee.ut.math.tvt.salessystem.dataobjects.StockItem (<no alias>) -> stockitem0_
+21:37:47.246 [main] DEBUG org.hibernate.hql.internal.antlr.HqlSqlBaseWalker - select : finishing up [level=1, statement=select]
+21:37:47.246 [main] DEBUG org.hibernate.hql.internal.ast.HqlSqlWalker - processQuery() :  ( SELECT ( FromClause{level=1} stock_item stockitem0_ ) )
+21:37:47.251 [main] DEBUG org.hibernate.hql.internal.ast.HqlSqlWalker - Derived SELECT clause created.
+21:37:47.255 [main] DEBUG org.hibernate.hql.internal.ast.util.JoinProcessor - Using FROM fragment [stock_item stockitem0_]
+21:37:47.255 [main] DEBUG org.hibernate.hql.internal.antlr.HqlSqlBaseWalker - select >> end [level=1, statement=select]
+21:37:47.255 [main] DEBUG org.hibernate.hql.internal.ast.QueryTranslatorImpl - --- SQL AST ---
+ \-[SELECT] QueryNode: 'SELECT'  querySpaces (stock_item)
+    +-[SELECT_CLAUSE] SelectClause: '{derived select clause}'
+    |  +-[SELECT_EXPR] SelectExpressionImpl: 'stockitem0_.dbId as dbId1_1_' {FromElement{explicit,not a collection join,not a fetch join,fetch non-lazy properties,classAlias=null,role=null,tableName=stock_item,tableAlias=stockitem0_,origin=null,columns={,className=ee.ut.math.tvt.salessystem.dataobjects.StockItem}}}
+    |  \-[SQL_TOKEN] SqlFragment: 'stockitem0_.description as descript2_1_, stockitem0_.index as index3_1_, stockitem0_.name as name4_1_, stockitem0_.price as price5_1_, stockitem0_.quantity as quantity6_1_'
+    \-[FROM] FromClause: 'FROM' FromClause{level=1, fromElementCounter=1, fromElements=1, fromElementByClassAlias=[], fromElementByTableAlias=[stockitem0_], fromElementsByPath=[], collectionJoinFromElementsByPath=[], impliedElements=[]}
+       \-[FROM_FRAGMENT] FromElement: 'stock_item stockitem0_' FromElement{explicit,not a collection join,not a fetch join,fetch non-lazy properties,classAlias=null,role=null,tableName=stock_item,tableAlias=stockitem0_,origin=null,columns={,className=ee.ut.math.tvt.salessystem.dataobjects.StockItem}}
+
+21:37:47.255 [main] DEBUG org.hibernate.hql.internal.ast.ErrorCounter - throwQueryException() : no errors
+21:37:47.260 [main] DEBUG org.hibernate.hql.internal.ast.QueryTranslatorImpl - HQL: FROM ee.ut.math.tvt.salessystem.dataobjects.StockItem
+21:37:47.261 [main] DEBUG org.hibernate.hql.internal.ast.QueryTranslatorImpl - SQL: select stockitem0_.dbId as dbId1_1_, stockitem0_.description as descript2_1_, stockitem0_.index as index3_1_, stockitem0_.name as name4_1_, stockitem0_.price as price5_1_, stockitem0_.quantity as quantity6_1_ from stock_item stockitem0_
+21:37:47.261 [main] DEBUG org.hibernate.hql.internal.ast.ErrorCounter - throwQueryException() : no errors
+21:37:47.273 [main] DEBUG org.hibernate.SQL - select stockitem0_.dbId as dbId1_1_, stockitem0_.description as descript2_1_, stockitem0_.index as index3_1_, stockitem0_.name as name4_1_, stockitem0_.price as price5_1_, stockitem0_.quantity as quantity6_1_ from stock_item stockitem0_
+21:37:47.286 [main] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl - committing
+21:37:47.287 [main] DEBUG org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl - Initiating JDBC connection release from afterTransaction
+21:37:47.287 [main] DEBUG org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl - Initiating JDBC connection release from afterTransaction
+21:37:47.288 [main] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl - begin
+21:37:47.300 [main] DEBUG org.hibernate.engine.spi.ActionQueue - Executing identity-insert immediately
+21:37:47.302 [main] DEBUG org.hibernate.SQL - insert into stock_item (dbId, description, index, name, price, quantity) values (default, ?, ?, ?, ?, ?)
+21:37:47.308 [main] DEBUG org.hibernate.id.IdentifierGeneratorHelper - Natively generated identity: 1
+21:37:47.308 [main] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl - HHH000387: ResultSet's statement was not registered
+21:37:47.311 [main] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl - committing
+21:37:47.311 [main] DEBUG org.hibernate.event.internal.AbstractFlushingEventListener - Processing flush-time cascades
+21:37:47.311 [main] DEBUG org.hibernate.event.internal.AbstractFlushingEventListener - Dirty checking collections
+21:37:47.313 [main] DEBUG org.hibernate.event.internal.AbstractFlushingEventListener - Flushed: 0 insertions, 0 updates, 0 deletions to 1 objects
+21:37:47.313 [main] DEBUG org.hibernate.event.internal.AbstractFlushingEventListener - Flushed: 0 (re)creations, 0 updates, 0 removals to 0 collections
+21:37:47.313 [main] DEBUG org.hibernate.internal.util.EntityPrinter - Listing entities:
+21:37:47.313 [main] DEBUG org.hibernate.internal.util.EntityPrinter - ee.ut.math.tvt.salessystem.dataobjects.StockItem{quantity=1, price=1.0, dbId=1, name=m, description=k, index=1}
+21:37:47.314 [main] DEBUG org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl - Initiating JDBC connection release from afterTransaction
+21:37:47.315 [main] DEBUG org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl - Initiating JDBC connection release from afterTransaction
+21:37:47.329 [main] INFO  ee.ut.math.tvt.salessystem.ui.ConsoleUI - Added new item to k called m with id 1, quantity: 1 and price 1.0
+21:37:47.340 [main] DEBUG ee.ut.math.tvt.salessystem.ui.ConsoleUI - User entered index 1, quantity 1, price 1, decription k and name m
+21:37:52.214 [main] INFO  ee.ut.math.tvt.salessystem.ui.ConsoleUI - Salesystem CLI shutdown.
