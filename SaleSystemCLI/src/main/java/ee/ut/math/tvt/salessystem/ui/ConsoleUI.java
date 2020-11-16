@@ -2,7 +2,6 @@ package ee.ut.math.tvt.salessystem.ui;
 
 import ee.ut.math.tvt.salessystem.SalesSystemException;
 import ee.ut.math.tvt.salessystem.dao.HibernateSalesSystemDAO;
-import ee.ut.math.tvt.salessystem.dao.InMemorySalesSystemDAO;
 import ee.ut.math.tvt.salessystem.dao.SalesSystemDAO;
 import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
 import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
@@ -139,7 +138,7 @@ public class ConsoleUI {
         List<StockItem> stockItems = dao.findStockItems();
         System.out.println("-------------------------");
         for (StockItem si : stockItems) {
-            System.out.println(si.getId() + " " + si.getName() + " " + si.getPrice() + " Euro (" + si.getQuantity() + " items, all items sum: " + (si.getQuantity() * si.getPrice()) + ")" + "");
+            System.out.println(si.getIndex() + " " + si.getName() + " " + si.getPrice() + " Euro (" + si.getQuantity() + " items, all items sum: " + (si.getQuantity() * si.getPrice()) + ")" + "");
         }
         if (stockItems.size() == 0) {
             System.out.println("\tNothing");
@@ -246,7 +245,7 @@ public class ConsoleUI {
             String name = c[5];
             StockItem newItem = new StockItem(idx, name, desc, price, quantity);
             warehouse.addItemToWarehouse(newItem, dao);
-            log.info("Added new item to " + newItem.getDescription() + " called " + newItem.getName() + " with id " + newItem.getId() + ", quantity: " + newItem.getQuantity() + " and price " + newItem.getPrice());
+            log.info("Added new item to " + newItem.getDescription() + " called " + newItem.getName() + " with id " + newItem.getIndex() + ", quantity: " + newItem.getQuantity() + " and price " + newItem.getPrice());
         } catch (SalesSystemException | NoSuchElementException e) {
             log.error(e.getMessage(), e);
         }

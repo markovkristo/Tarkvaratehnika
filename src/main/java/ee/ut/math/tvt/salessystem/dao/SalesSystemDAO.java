@@ -36,7 +36,7 @@ public interface SalesSystemDAO {
     SoldItem findSoldItem(long id);
     void saveNewStockItem(StockItem stockItem);
 
-    void saveExistingStockItem(StockItem stockItem, int quantity, double price);
+    void saveExistingStockItem(StockItem stockItem);
 
     void removeStockItem(StockItem stockItem, int quantity);
 

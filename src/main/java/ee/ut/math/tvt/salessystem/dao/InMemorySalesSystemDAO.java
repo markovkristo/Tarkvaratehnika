@@ -33,7 +33,7 @@ public class InMemorySalesSystemDAO implements SalesSystemDAO {
     @Override
     public StockItem findStockItem(long id) {
         for (StockItem item : stockItemList) {
-            if (item.getId() == id)
+            if (item.getIndex() == id)
                 return item;
         }
         return null;
@@ -55,13 +55,12 @@ public class InMemorySalesSystemDAO implements SalesSystemDAO {
     @Override
     public void saveNewStockItem(StockItem item) {
         stockItemList.add(item);
-        stockItemList.sort(Comparator.comparing(StockItem::getId));
+        stockItemList.sort(Comparator.comparing(StockItem::getIndex));
     }
 
     @Override
-    public void saveExistingStockItem(StockItem item, int quantity, double price) {
-        item.setPrice(price);
-        item.setQuantity(item.getQuantity() + quantity);
+    public void saveExistingStockItem(StockItem item) {
+
     }
 
     @Override

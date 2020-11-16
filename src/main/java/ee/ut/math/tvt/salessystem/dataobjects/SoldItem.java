@@ -27,7 +27,7 @@ public class SoldItem {
     private double price;
 
     public SoldItem(StockItem stockItem, int quantity) {
-        this.id = stockItem.getId();
+        this.id = stockItem.getIndex();
         this.stockItem = stockItem;
         this.name = stockItem.getName();
         this.price = stockItem.getPrice();

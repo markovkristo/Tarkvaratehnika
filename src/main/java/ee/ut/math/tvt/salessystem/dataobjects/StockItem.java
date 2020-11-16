@@ -12,7 +12,10 @@ public class StockItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long dbId;
+
+    @Column(name = "index")
+    private Long index;
 
     @Column(name = "name")
     private String name;
@@ -26,12 +29,16 @@ public class StockItem {
     @Column(name = "quantity")
     private int quantity;
 
-    public StockItem(Long id, String name, String desc, double price, int quantity) {
-        this.id = id;
+    public StockItem(Long index, String name, String desc, double price, int quantity) {
+        this.index = index;
         this.name = name;
         this.description = desc;
         this.price = price;
         this.quantity = quantity;
+    }
+
+    public StockItem() {
+        super();
     }
 
     public String getDescription() {
@@ -58,12 +65,12 @@ public class StockItem {
         this.price = price;
     }
 
-    public Long getId() {
-        return id;
+    public Long getIndex() {
+        return index;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIndex(Long index) {
+        this.index = index;
     }
 
     public int getQuantity() {
@@ -78,8 +85,12 @@ public class StockItem {
         this.quantity -= quantity;
     }
 
+    public void addQuantity(int quantity) {
+        this.quantity += quantity;
+    }
+
     @Override
     public String toString() {
-        return String.format("StockItem{id=%d, name='%s', quantity=%d, price=%f, description='%s'}", id, name, quantity, price, description);
+        return String.format("StockItem{id=%d, name='%s', quantity=%d, price=%f, description='%s'}", index, name, quantity, price, description);
     }
 }

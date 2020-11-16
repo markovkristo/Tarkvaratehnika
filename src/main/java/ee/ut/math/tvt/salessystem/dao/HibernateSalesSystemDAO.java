@@ -26,7 +26,10 @@ public class HibernateSalesSystemDAO implements SalesSystemDAO {
 
     @Override
     public List<StockItem> findStockItems() {
-        return em.createQuery("FROM StockItem", StockItem.class).getResultList();
+        beginTransaction();
+        List<StockItem> stockItems = em.createQuery("FROM StockItem", StockItem.class).getResultList();
+        commitTransaction();
+        return stockItems;
     }
 
     @Override
@@ -36,29 +39,30 @@ public class HibernateSalesSystemDAO implements SalesSystemDAO {
 
     @Override
     public StockItem findStockItem(long id) {
-        return findStockItems()
-                .stream()
-                .filter(i -> i.getId().equals(id))
-                .findFirst().orElse(null);
+        StockItem stockItem = em.find(StockItem.class, id);
+        em.detach(stockItem);
+        return stockItem;
     }
 
     @Override
     public SoldItem findSoldItem(long id) {
-        return em.createQuery("FROM StockItem", SoldItem.class)
-                .getResultList()
-                .stream()
-                .filter(i -> i.getId().equals(id))
-                .findFirst().orElse(null);
+        SoldItem soldItem = em.find(SoldItem.class, id);
+        em.detach(soldItem);
+        return soldItem;
     }
 
     @Override
     public void saveNewStockItem(StockItem stockItem) {
+        beginTransaction();
         em.persist(stockItem);
+        commitTransaction();
     }
 
     @Override
-    public void saveExistingStockItem(StockItem stockItem, int quantity, double price) {
-
+    public void saveExistingStockItem(StockItem stockItem) {
+        beginTransaction();
+        em.merge(stockItem);
+        commitTransaction();
     }
 
     @Override

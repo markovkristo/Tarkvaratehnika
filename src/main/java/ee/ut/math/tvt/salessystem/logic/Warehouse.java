@@ -10,8 +10,8 @@ public class Warehouse {
 
     public void addItemToWarehouse(StockItem addedItem, SalesSystemDAO dao) {
         List<StockItem> stockItems = dao.findStockItems();
-        StockItem item = stockItems.stream().filter(i -> i.getId().equals(addedItem.getId())).findAny().orElse(null);
-        if (!chosenDataIsValidForAdding(addedItem.getId(), addedItem.getName(), addedItem.getQuantity(), addedItem.getPrice())) {
+        StockItem item = stockItems.stream().filter(i -> i.getIndex().equals(addedItem.getIndex())).findAny().orElse(null);
+        if (!chosenDataIsValidForAdding(addedItem.getIndex(), addedItem.getName(), addedItem.getQuantity(), addedItem.getPrice())) {
             return;
         }
         if (!chosenQuantityIsValid(addedItem.getQuantity())) {
@@ -19,9 +19,12 @@ public class Warehouse {
                     + addedItem.getQuantity());
         }
         if (item != null && item.getName().equals(addedItem.getName())) {
-            dao.saveExistingStockItem(item, addedItem.getQuantity(), addedItem.getPrice());
+            StockItem existingStockItem = dao.findStockItem(addedItem.getIndex());
+            existingStockItem.addQuantity(addedItem.getQuantity());
+            existingStockItem.setPrice(addedItem.getPrice());
+            dao.saveExistingStockItem(existingStockItem);
         } else if (item != null && !item.getName().equals(addedItem.getName())) {
-            throw new SalesSystemException("Item with id: " + item.getId() +" is already in use ("+item.getName()+"). Please select a different" +
+            throw new SalesSystemException("Item with id: " + item.getIndex() +" is already in use ("+item.getName()+"). Please select a different" +
                     " id");
         } else {
             addedItem.setName(addedItem.getName().trim());
@@ -37,7 +40,7 @@ public class Warehouse {
         if (!productWithGivenIdExists(id, stockItems)) {
             throw new SalesSystemException("There is no product with id of " + id);
         }
-        StockItem item = stockItems.stream().filter(e -> e.getId() == id).findFirst().get();
+        StockItem item = stockItems.stream().filter(e -> e.getIndex() == id).findFirst().get();
         if (removableQuantity <= item.getQuantity()) {
             dao.removeStockItem(item, removableQuantity);
         } else {
@@ -47,7 +50,7 @@ public class Warehouse {
     }
 
     private boolean productWithGivenIdExists(long id, List<StockItem> stockItems) {
-        return stockItems.stream().anyMatch(e -> e.getId() == id);
+        return stockItems.stream().anyMatch(e -> e.getIndex() == id);
     }
 
     private boolean chosenQuantityIsValid(int quantity) {

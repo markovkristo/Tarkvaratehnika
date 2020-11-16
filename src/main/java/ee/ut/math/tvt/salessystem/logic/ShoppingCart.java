@@ -5,11 +5,9 @@ import ee.ut.math.tvt.salessystem.dao.SalesSystemDAO;
 import ee.ut.math.tvt.salessystem.dataobjects.Purchase;
 import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
 import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
-import ee.ut.math.tvt.salessystem.dataobjects.Transaction;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -141,7 +139,7 @@ public class ShoppingCart {
                         long idx = 0;
                         for (StockItem value : stockItems) {
                             if (name.equals(value.getName()))
-                                idx = value.getId();
+                                idx = value.getIndex();
                         }
                         StockItem stockItem = dao.findStockItem(idx);
                         int soldAmount = item.getQuantity();
