@@ -4,6 +4,7 @@ import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
 import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
 import ee.ut.math.tvt.salessystem.dataobjects.Sale;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -30,7 +31,9 @@ import java.util.List;
 public interface SalesSystemDAO {
 
     List<StockItem> findStockItems();
-    List<Sale> findTransactions();
+    List<Sale> findTransactionsBetween(LocalDate startDate, LocalDate endDate);
+    List<Sale> findLastTenTransactions();
+    List<Sale> findAllTransactions();
     StockItem findStockItem(long id);
 
     SoldItem findSoldItem(long id);

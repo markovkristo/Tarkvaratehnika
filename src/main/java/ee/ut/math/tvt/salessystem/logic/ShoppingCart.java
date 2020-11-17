@@ -2,7 +2,6 @@ package ee.ut.math.tvt.salessystem.logic;
 
 import ee.ut.math.tvt.salessystem.SalesSystemException;
 import ee.ut.math.tvt.salessystem.dao.SalesSystemDAO;
-import ee.ut.math.tvt.salessystem.dataobjects.Purchase;
 import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
 import ee.ut.math.tvt.salessystem.dataobjects.Sale;
 import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
@@ -115,12 +114,10 @@ public class ShoppingCart {
     }
 
     public void submitCurrentPurchase() {
-        List<Purchase> purchases = new ArrayList<>();
         for (SoldItem item : items) {
-            purchases.add(new Purchase(item.getName(), item.getPrice(), item.getQuantity()));
             dao.saveSoldItem(item);
         }
-        Sale sale = new Sale(items.stream().mapToLong(SoldItem::getQuantity).sum(), purchases);
+        Sale sale = new Sale(items.stream().mapToLong(SoldItem::getQuantity).sum(), items);
         dao.saveSale(sale);
         items.clear();
     }

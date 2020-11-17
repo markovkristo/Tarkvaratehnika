@@ -7,14 +7,15 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "sold_item")
+@Table(name = "solditem")
 public class SoldItem {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //@JoinColumn(name = "stock_item", nullable = false)
-    @Transient
+    @ManyToOne
+    @JoinColumn(name = "solditem_stockitem")
     private StockItem stockItem;
 
     @Column(name = "name")
@@ -26,7 +27,6 @@ public class SoldItem {
     @Column(name = "price")
     private double price;
 
-    @Column(name = "purchaseId")
     private Long purchaseId;
 
     public SoldItem(StockItem stockItem, int quantity) {

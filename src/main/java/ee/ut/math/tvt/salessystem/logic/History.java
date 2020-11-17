@@ -15,7 +15,7 @@ public class History {
 
     public void showLastTenPurchasesCLI() {
         System.out.println("Last 10 purchases are: ");
-        List<Sale> sales = dao.findTransactions();
+        List<Sale> sales = dao.findLastTenTransactions();
         int size = sales.size();
         if (sales.size() >= 10) {
             for (int i = 0; i < 10; i++) {
@@ -34,18 +34,18 @@ public class History {
 
     public void showAllPurchasesCLI() {
         System.out.println("All purchases are: ");
-        List<Sale> sales = dao.findTransactions();
+        List<Sale> sales = dao.findAllTransactions();
         for (Sale ts : sales) {
             System.out.println(ts.toString() + " ");
         }
     }
 
-    public void showPurchaseHistoryBetweenDatesCLI(String startDate, String endDate) {
+    public void showPurchaseHistoryBetweenDatesCLI(LocalDate startDate, LocalDate endDate) {
         System.out.println("All purchases which were made between " + startDate + " and " + endDate + ", were: ");
-        List<Sale> sales = dao.findTransactions();
+        List<Sale> sales = dao.findTransactionsBetween(startDate, endDate);
         for (Sale ts : sales) {
             LocalDate date = ts.getDateOfTransaction();
-            if (date.compareTo(LocalDate.parse(startDate)) >= 0 && date.compareTo(LocalDate.parse(endDate)) <= 0)
+            if (date.compareTo(startDate) >= 0 && date.compareTo(endDate) <= 0)
                 System.out.print(ts.toString() + " ");
         }
     }

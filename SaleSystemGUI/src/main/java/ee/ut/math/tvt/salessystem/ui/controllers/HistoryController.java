@@ -1,8 +1,8 @@
 package ee.ut.math.tvt.salessystem.ui.controllers;
 
 import ee.ut.math.tvt.salessystem.dao.SalesSystemDAO;
-import ee.ut.math.tvt.salessystem.dataobjects.Purchase;
 import ee.ut.math.tvt.salessystem.dataobjects.Sale;
+import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -39,7 +39,7 @@ public class HistoryController implements Initializable {
     @FXML
     private TableView<Sale> historyTableView;
     @FXML
-    private TableView<Purchase> historyTransactionView;
+    private TableView<SoldItem> historyTransactionView;
     private SalesSystemDAO dao;
 
     public HistoryController(SalesSystemDAO dao) {
@@ -53,7 +53,7 @@ public class HistoryController implements Initializable {
 
     @FXML
     public void showAll() {
-        List<Sale> sales = dao.findTransactions();
+        List<Sale> sales = dao.findAllTransactions();
         if (sales.isEmpty()) {
             displayInfo("There are have not been any transactions.");
             return;
@@ -71,7 +71,7 @@ public class HistoryController implements Initializable {
         }
         LocalDate startDateInput = startDate.getValue();
         LocalDate endDateInput = endDate.getValue();
-        List<Sale> sales = dao.findTransactions();
+        List<Sale> sales = dao.findTransactionsBetween(startDateInput, endDateInput);
         List<Sale> transactionsBetweenDates = new ArrayList<>();
         for (Sale ts : sales) {
             LocalDate date = ts.getDateOfTransaction();
@@ -88,7 +88,7 @@ public class HistoryController implements Initializable {
 
     @FXML
     public void showLastTen() {
-        List<Sale> sales = dao.findTransactions();
+        List<Sale> sales = dao.findLastTenTransactions();
         if (sales.isEmpty()) {
             displayInfo("There have not been any transactions.");
             return;
@@ -104,8 +104,8 @@ public class HistoryController implements Initializable {
     @FXML
     public void purchases(MouseEvent click) {
         Sale sale = historyTableView.getSelectionModel().getSelectedItem();
-        System.out.println(sale.getPurchases());
-        historyTransactionView.setItems(FXCollections.observableList(sale.getPurchases()));
+        System.out.println(sale.getSoldItems());
+        historyTransactionView.setItems(FXCollections.observableList(sale.getSoldItems()));
     }
 
     private boolean dataIsPresent() {

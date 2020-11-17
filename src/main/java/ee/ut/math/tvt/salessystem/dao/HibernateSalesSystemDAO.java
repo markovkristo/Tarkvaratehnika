@@ -7,6 +7,7 @@ import ee.ut.math.tvt.salessystem.dataobjects.Sale;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.time.LocalDate;
 import java.util.List;
 
 public class HibernateSalesSystemDAO implements SalesSystemDAO {
@@ -26,15 +27,24 @@ public class HibernateSalesSystemDAO implements SalesSystemDAO {
 
     @Override
     public List<StockItem> findStockItems() {
-        beginTransaction();
-        List<StockItem> stockItems = em.createQuery("FROM StockItem", StockItem.class).getResultList();
-        commitTransaction();
-        return stockItems;
+        return em.createQuery("FROM StockItem", StockItem.class).getResultList();
     }
 
     @Override
-    public List<Sale> findTransactions() {
-        return null;
+    public List<Sale> findTransactionsBetween(LocalDate startDate, LocalDate endDate) {
+        String queryString = "SELECT t FROM Sale as t WHERE t.dateOfTransaction >= :startDate AND c.dateOfTransaction <= :endDate";
+        return em.createQuery(queryString, Sale.class).getResultList();
+    }
+
+    @Override
+    public List<Sale> findLastTenTransactions() {
+        String queryString = "SELECT t FROM Sale t ORDER BY t.timeOfTransaction DESC";
+        return em.createQuery(queryString,Sale.class).setMaxResults(10).getResultList();
+    }
+
+    @Override
+    public List<Sale> findAllTransactions() {
+        return em.createQuery("FROM Sale", Sale.class).getResultList();
     }
 
     @Override

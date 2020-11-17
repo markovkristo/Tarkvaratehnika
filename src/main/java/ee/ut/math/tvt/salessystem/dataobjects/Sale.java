@@ -8,6 +8,7 @@ import java.util.List;
 @Entity
 @Table(name = "sale")
 public class Sale {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,14 +22,16 @@ public class Sale {
     @Column(name = "totalQuantity")
     private Long totalQuantity;
 
-    @Transient
-    private List<Purchase> purchases;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "sale_solditem",
+            joinColumns = {@JoinColumn(name="sale_id")}, inverseJoinColumns = {@JoinColumn(name="solditem_id")})
+    private List<SoldItem> soldItems;
 
-    public Sale(Long totalQuantity, List<Purchase> purchases) {
+    public Sale(Long totalQuantity, List<SoldItem> soldItems) {
         this.dateOfTransaction = LocalDate.now();
         this.timeOfTransaction = LocalTime.now();
         this.totalQuantity = totalQuantity;
-        this.purchases = purchases;
+        this.soldItems = soldItems;
     }
 
     public LocalDate getDateOfTransaction() {
@@ -55,12 +58,8 @@ public class Sale {
         this.totalQuantity = totalQuantity;
     }
 
-    public List<Purchase> getPurchases() {
-        return purchases;
-    }
-
-    public void setPurchases(List<Purchase> purchases) {
-        this.purchases = purchases;
+    public List<SoldItem> getSoldItems() {
+        return soldItems;
     }
 
     @Override
@@ -69,7 +68,7 @@ public class Sale {
                 "date " + dateOfTransaction +
                 ", time " + timeOfTransaction +
                 ", quantity " + totalQuantity +
-                ", purchases: " + purchases +
+                ", purchases: " + soldItems +
                 '}';
     }
 }

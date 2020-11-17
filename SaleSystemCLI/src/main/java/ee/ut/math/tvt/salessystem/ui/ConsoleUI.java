@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -403,7 +404,7 @@ public class ConsoleUI {
             case "hib":
                 if (checkDates(c)) {
                     System.out.println("-------------------------");
-                    history.showPurchaseHistoryBetweenDatesCLI(c[1], c[2]);
+                    history.showPurchaseHistoryBetweenDatesCLI(LocalDate.parse(c[1]), LocalDate.parse(c[2]));
                     System.out.println("-------------------------");
                 }
                 break;

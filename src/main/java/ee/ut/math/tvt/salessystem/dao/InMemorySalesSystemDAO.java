@@ -3,6 +3,8 @@ package ee.ut.math.tvt.salessystem.dao;
 import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
 import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
 import ee.ut.math.tvt.salessystem.dataobjects.Sale;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -27,6 +29,21 @@ public class InMemorySalesSystemDAO implements SalesSystemDAO {
     @Override
     public List<StockItem> findStockItems() {
         return stockItemList;
+    }
+
+    @Override
+    public List<Sale> findTransactionsBetween(LocalDate startDate, LocalDate endDate) {
+        return null;
+    }
+
+    @Override
+    public List<Sale> findLastTenTransactions() {
+        return null;
+    }
+
+    @Override
+    public List<Sale> findAllTransactions() {
+        return null;
     }
 
     public List<Sale> findTransactions(){ return sales;}
