@@ -1,4 +1,5 @@
 apply plugin: 'java'
+version = '1.0'
 
 repositories {
     mavenCentral()
@@ -7,6 +8,7 @@ repositories {
 
 dependencies {
     testCompile("junit:junit:4.+")
+    compile("org.yaml:snakeyaml:1.23")
     testImplementation 'org.mockito:mockito-core:2.24.0'
     compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.6.2'
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.6.2'
@@ -16,15 +18,25 @@ dependencies {
     implementation "javax.xml.bind:jaxb-api:2.2.11"
 }
 
-task hsql(type:JavaExec){
-    main = "org.hsqldb.Server"
-    classpath = sourceSets.main.runtimeClasspath
-    args = ["-database.0", "data/pos", "-dbname.0", "pos"]
-}
+test {
+    reports {
+        junitXml.enabled = true
+        html.enabled = false
+    }
+    testResultsDirName = file("shippable/testresults")
+    testReportDirName = file("shippable/testresults")
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-}
+    task hsql(type: JavaExec) {
+        main = "org.hsqldb.Server"
+        classpath = sourceSets.main.runtimeClasspath
+        args = ["-database.0", "data/pos", "-dbname.0", "pos"]
+    }
 
-version = '1.0'
+    java {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+}
