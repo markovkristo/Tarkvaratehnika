@@ -5,6 +5,7 @@ import ee.ut.math.tvt.salessystem.dao.SalesSystemDAO;
 import ee.ut.math.tvt.salessystem.dataobjects.Purchase;
 import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
 import ee.ut.math.tvt.salessystem.dataobjects.Sale;
+import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -31,24 +32,34 @@ public class ShoppingCart {
         }
         if (!quantityOfItemCanBeAdded(item) && !itemIsInCart(item)) {
             throw new SalesSystemException("Desired quantity of " + item.getQuantity() + " exceeds the maximum quantity " +
-            "of " + dao.findStockItem(item.getId()).getQuantity());
+            "of " + dao.findStockItem(item.getStockItem().getIndex()).getQuantity());
         }
         if (itemIsInCart(item)) {
             if (moreOfTheItemCanBeAdded(item)) {
-                items
+                SoldItem existingItem = items
                         .stream()
                         .filter(i -> i.getName().equals(item.getName()))
                         .findFirst()
-                        .get()
-                        .addMoreQuantity(item.getQuantity());
+                        .get();
+                existingItem.addMoreQuantity(item.getQuantity());
+                StockItem stockItem = dao.findStockItem(item.getStockItem().getIndex());
+                stockItem.lowerQuantity(item.getQuantity());
+                dao.removeAmountOfStockItem(stockItem);
             } else {
-                int remainingQuantity = dao.findStockItem(item.getId()).getQuantity()
-                        - items.stream().filter(i -> i.getId().equals(item.getId())).findFirst().get().getQuantity();
+                int remainingQuantity = dao.findStockItem(item.getStockItem().getIndex()).getQuantity()
+                        - items.stream().filter(i -> i.getStockItem().getIndex().equals(item.getStockItem().getIndex())).findFirst().get().getQuantity();
                 throw new SalesSystemException("Can't add " + item.getQuantity() + " of " + item.getName() + " to the cart.\nThis " +
                         "exceeds the remaining quantity of " + remainingQuantity + ".");
             }
         } else {
             items.add(item);
+            if (item.getQuantity() < dao.findStockItem(item.getStockItem().getIndex()).getQuantity()) {
+                StockItem stockItem = dao.findStockItem(item.getStockItem().getIndex());
+                stockItem.lowerQuantity(item.getQuantity());
+                dao.removeAmountOfStockItem(stockItem);
+            } else {
+                dao.removeStockItemEntirely(dao.findStockItem(item.getStockItem().getIndex()));
+            }
         }
         log.debug("Added " + item.getName() + " quantity of " + item.getQuantity());
     }
@@ -107,7 +118,6 @@ public class ShoppingCart {
         List<Purchase> purchases = new ArrayList<>();
         for (SoldItem item : items) {
             purchases.add(new Purchase(item.getName(), item.getPrice(), item.getQuantity()));
-            warehouse.removeItemFromWarehouse(item.getStockItem().getIndex(), item.getQuantity(), dao);
             dao.saveSoldItem(item);
         }
         Sale sale = new Sale(items.stream().mapToLong(SoldItem::getQuantity).sum(), purchases);
