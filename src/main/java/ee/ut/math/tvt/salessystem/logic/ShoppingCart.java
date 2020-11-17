@@ -52,12 +52,13 @@ public class ShoppingCart {
             }
         } else {
             items.add(item);
+            StockItem stockItem = dao.findStockItem(item.getStockItem().getIndex());
             if (item.getQuantity() < dao.findStockItem(item.getStockItem().getIndex()).getQuantity()) {
-                StockItem stockItem = dao.findStockItem(item.getStockItem().getIndex());
                 stockItem.lowerQuantity(item.getQuantity());
                 dao.removeAmountOfStockItem(stockItem);
             } else {
-                dao.removeStockItemEntirely(dao.findStockItem(item.getStockItem().getIndex()));
+                stockItem.setQuantity(0);
+                dao.removeStockItemEntirely(stockItem);
             }
         }
         log.debug("Added " + item.getName() + " quantity of " + item.getQuantity());
@@ -114,12 +115,10 @@ public class ShoppingCart {
     }
 
     public void submitCurrentPurchase() {
-        ArrayList<SoldItem> soldItems = new ArrayList<>();
         for (SoldItem item : items) {
             dao.saveSoldItem(item);
-            soldItems.add(item);
         }
-        Sale sale = new Sale(items.stream().mapToLong(SoldItem::getQuantity).sum(), soldItems);
+        Sale sale = new Sale(items.stream().mapToLong(SoldItem::getQuantity).sum(), items);
         dao.saveSale(sale);
         items.clear();
     }

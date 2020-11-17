@@ -34,6 +34,10 @@ public class Sale {
         this.soldItems = soldItems;
     }
 
+    public Sale() {
+        super();
+    }
+
     public LocalDate getDateOfTransaction() {
         return dateOfTransaction;
     }

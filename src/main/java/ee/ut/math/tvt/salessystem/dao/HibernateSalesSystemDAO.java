@@ -39,7 +39,7 @@ public class HibernateSalesSystemDAO implements SalesSystemDAO {
     @Override
     public List<Sale> findLastTenTransactions() {
         String queryString = "SELECT t FROM Sale t ORDER BY t.timeOfTransaction DESC";
-        return em.createQuery(queryString,Sale.class).setMaxResults(10).getResultList();
+        return em.createQuery(queryString, Sale.class).setMaxResults(10).getResultList();
     }
 
     @Override
@@ -54,11 +54,7 @@ public class HibernateSalesSystemDAO implements SalesSystemDAO {
 
     @Override
     public SoldItem findSoldItem(long id) {
-        beginTransaction();
-        SoldItem soldItem = em.find(SoldItem.class, id);
-        em.detach(soldItem);
-        commitTransaction();
-        return soldItem;
+        return em.find(SoldItem.class, id);
     }
 
     @Override
@@ -78,7 +74,7 @@ public class HibernateSalesSystemDAO implements SalesSystemDAO {
     @Override
     public void removeStockItemEntirely(StockItem stockItem) {
         beginTransaction();
-        em.remove(stockItem);
+        em.merge(stockItem);
         commitTransaction();
     }
 
@@ -91,15 +87,13 @@ public class HibernateSalesSystemDAO implements SalesSystemDAO {
 
     @Override
     public void saveSoldItem(SoldItem item) {
-        beginTransaction();
         em.persist(item);
-        commitTransaction();
     }
 
     @Override
     public void saveSale(Sale sale) {
         beginTransaction();
-        em.persist(sale);
+        em.merge(sale);
         commitTransaction();
     }
 

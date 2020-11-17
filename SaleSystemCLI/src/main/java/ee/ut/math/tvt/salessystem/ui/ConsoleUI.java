@@ -140,7 +140,11 @@ public class ConsoleUI {
         List<StockItem> stockItems = dao.findStockItems();
         System.out.println("-------------------------");
         for (StockItem si : stockItems) {
-            System.out.println(si.getIndex() + " " + si.getName() + " " + si.getPrice() + " Euro (" + si.getQuantity() + " items, all items sum: " + (si.getQuantity() * si.getPrice()) + ")" + "");
+            if(si.getQuantity() != 0) {
+                System.out.println(si.getIndex() + " " + si.getName() + " " + si.getPrice() + " Euro (" + si.getQuantity() + " items, all items sum: " + (si.getQuantity() * si.getPrice()) + ")" + "");
+            } else {
+                System.out.println("\tNothing");
+            }
         }
         if (stockItems.size() == 0) {
             System.out.println("\tNothing");
