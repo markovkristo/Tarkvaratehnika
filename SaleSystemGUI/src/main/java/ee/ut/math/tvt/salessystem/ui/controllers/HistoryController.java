@@ -104,7 +104,6 @@ public class HistoryController implements Initializable {
     @FXML
     public void purchases(MouseEvent click) {
         Sale sale = historyTableView.getSelectionModel().getSelectedItem();
-        System.out.println(sale.getSoldItems());
         historyTransactionView.setItems(FXCollections.observableList(sale.getSoldItems()));
     }
 

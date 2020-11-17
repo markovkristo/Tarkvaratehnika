@@ -233,9 +233,6 @@ public class ConsoleUI {
             int amount = Integer.parseInt(c[2]);
             StockItem item = dao.findStockItem(idx);
             StockItem newItem = new StockItem(idx, item.getName(), item.getDescription(), item.getPrice(), amount);
-            if (item.getQuantity() > 0) {
-                warehouse.removeItemFromWarehouse(idx, item.getQuantity(), dao);
-            }
             warehouse.addItemToWarehouse(newItem, dao);
             log.info("Added " + amount + " new " + item.getName() + " to warehouse. New total: " + item.getQuantity());
         } catch (SalesSystemException | NoSuchElementException e) {
@@ -432,7 +429,8 @@ public class ConsoleUI {
                 break;
             case "r":
                 System.out.println("-------------------------");
-                cart.cancelCurrentPurchase();
+                cart.cancelCurrentPurchaseCLI();
+                log.info("Cart has been reset.");
                 System.out.println("-------------------------");
                 break;
             case "cr":

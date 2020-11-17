@@ -97,7 +97,7 @@ public class PurchaseController implements Initializable {
     protected void cancelPurchaseButtonClicked() {
         log.info("Sale cancelled");
         try {
-            shoppingCart.cancelCurrentPurchase();
+            shoppingCart.cancelCurrentPurchaseGUI();
             disableInputs();
             purchaseTableView.refresh();
         } catch (SalesSystemException e) {

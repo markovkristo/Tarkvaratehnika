@@ -39,12 +39,12 @@
                         <columns>
                             <TableColumn text="Date">
                                 <cellValueFactory>
-                                    <PropertyValueFactory property="localDate" />
+                                    <PropertyValueFactory property="dateOfTransaction" />
                                 </cellValueFactory>
                             </TableColumn>
                             <TableColumn text="Time">
                                 <cellValueFactory>
-                                    <PropertyValueFactory property="localTime" />
+                                    <PropertyValueFactory property="timeOfTransaction" />
                                 </cellValueFactory>
                             </TableColumn>
                             <TableColumn text="Total">
@@ -67,17 +67,17 @@
                         <columns>
                             <TableColumn text="Id">
                                 <cellValueFactory>
-                                    <PropertyValueFactory property="productId" />
+                                    <PropertyValueFactory property="id" />
                                 </cellValueFactory>
                             </TableColumn>
                             <TableColumn text="Name">
                                 <cellValueFactory>
-                                    <PropertyValueFactory property="productName" />
+                                    <PropertyValueFactory property="name" />
                                 </cellValueFactory>
                             </TableColumn>
                             <TableColumn text="Price">
                                 <cellValueFactory>
-                                    <PropertyValueFactory property="productPrice" />
+                                    <PropertyValueFactory property="price" />
                                 </cellValueFactory>
                             </TableColumn>
                             <TableColumn text="Quantity">

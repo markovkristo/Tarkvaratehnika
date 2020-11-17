@@ -45,6 +45,7 @@ public class Warehouse {
             item.lowerQuantity(removableQuantity);
             dao.removeAmountOfStockItem(item);
         } else if (removableQuantity == item.getQuantity()) {
+            item.setQuantity(0);
             dao.removeStockItemEntirely(item);
         } else {
             throw new SalesSystemException("Removable quantity ("+removableQuantity+") can not exceed maximum quantity" +

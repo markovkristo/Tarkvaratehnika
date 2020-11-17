@@ -45,8 +45,7 @@ public class ShoppingCart {
                 stockItem.lowerQuantity(item.getQuantity());
                 dao.removeAmountOfStockItem(stockItem);
             } else {
-                int remainingQuantity = dao.findStockItem(item.getStockItem().getIndex()).getQuantity()
-                        - items.stream().filter(i -> i.getStockItem().getIndex().equals(item.getStockItem().getIndex())).findFirst().get().getQuantity();
+                int remainingQuantity = dao.findStockItem(item.getStockItem().getIndex()).getQuantity();
                 throw new SalesSystemException("Can't add " + item.getQuantity() + " of " + item.getName() + " to the cart.\nThis " +
                         "exceeds the remaining quantity of " + remainingQuantity + ".");
             }
@@ -68,19 +67,19 @@ public class ShoppingCart {
         if (quantityIsNegativeOrZero(quantity)) {
             throw new SalesSystemException("Removable quantity can't be zero or negative.");
         }
-        if (items.stream().noneMatch(i -> i.getId() == id)) {
+        if (items.stream().noneMatch(i -> i.getStockItem().getIndex() == id)) {
             throw new SalesSystemException("There aren't any items with ID of " + id + " in the cart.");
         }
-        SoldItem item = items.stream().filter(i -> i.getId() == id).findFirst().get();
+        SoldItem item = items.stream().filter(i -> i.getStockItem().getIndex() == id).findFirst().get();
         if (item.getQuantity() < quantity) {
             String name = item.getName();
-            items.removeIf(i -> i.getId() == id);
+            items.removeIf(i -> i.getStockItem().getIndex() == id);
             throw new SalesSystemException("There aren't that many units of " + name + " in the cart. " +
                     "All of the product was removed from the cart.");
         }
-        items.stream().filter(i -> i.getId() == id).findFirst().get().lowerQuantity(quantity);
-        if (items.stream().filter(i -> i.getId() == id).findFirst().get().getQuantity() == 0) {
-            items.removeIf(i -> i.getId() == id);
+        items.stream().filter(i -> i.getStockItem().getIndex() == id).findFirst().get().lowerQuantity(quantity);
+        if (items.stream().filter(i -> i.getStockItem().getIndex() == id).findFirst().get().getQuantity() == 0) {
+            items.removeIf(i -> i.getStockItem().getIndex() == id);
         }
     }
 
@@ -110,7 +109,20 @@ public class ShoppingCart {
         return items;
     }
 
-    public void cancelCurrentPurchase() {
+    public void cancelCurrentPurchaseCLI() {
+        for (SoldItem item : items) {
+            StockItem stockItem = item.getStockItem();
+            stockItem.addQuantity(item.getQuantity());
+        }
+        items.clear();
+    }
+
+    public void cancelCurrentPurchaseGUI(){
+        for (SoldItem item: items) {
+            StockItem stockItem = item.getStockItem();
+            stockItem.setQuantity(item.getQuantity());
+            warehouse.addItemToWarehouse(stockItem, dao);
+        }
         items.clear();
     }
 
@@ -128,9 +140,8 @@ public class ShoppingCart {
     }
 
     private boolean moreOfTheItemCanBeAdded(SoldItem item) {
-        int cartQuantity = items.stream().filter(i -> i.getStockItem().getIndex().equals(item.getStockItem().getIndex())).findFirst().get().getQuantity();
         int stockQuantity = dao.findStockItem(item.getStockItem().getIndex()).getQuantity();
-        return item.getQuantity() <= stockQuantity - cartQuantity;
+        return item.getQuantity() <= stockQuantity;
     }
 
     private boolean quantityOfItemCanBeAdded(SoldItem item) {
