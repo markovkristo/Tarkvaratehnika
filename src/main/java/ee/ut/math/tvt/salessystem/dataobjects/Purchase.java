@@ -9,8 +9,7 @@ public class Purchase {
     private int quantity;
     private BigDecimal sum;
 
-    public Purchase(long productId, String productName, double productPrice, int quantity) {
-        this.productId = productId;
+    public Purchase(String productName, double productPrice, int quantity) {
         this.productName = productName;
         this.productPrice = productPrice;
         this.quantity = quantity;
