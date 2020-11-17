@@ -18,6 +18,16 @@ dependencies {
     implementation "javax.xml.bind:jaxb-api:2.2.11"
 }
 
+test {
+    reports {
+        junitXml.enabled = true
+        html.enabled = false
+    }
+    testResultsDirName = file("shippable/testresults")
+    testReportDirName = file("shippable/testresults")
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
 
     task hsql(type: JavaExec) {
         main = "org.hsqldb.Server"
@@ -29,3 +39,4 @@ dependencies {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+}
