@@ -114,10 +114,12 @@ public class ShoppingCart {
     }
 
     public void submitCurrentPurchase() {
+        ArrayList<SoldItem> soldItems = new ArrayList<>();
         for (SoldItem item : items) {
             dao.saveSoldItem(item);
+            soldItems.add(item);
         }
-        Sale sale = new Sale(items.stream().mapToLong(SoldItem::getQuantity).sum(), items);
+        Sale sale = new Sale(items.stream().mapToLong(SoldItem::getQuantity).sum(), soldItems);
         dao.saveSale(sale);
         items.clear();
     }

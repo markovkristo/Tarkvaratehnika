@@ -416,10 +416,10 @@ public class ConsoleUI {
                 break;
             case "p":
                 System.out.println("-------------------------");
-                System.out.println("Are you sure that you want to submit current purchase? (Yes/No)");
+                System.out.println("Are you sure that you want to submit current purchase? (y/n)");
                 Scanner choice = new Scanner(System.in);
                 String input = choice.nextLine().toLowerCase();
-                if (input.equals("yes")) {
+                if (input.equals("y")) {
                     cart.submitCurrentPurchase();
                 }
                 System.out.println("-------------------------");
