@@ -177,12 +177,9 @@ public class ConsoleUI {
             long idx = Long.parseLong(c[1]);
             int amount = Integer.parseInt(c[2]);
             StockItem item = dao.findStockItem(idx);
-            if (ifItemExists(item))
-                if (amount <= item.getQuantity()) {
-                    cart.addItem(new SoldItem(item, Math.min(amount, item.getQuantity())));
-                    log.info("Added " + amount + " " + item.getName() + " to the cart ");
-                } else
-                    throw new SalesSystemException("Added items quantity exceeds warehouse quantity. ");
+            cart.addItem(new SoldItem(item, Math.min(amount, item.getQuantity())));
+            log.info("Added " + amount + " " + item.getName() + " to the cart ");
+
         } catch (SalesSystemException | NoSuchElementException e) {
             log.error(e.getMessage(), e);
         }
@@ -193,17 +190,8 @@ public class ConsoleUI {
         System.out.println("-------------------------");
         try {
             long idx = Integer.parseInt(c[1]);
-            int amount = Integer.parseInt(c[2]);
-            StockItem item = dao.findStockItem(idx);
-            List<SoldItem> soldItems = cart.getAll();
-            if (ifItemExists(item)) {
-                if (soldItems.stream().noneMatch(i -> i.getId() == idx)) {
-                    throw new SalesSystemException("There aren't any items with ID of " + idx + " in the cart.");
-                } else {
-                    SoldItem soldItem = new SoldItem(item, amount);
-                    cart.removeItem(soldItem, amount);
-                }
-            }
+            int quantity = Integer.parseInt(c[2]);
+            cart.removeItem(idx, quantity);
         } catch (SalesSystemException | NoSuchElementException e) {
             log.error(e.getMessage(), e);
         }
@@ -214,14 +202,12 @@ public class ConsoleUI {
         System.out.println("-------------------------");
         try {
             long idx = Long.parseLong(c[1]);
-            double price = Double.parseDouble(c[2]);
             StockItem item = dao.findStockItem(idx);
-            if (ifItemExists(item)) {
-                double oldPrice = item.getPrice();
-                item.setPrice(price);
-                log.info("Changed the price of " + item.getName() + " from " + oldPrice + " to " + price + ".");
-            }
-        } catch (SalesSystemException | NoSuchElementException e) {
+            double newPrice = Double.parseDouble(c[2]);
+            double oldPrice = item.getPrice();
+            warehouse.changePrice(item, newPrice);
+            log.info("Changed the price of " + item.getName() + " from " + oldPrice + " to " + newPrice + ".");
+        } catch (NoSuchElementException e) {
             log.error(e.getMessage(), e);
         }
         System.out.println("-------------------------");
@@ -347,37 +333,7 @@ public class ConsoleUI {
         System.out.println("-------------------------");
     }
 
-    private void processCommand2(String command){
-        String[] c = command.split(",");
-        for (int i = 0; i < c.length; i++) {
-            if (i == 0) {
-                c[i] = c[i].trim().toLowerCase();
-            } else
-                c[i] = c[i].trim();
-        }
-        switch (c[0]){
-            case "h":
-                printUsage2();
-                break;
-            case "q":
-                log.info("Salesystem CLI shutdown.");
-                System.exit(0);
-            case "w":
-                printWarehouseUsage();
-                break;
-            case "c":
-                printPOSUsage();
-                break;
-            case "hi":
-                printHistoryUsage();
-                break;
-            default:
-                System.out.println("unknown command");
-                break;
-        }
-    }
-
-   private void processCommand(String command) {
+    private void processCommand(String command) {
         String[] c = command.split(",");
         for (int i = 0; i < c.length; i++) {
             if (i == 0) {

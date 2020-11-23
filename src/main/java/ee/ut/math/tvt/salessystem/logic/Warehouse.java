@@ -53,6 +53,14 @@ public class Warehouse {
         }
     }
 
+    public void changePrice(StockItem item, double price) {
+        if (item != null) {
+            item.setPrice(price);
+        } else {
+            throw new SalesSystemException("No item like this exists");
+        }
+    }
+
     private boolean productWithGivenIdExists(long id, List<StockItem> stockItems) {
         return stockItems.stream().anyMatch(e -> e.getIndex() == id);
     }

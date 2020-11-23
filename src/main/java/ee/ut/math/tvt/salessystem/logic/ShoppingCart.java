@@ -26,6 +26,9 @@ public class ShoppingCart {
      * Add new SoldItem to table.
      */
     public void addItem(SoldItem item) {
+        if (item == null) {
+            throw new SalesSystemException("There is no such item");
+        }
         if (quantityIsNegativeOrZero(item.getQuantity())) {
             throw new SalesSystemException("Product's quantity can't be zero or negative.");
         }
@@ -63,7 +66,7 @@ public class ShoppingCart {
         log.debug("Added " + item.getName() + " quantity of " + item.getQuantity());
     }
 
-    public void removeItemGUI(long id, int quantity) {
+    public void removeItem(long id, int quantity) {
         if (quantityIsNegativeOrZero(quantity)) {
             throw new SalesSystemException("Removable quantity can't be zero or negative.");
         }
@@ -80,28 +83,6 @@ public class ShoppingCart {
         items.stream().filter(i -> i.getStockItem().getIndex() == id).findFirst().get().lowerQuantity(quantity);
         if (items.stream().filter(i -> i.getStockItem().getIndex() == id).findFirst().get().getQuantity() == 0) {
             items.removeIf(i -> i.getStockItem().getIndex() == id);
-        }
-    }
-
-    public void removeItem(SoldItem item, int amount) {
-        if (items.isEmpty())
-            throw new SalesSystemException("Shopping cart is empty. ");
-        else {
-            for (int i = 0; i < items.size(); i++) {
-                if (item.getName().equals(items.get(i).getName())) {
-                    int cartAmount = items.get(i).getQuantity();
-                    int newAmount = cartAmount - amount;
-                    if (newAmount > 0) {
-                        items.get(i).setQuantity(newAmount);
-                        log.info("Removed " + amount + " of " + item.getName() + " from shopping cart.");
-                    } else if (newAmount == 0) {
-                        items.remove(items.get(i));
-                        log.info("Removed " + amount + " of " + item.getName() + " from shopping cart.");
-                    } else
-                        throw new SalesSystemException("Removable amount exceeds the items quantity in the cart, removable amount: " + amount + ", items quantity in cart: " + cartAmount);
-                    break;
-                }
-            }
         }
     }
 
