@@ -1,7 +1,7 @@
 package ee.ut.math.tvt.salessystem.ui;
 
 import ee.ut.math.tvt.salessystem.SalesSystemException;
-import ee.ut.math.tvt.salessystem.dao.HibernateSalesSystemDAO;
+import ee.ut.math.tvt.salessystem.dao.InMemorySalesSystemDAO;
 import ee.ut.math.tvt.salessystem.dao.SalesSystemDAO;
 import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
 import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
@@ -43,7 +43,7 @@ public class ConsoleUI {
     }
 
     public static void main(String[] args) throws Exception {
-        SalesSystemDAO dao = new HibernateSalesSystemDAO();
+        SalesSystemDAO dao = new InMemorySalesSystemDAO();
         ConsoleUI console = new ConsoleUI(dao);
         console.run();
     }
@@ -139,14 +139,15 @@ public class ConsoleUI {
     private void showStock() {
         List<StockItem> stockItems = dao.findStockItems();
         System.out.println("-------------------------");
+        int empty = 0;
         for (StockItem si : stockItems) {
-            if(si.getQuantity() != 0) {
+            if (si.getQuantity() != 0) {
                 System.out.println(si.getIndex() + " " + si.getName() + " " + si.getPrice() + " Euro (" + si.getQuantity() + " items, all items sum: " + (si.getQuantity() * si.getPrice()) + ")" + "");
             } else {
-                System.out.println("\tNothing");
+                empty++;
             }
         }
-        if (stockItems.size() == 0) {
+        if (stockItems.size() == 0 || empty == stockItems.size()) {
             System.out.println("\tNothing");
         }
         System.out.println("-------------------------");

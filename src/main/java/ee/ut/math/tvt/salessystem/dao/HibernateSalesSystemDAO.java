@@ -86,8 +86,10 @@ public class HibernateSalesSystemDAO implements SalesSystemDAO {
     }
 
     @Override
-    public void saveSoldItem(SoldItem item) {
-        em.persist(item);
+    public void saveSoldItemsAsList(List<SoldItem> soldItems) {
+        for (SoldItem item : soldItems) {
+            em.persist(item);
+        }
     }
 
     @Override

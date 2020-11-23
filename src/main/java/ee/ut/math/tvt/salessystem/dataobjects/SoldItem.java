@@ -98,6 +98,6 @@ public class SoldItem {
 
     @Override
     public String toString() {
-        return String.format("SoldItem{quantity=%d, name='%s'}", quantity, name);
+        return String.format("'%s', amount = %d, cost = %f",name, quantity, getSum());
     }
 }

@@ -45,7 +45,7 @@ public interface SalesSystemDAO {
 
     void removeAmountOfStockItem(StockItem stockItem);
 
-    void saveSoldItem(SoldItem item);
+    void saveSoldItemsAsList(List<SoldItem> soldItems);
 
     void saveSale(Sale sale);
 

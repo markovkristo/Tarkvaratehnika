@@ -71,7 +71,7 @@ public class Sale {
         return "Transaction: " +
                 "date " + dateOfTransaction +
                 ", time " + timeOfTransaction +
-                ", quantity " + totalQuantity +
+                ", total quantity " + totalQuantity +
                 ", purchases: " + soldItems+
                 '}';
     }
