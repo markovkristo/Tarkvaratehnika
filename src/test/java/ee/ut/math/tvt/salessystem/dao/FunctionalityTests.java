@@ -193,9 +193,9 @@ public class FunctionalityTests {
         testCart.submitCurrentPurchase();
         LocalTime currentTime = LocalTime.now();
         List<Sale> transactions = mockDao.findAllTransactions();
-
+        long jetlag = transactions.get(0).getTimeOfTransaction().toSecondOfDay() - currentTime.toSecondOfDay();
         Assert.assertEquals(1, transactions.size());
-        Assert.assertEquals(currentTime, transactions.get(0).getTimeOfTransaction());
+        Assert.assertTrue(jetlag < 1);
     }
 
     @Test
